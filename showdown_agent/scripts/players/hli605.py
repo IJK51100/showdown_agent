@@ -9,26 +9,6 @@ from poke_env.player import Player
 
 # Gen 9 Ubers bulky offense team
 team = """
-Miraidon @ Choice Specs
-Ability: Hadron Engine
-Tera Type: Electric
-EVs: 4 Def / 252 SpA / 252 Spe
-Timid Nature
-- Electro Drift
-- Draco Meteor
-- Volt Switch
-- Overheat
-
-Koraidon @ Choice Scarf
-Ability: Orichalcum Pulse
-Tera Type: Fighting
-EVs: 252 Atk / 4 SpD / 252 Spe
-Jolly Nature
-- Close Combat
-- Flare Blitz
-- U-turn
-- Dragon Claw
-
 Necrozma-Dusk-Mane @ Heavy-Duty Boots
 Ability: Prism Armor
 Tera Type: Steel
@@ -42,12 +22,24 @@ Impish Nature
 Arceus-Fairy @ Pixie Plate
 Ability: Multitype
 Tera Type: Fairy
-EVs: 252 HP / 4 SpA / 252 Spe
+EVs: 252 HP / 4 Def / 252 Spe
 Timid Nature
+IVs: 0 Atk
 - Judgment
 - Calm Mind
 - Recover
 - Earth Power
+
+Eternatus @ Black Sludge
+Ability: Pressure
+Tera Type: Poison
+EVs: 252 HP / 4 SpA / 252 SpD
+Calm Nature
+IVs: 0 Atk
+- Sludge Bomb
+- Flamethrower
+- Toxic Spikes
+- Recover
 
 Giratina-Origin @ Griseous Core
 Ability: Levitate
@@ -56,18 +48,29 @@ EVs: 248 HP / 252 Def / 8 SpD
 Impish Nature
 - Will-O-Wisp
 - Hex
-- Defog
-- Draco Meteor
+- Dragon Tail
+- Rest
 
-Eternatus @ Black Sludge
-Ability: Pressure
-Tera Type: Poison
-EVs: 252 HP / 4 SpA / 252 SpD
-Calm Nature
-- Sludge Bomb
+Great Tusk @ Leftovers
+Ability: Protosynthesis
+Tera Type: Water
+EVs: 252 HP / 252 Def / 4 Spe
+Impish Nature
+- Rapid Spin
+- Headlong Rush
+- Close Combat
+- Knock Off
+
+Chi-Yu @ Choice Scarf
+Ability: Beads of Ruin
+Tera Type: Fire
+EVs: 4 Def / 252 SpA / 252 Spe
+Timid Nature
+IVs: 0 Atk
 - Flamethrower
-- Toxic Spikes
-- Recover
+- Dark Pulse
+- Overheat
+- Ruination
 """
 
 
