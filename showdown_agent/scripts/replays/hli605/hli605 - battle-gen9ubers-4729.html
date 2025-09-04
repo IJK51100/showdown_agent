@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-4729</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-4729<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-nu</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-4729|init|battle
+|title|hli605 vs. random-nu
+|j|☆hli605
+|j|☆random-nu
+|gametype|singles
+|player|p1|hli605|170|
+|player|p2|random-nu|265|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Giratina-Origin|
+|poke|p1|Great Tusk|
+|poke|p1|Chi-Yu|
+|poke|p2|Entei|
+|poke|p2|Chesnaught, F|
+|poke|p2|Volcanion|
+|poke|p2|Muk-Alola, F|
+|poke|p2|Bronzong|
+|poke|p2|Zapdos-Galar|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Giratina|Giratina-Origin|503/503
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|turn|1
+|
+|switch|p2a: Muk|Muk-Alola, F|100/100
+|move|p1a: Giratina|Will-O-Wisp|p2a: Muk
+|-status|p2a: Muk|brn
+|
+|-damage|p2a: Muk|94/100 brn|[from] brn
+|upkeep
+|turn|2
+|
+|switch|p2a: Entei|Entei|100/100
+|move|p1a: Giratina|Hex|p2a: Entei
+|-damage|p2a: Entei|70/100
+|
+|upkeep
+|turn|3
+|
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|move|p1a: Giratina|Hex|p2a: Zapdos
+|-damage|p2a: Zapdos|71/100
+|
+|upkeep
+|turn|4
+|
+|switch|p2a: Entei|Entei|70/100
+|move|p1a: Giratina|Will-O-Wisp|p2a: Entei
+|-immune|p2a: Entei
+|
+|upkeep
+|turn|5
+|
+|-terastallize|p2a: Entei|Normal
+|move|p2a: Entei|Stone Edge|p1a: Giratina
+|-damage|p1a: Giratina|424/503
+|move|p1a: Giratina|Hex|p2a: Entei
+|-immune|p2a: Entei
+|
+|upkeep
+|turn|6
+|
+|switch|p2a: Muk|Muk-Alola, F|94/100 brn
+|move|p1a: Giratina|Will-O-Wisp|p2a: Muk|[miss]
+|-miss|p1a: Giratina|p2a: Muk
+|
+|-heal|p2a: Muk|100/100 brn|[from] item: Leftovers
+|-damage|p2a: Muk|94/100 brn|[from] brn
+|upkeep
+|turn|7
+|
+|switch|p2a: Entei|Entei, tera:Normal|70/100
+|move|p1a: Giratina|Hex|p2a: Entei
+|-immune|p2a: Entei
+|
+|upkeep
+|turn|8
+|
+|switch|p2a: Muk|Muk-Alola, F|94/100 brn
+|move|p1a: Giratina|Will-O-Wisp|p2a: Muk
+|-fail|p2a: Muk|brn
+|
+|-heal|p2a: Muk|100/100 brn|[from] item: Leftovers
+|-damage|p2a: Muk|94/100 brn|[from] brn
+|upkeep
+|turn|9
+|
+|move|p1a: Giratina|Hex|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|76/100 brn
+|move|p2a: Muk|Rest|p2a: Muk
+|-status|p2a: Muk|slp|[from] move: Rest
+|-heal|p2a: Muk|100/100 slp|[silent]
+|
+|upkeep
+|turn|10
+|
+|move|p1a: Giratina|Hex|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|85/100 slp
+|cant|p2a: Muk|slp
+|
+|-heal|p2a: Muk|91/100 slp|[from] item: Leftovers
+|upkeep
+|turn|11
+|
+|move|p1a: Giratina|Hex|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|74/100 slp
+|cant|p2a: Muk|slp
+|
+|-heal|p2a: Muk|80/100 slp|[from] item: Leftovers
+|upkeep
+|turn|12
+|
+|switch|p2a: Bronzong|Bronzong|100/100
+|move|p1a: Giratina|Hex|p2a: Bronzong
+|-supereffective|p2a: Bronzong
+|-damage|p2a: Bronzong|54/100
+|
+|-heal|p2a: Bronzong|60/100|[from] item: Leftovers
+|upkeep
+|turn|13
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong
+|-status|p2a: Bronzong|brn
+|move|p2a: Bronzong|Stealth Rock|p1a: Giratina
+|-sidestart|p1: hli605|move: Stealth Rock
+|
+|-heal|p2a: Bronzong|66/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|60/100 brn|[from] brn
+|upkeep
+|turn|14
+|
+|switch|p2a: Zapdos|Zapdos-Galar|71/100
+|move|p1a: Giratina|Hex|p2a: Zapdos
+|-damage|p2a: Zapdos|35/100
+|
+|upkeep
+|turn|15
+|
+|move|p2a: Zapdos|Brave Bird|p1a: Giratina
+|-damage|p1a: Giratina|285/503
+|-damage|p2a: Zapdos|21/100|[from] Recoil
+|move|p1a: Giratina|Will-O-Wisp|p2a: Zapdos
+|-status|p2a: Zapdos|brn
+|
+|-damage|p2a: Zapdos|15/100 brn|[from] brn
+|upkeep
+|turn|16
+|
+|switch|p2a: Muk|Muk-Alola, F|80/100 slp
+|move|p1a: Giratina|Hex|p2a: Muk
+|-resisted|p2a: Muk
+|-crit|p2a: Muk
+|-damage|p2a: Muk|55/100 slp
+|
+|-heal|p2a: Muk|61/100 slp|[from] item: Leftovers
+|upkeep
+|turn|17
+|
+|switch|p2a: Entei|Entei, tera:Normal|70/100
+|move|p1a: Giratina|Hex|p2a: Entei
+|-immune|p2a: Entei
+|
+|upkeep
+|turn|18
+|
+|switch|p2a: Volcanion|Volcanion|100/100
+|move|p1a: Giratina|Will-O-Wisp|p2a: Volcanion
+|-immune|p2a: Volcanion
+|
+|upkeep
+|turn|19
+|
+|move|p2a: Volcanion|Flamethrower|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|203/503
+|-status|p1a: Giratina|brn
+|move|p1a: Giratina|Hex|p2a: Volcanion
+|-damage|p2a: Volcanion|68/100
+|
+|-damage|p1a: Giratina|172/503 brn|[from] brn
+|upkeep
+|turn|20
+|
+|switch|p2a: Chesnaught|Chesnaught, F|100/100
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|upkeep
+|turn|21
+|
+|switch|p2a: Bronzong|Bronzong|60/100 brn
+|cant|p1a: Giratina|slp
+|
+|-heal|p2a: Bronzong|66/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|60/100 brn|[from] brn
+|upkeep
+|turn|22
+|
+|cant|p1a: Giratina|slp
+|move|p2a: Bronzong|Body Press|p1a: Giratina
+|-immune|p1a: Giratina
+|
+|-heal|p2a: Bronzong|66/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|60/100 brn|[from] brn
+|upkeep
+|turn|23
+|
+|switch|p2a: Zapdos|Zapdos-Galar|15/100 brn
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Hex|p2a: Zapdos
+|-damage|p2a: Zapdos|0 fnt
+|faint|p2a: Zapdos
+|
+|upkeep
+|
+|switch|p2a: Chesnaught|Chesnaught, F|100/100
+|turn|24
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Chesnaught|[miss]
+|-miss|p1a: Giratina|p2a: Chesnaught
+|move|p2a: Chesnaught|Knock Off|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|419/503
+|
+|upkeep
+|turn|25
+|
+|switch|p2a: Entei|Entei, tera:Normal|70/100
+|move|p1a: Giratina|Will-O-Wisp|p2a: Entei
+|-status|p2a: Entei|brn
+|
+|-damage|p2a: Entei|64/100 brn|[from] brn
+|upkeep
+|turn|26
+|
+|move|p2a: Entei|Extreme Speed|p1a: Giratina
+|-immune|p1a: Giratina
+|move|p1a: Giratina|Hex|p2a: Entei
+|-immune|p2a: Entei
+|
+|-damage|p2a: Entei|57/100 brn|[from] brn
+|upkeep
+|turn|27
+|
+|move|p2a: Entei|Double-Edge|p1a: Giratina
+|-immune|p1a: Giratina
+|move|p1a: Giratina|Hex|p2a: Entei
+|-immune|p2a: Entei
+|
+|-damage|p2a: Entei|51/100 brn|[from] brn
+|upkeep
+|turn|28
+|
+|move|p2a: Entei|Double-Edge|p1a: Giratina
+|-immune|p1a: Giratina
+|move|p1a: Giratina|Hex|p2a: Entei
+|-immune|p2a: Entei
+|
+|-damage|p2a: Entei|45/100 brn|[from] brn
+|upkeep
+|turn|29
+|
+|switch|p2a: Muk|Muk-Alola, F|61/100 slp
+|move|p1a: Giratina|Dragon Tail|p2a: Muk
+|-damage|p2a: Muk|29/100 slp
+|drag|p2a: Volcanion|Volcanion|68/100
+|
+|upkeep
+|turn|30
+|
+|switch|p2a: Chesnaught|Chesnaught, F|100/100
+|move|p1a: Giratina|Dragon Tail|p2a: Chesnaught
+|-damage|p2a: Chesnaught|83/100
+|-damage|p1a: Giratina|336/503|[from] item: Rocky Helmet|[of] p2a: Chesnaught
+|drag|p2a: Muk|Muk-Alola, F|29/100 slp
+|
+|-heal|p2a: Muk|35/100 slp|[from] item: Leftovers
+|upkeep
+|turn|31
+|
+|-curestatus|p2a: Muk|slp|[msg]
+|move|p2a: Muk|Poison Jab|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|299/503
+|-status|p1a: Giratina|psn
+|move|p1a: Giratina|Dragon Tail|p2a: Muk
+|-damage|p2a: Muk|5/100
+|drag|p2a: Volcanion|Volcanion|68/100
+|
+|-damage|p1a: Giratina|237/503 psn|[from] psn
+|upkeep
+|turn|32
+|
+|move|p2a: Volcanion|Flamethrower|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|149/503 psn
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|upkeep
+|turn|33
+|
+|switch|p2a: Muk|Muk-Alola, F|5/100
+|cant|p1a: Giratina|slp
+|
+|-heal|p2a: Muk|11/100|[from] item: Leftovers
+|upkeep
+|turn|34
+|
+|cant|p1a: Giratina|slp
+|move|p2a: Muk|Poison Jab|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|464/503 slp
+|
+|-heal|p2a: Muk|17/100|[from] item: Leftovers
+|upkeep
+|turn|35
+|
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Will-O-Wisp|p2a: Muk
+|-status|p2a: Muk|brn
+|move|p2a: Muk|Sleep Talk||[still]
+|-fail|p2a: Muk
+|
+|-heal|p2a: Muk|23/100 brn|[from] item: Leftovers
+|-damage|p2a: Muk|17/100 brn|[from] brn
+|upkeep
+|turn|36
+|
+|move|p2a: Muk|Sleep Talk||[still]
+|-fail|p2a: Muk
+|move|p1a: Giratina|Dragon Tail|p2a: Muk
+|-damage|p2a: Muk|0 fnt
+|faint|p2a: Muk
+|
+|upkeep
+|
+|switch|p2a: Volcanion|Volcanion|68/100
+|turn|37
+|
+|switch|p2a: Bronzong|Bronzong|60/100 brn
+|move|p1a: Giratina|Dragon Tail|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|50/100 brn
+|drag|p2a: Entei|Entei, tera:Normal|45/100 brn
+|
+|-damage|p2a: Entei|39/100 brn|[from] brn
+|upkeep
+|turn|38
+|
+|switch|p2a: Bronzong|Bronzong|50/100 brn
+|move|p1a: Giratina|Dragon Tail|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|42/100 brn
+|drag|p2a: Chesnaught|Chesnaught, F|83/100
+|
+|upkeep
+|turn|39
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Chesnaught
+|-status|p2a: Chesnaught|brn
+|move|p2a: Chesnaught|Spikes|p1a: Giratina
+|-sidestart|p1: hli605|Spikes
+|
+|-damage|p2a: Chesnaught|77/100 brn|[from] brn
+|upkeep
+|turn|40
+|
+|move|p2a: Chesnaught|Spikes|p1a: Giratina
+|-sidestart|p1: hli605|Spikes
+|move|p1a: Giratina|Dragon Tail|p2a: Chesnaught
+|-damage|p2a: Chesnaught|59/100 brn
+|-damage|p1a: Giratina|381/503|[from] item: Rocky Helmet|[of] p2a: Chesnaught
+|drag|p2a: Entei|Entei, tera:Normal|39/100 brn
+|
+|-damage|p2a: Entei|33/100 brn|[from] brn
+|upkeep
+|turn|41
+|
+|move|p2a: Entei|Extreme Speed|p1a: Giratina
+|-immune|p1a: Giratina
+|move|p1a: Giratina|Dragon Tail|p2a: Entei
+|-damage|p2a: Entei|5/100 brn
+|drag|p2a: Volcanion|Volcanion|68/100
+|
+|upkeep
+|turn|42
+|
+|move|p2a: Volcanion|Earth Power|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Dragon Tail|p2a: Volcanion
+|-damage|p2a: Volcanion|39/100
+|drag|p2a: Chesnaught|Chesnaught, F|59/100 brn
+|
+|-damage|p2a: Chesnaught|53/100 brn|[from] brn
+|upkeep
+|turn|43
+|
+|move|p2a: Chesnaught|Synthesis|p2a: Chesnaught
+|-heal|p2a: Chesnaught|100/100 brn
+|move|p1a: Giratina|Dragon Tail|p2a: Chesnaught
+|-crit|p2a: Chesnaught
+|-damage|p2a: Chesnaught|77/100 brn
+|-damage|p1a: Giratina|298/503|[from] item: Rocky Helmet|[of] p2a: Chesnaught
+|drag|p2a: Volcanion|Volcanion|39/100
+|
+|upkeep
+|turn|44
+|
+|switch|p2a: Chesnaught|Chesnaught, F|77/100 brn
+|move|p1a: Giratina|Dragon Tail|p2a: Chesnaught
+|-damage|p2a: Chesnaught|61/100 brn
+|-damage|p1a: Giratina|215/503|[from] item: Rocky Helmet|[of] p2a: Chesnaught
+|drag|p2a: Bronzong|Bronzong|42/100 brn
+|
+|-heal|p2a: Bronzong|48/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|42/100 brn|[from] brn
+|upkeep
+|turn|45
+|
+|switch|p2a: Chesnaught|Chesnaught, F|61/100 brn
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|-damage|p2a: Chesnaught|55/100 brn|[from] brn
+|upkeep
+|turn|46
+|
+|move|p2a: Chesnaught|Synthesis|p2a: Chesnaught
+|-heal|p2a: Chesnaught|100/100 brn
+|cant|p1a: Giratina|slp
+|
+|-damage|p2a: Chesnaught|94/100 brn|[from] brn
+|upkeep
+|turn|47
+|
+|switch|p2a: Bronzong|Bronzong|42/100 brn
+|cant|p1a: Giratina|slp
+|
+|-heal|p2a: Bronzong|48/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|42/100 brn|[from] brn
+|upkeep
+|turn|48
+|
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|2
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Dragon Tail|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|37/100 brn
+|drag|p2a: Entei|Entei, tera:Normal|5/100 brn
+|
+|-damage|p2a: Entei|0 fnt|[from] brn
+|faint|p2a: Entei
+|upkeep
+|
+|switch|p2a: Bronzong|Bronzong|37/100 brn
+|turn|49
+|
+|move|p2a: Bronzong|Body Press|p1a: Giratina
+|-immune|p1a: Giratina
+|move|p1a: Giratina|Dragon Tail|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|28/100 brn
+|drag|p2a: Chesnaught|Chesnaught, F|94/100 brn
+|
+|-damage|p2a: Chesnaught|88/100 brn|[from] brn
+|upkeep
+|turn|50
+|
+|move|p2a: Chesnaught|Knock Off|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|462/503
+|move|p1a: Giratina|Dragon Tail|p2a: Chesnaught
+|-damage|p2a: Chesnaught|72/100 brn
+|-damage|p1a: Giratina|379/503|[from] item: Rocky Helmet|[of] p2a: Chesnaught
+|drag|p2a: Bronzong|Bronzong|28/100 brn
+|
+|-heal|p2a: Bronzong|34/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|28/100 brn|[from] brn
+|upkeep
+|turn|51
+|
+|move|p2a: Bronzong|Psychic Noise|p1a: Giratina
+|-damage|p1a: Giratina|306/503
+|-start|p1a: Giratina|move: Heal Block
+|move|p1a: Giratina|Dragon Tail|p2a: Bronzong|[miss]
+|-miss|p1a: Giratina|p2a: Bronzong
+|
+|-heal|p2a: Bronzong|34/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|28/100 brn|[from] brn
+|upkeep
+|turn|52
+|
+|switch|p2a: Chesnaught|Chesnaught, F|72/100 brn
+|move|p1a: Giratina|Dragon Tail|p2a: Chesnaught
+|-damage|p2a: Chesnaught|55/100 brn
+|-damage|p1a: Giratina|223/503|[from] item: Rocky Helmet|[of] p2a: Chesnaught
+|drag|p2a: Bronzong|Bronzong|28/100 brn
+|
+|-heal|p2a: Bronzong|34/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|28/100 brn|[from] brn
+|-end|p1a: Giratina|move: Heal Block
+|upkeep
+|turn|53
+|
+|switch|p2a: Chesnaught|Chesnaught, F|55/100 brn
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|-damage|p2a: Chesnaught|49/100 brn|[from] brn
+|upkeep
+|turn|54
+|
+|switch|p2a: Bronzong|Bronzong|28/100 brn
+|cant|p1a: Giratina|slp
+|
+|-heal|p2a: Bronzong|34/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|28/100 brn|[from] brn
+|upkeep
+|turn|55
+|
+|cant|p1a: Giratina|slp
+|move|p2a: Bronzong|Body Press|p1a: Giratina
+|-immune|p1a: Giratina
+|
+|-heal|p2a: Bronzong|34/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|28/100 brn|[from] brn
+|upkeep
+|turn|56
+|
+|switch|p2a: Chesnaught|Chesnaught, F|49/100 brn
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-fail|p1a: Giratina|heal
+|
+|-damage|p2a: Chesnaught|43/100 brn|[from] brn
+|upkeep
+|turn|57
+|
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-fail|p1a: Giratina|heal
+|move|p2a: Chesnaught|Body Press|p1a: Giratina
+|-immune|p1a: Giratina
+|
+|-damage|p2a: Chesnaught|37/100 brn|[from] brn
+|upkeep
+|turn|58
+|
+|switch|p2a: Bronzong|Bronzong|28/100 brn
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-fail|p1a: Giratina|heal
+|
+|-heal|p2a: Bronzong|34/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|28/100 brn|[from] brn
+|upkeep
+|turn|59
+|
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-fail|p1a: Giratina|heal
+|move|p2a: Bronzong|Psychic Noise|p1a: Giratina
+|-damage|p1a: Giratina|434/503
+|-start|p1a: Giratina|move: Heal Block
+|
+|-heal|p2a: Bronzong|34/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|28/100 brn|[from] brn
+|upkeep
+|turn|60
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong
+|-fail|p2a: Bronzong|brn
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|2
+|
+|-heal|p2a: Bronzong|34/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|28/100 brn|[from] brn
+|-end|p1a: Giratina|move: Heal Block
+|upkeep
+|turn|61
+|
+|switch|p2a: Chesnaught|Chesnaught, F|37/100 brn
+|move|p1a: Giratina|Will-O-Wisp|p2a: Chesnaught
+|-fail|p2a: Chesnaught|brn
+|
+|-damage|p2a: Chesnaught|30/100 brn|[from] brn
+|upkeep
+|turn|62
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Chesnaught
+|-fail|p2a: Chesnaught|brn
+|move|p2a: Chesnaught|Spikes|p1a: Giratina
+|-sidestart|p1: hli605|Spikes
+|
+|-damage|p2a: Chesnaught|24/100 brn|[from] brn
+|upkeep
+|turn|63
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Chesnaught
+|-fail|p2a: Chesnaught|brn
+|move|p2a: Chesnaught|Knock Off|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|395/503
+|
+|-damage|p2a: Chesnaught|18/100 brn|[from] brn
+|upkeep
+|turn|64
+|
+|switch|p2a: Volcanion|Volcanion|39/100
+|move|p1a: Giratina|Will-O-Wisp|p2a: Volcanion
+|-immune|p2a: Volcanion
+|
+|upkeep
+|turn|65
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Volcanion
+|-immune|p2a: Volcanion
+|move|p2a: Volcanion|Roar|p1a: Giratina
+|drag|p1a: Chi-Yu|Chi-Yu|251/251
+|-damage|p1a: Chi-Yu|189/251|[from] Stealth Rock
+|-damage|p1a: Chi-Yu|127/251|[from] Spikes
+|-ability|p1a: Chi-Yu|Beads of Ruin
+|
+|upkeep
+|turn|66
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|8/100
+|-unboost|p1a: Chi-Yu|spa|2
+|move|p2a: Volcanion|Steam Eruption|p1a: Chi-Yu
+|-supereffective|p1a: Chi-Yu
+|-crit|p1a: Chi-Yu
+|-damage|p1a: Chi-Yu|0 fnt
+|faint|p1a: Chi-Yu
+|
+|upkeep
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|-damage|p1a: Great Tusk|421/434|[from] Stealth Rock
+|-damage|p1a: Great Tusk|313/434|[from] Spikes
+|turn|67
+|
+|switch|p2a: Bronzong|Bronzong|28/100 brn
+|move|p1a: Great Tusk|Rapid Spin|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|24/100 brn
+|-boost|p1a: Great Tusk|spe|1
+|-sideend|p1: hli605|Spikes|[from] move: Rapid Spin|[of] p1a: Great Tusk
+|-sideend|p1: hli605|Stealth Rock|[from] move: Rapid Spin|[of] p1a: Great Tusk
+|
+|-heal|p1a: Great Tusk|340/434|[from] item: Leftovers
+|-heal|p2a: Bronzong|30/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|24/100 brn|[from] brn
+|upkeep
+|turn|68
+|
+|switch|p2a: Chesnaught|Chesnaught, F|18/100 brn
+|move|p1a: Great Tusk|Headlong Rush|p2a: Chesnaught
+|-resisted|p2a: Chesnaught
+|-damage|p2a: Chesnaught|3/100 brn
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|-damage|p1a: Great Tusk|268/434|[from] item: Rocky Helmet|[of] p2a: Chesnaught
+|
+|-heal|p1a: Great Tusk|295/434|[from] item: Leftovers
+|-damage|p2a: Chesnaught|0 fnt|[from] brn
+|faint|p2a: Chesnaught
+|upkeep
+|
+|switch|p2a: Bronzong|Bronzong|24/100 brn
+|turn|69
+|
+|switch|p2a: Volcanion|Volcanion|8/100
+|move|p1a: Great Tusk|Headlong Rush|p2a: Volcanion
+|-supereffective|p2a: Volcanion
+|-damage|p2a: Volcanion|0 fnt
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|faint|p2a: Volcanion
+|
+|-heal|p1a: Great Tusk|322/434|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Bronzong|Bronzong|24/100 brn
+|turn|70
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|2
+|
+|-heal|p1a: Great Tusk|349/434|[from] item: Leftovers
+|-heal|p2a: Bronzong|30/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|24/100 brn|[from] brn
+|upkeep
+|turn|71
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Great Tusk
+|-supereffective|p1a: Great Tusk
+|-damage|p1a: Great Tusk|0 fnt
+|faint|p1a: Great Tusk
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|
+|-heal|p2a: Bronzong|30/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|24/100 brn|[from] brn
+|upkeep
+|
+|switch|p1a: Giratina|Giratina-Origin|395/503
+|turn|72
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong
+|-fail|p2a: Bronzong|brn
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|2
+|
+|-heal|p2a: Bronzong|30/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|24/100 brn|[from] brn
+|upkeep
+|turn|73
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong
+|-fail|p2a: Bronzong|brn
+|move|p2a: Bronzong|Stealth Rock|p1a: Giratina
+|-sidestart|p1: hli605|move: Stealth Rock
+|
+|-heal|p2a: Bronzong|30/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|24/100 brn|[from] brn
+|upkeep
+|turn|74
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong
+|-fail|p2a: Bronzong|brn
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|2
+|
+|-heal|p2a: Bronzong|30/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|24/100 brn|[from] brn
+|upkeep
+|turn|75
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong
+|-fail|p2a: Bronzong|brn
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|-heal|p2a: Bronzong|30/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|24/100 brn|[from] brn
+|upkeep
+|turn|76
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong
+|-fail|p2a: Bronzong|brn
+|move|p2a: Bronzong|Body Press|p1a: Giratina
+|-immune|p1a: Giratina
+|
+|-heal|p2a: Bronzong|30/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|24/100 brn|[from] brn
+|upkeep
+|turn|77
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong
+|-fail|p2a: Bronzong|brn
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p2a: Bronzong|30/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|24/100 brn|[from] brn
+|upkeep
+|turn|78
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong|[miss]
+|-miss|p1a: Giratina|p2a: Bronzong
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|-heal|p2a: Bronzong|30/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|24/100 brn|[from] brn
+|upkeep
+|turn|79
+|
+|-activate|p1a: Giratina|move: Struggle
+|move|p1a: Giratina|Struggle|p2a: Bronzong
+|-damage|p2a: Bronzong|22/100 brn
+|-damage|p1a: Giratina|269/503|[from] recoil
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p2a: Bronzong|28/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|22/100 brn|[from] brn
+|upkeep
+|turn|80
+|
+|-activate|p1a: Giratina|move: Struggle
+|move|p1a: Giratina|Struggle|p2a: Bronzong
+|-damage|p2a: Bronzong|19/100 brn
+|-damage|p1a: Giratina|143/503|[from] recoil
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|-heal|p2a: Bronzong|25/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|19/100 brn|[from] brn
+|upkeep
+|turn|81
+|
+|-activate|p1a: Giratina|move: Struggle
+|move|p1a: Giratina|Struggle|p2a: Bronzong
+|-damage|p2a: Bronzong|17/100 brn
+|-damage|p1a: Giratina|17/503|[from] recoil
+|move|p2a: Bronzong|Body Press|p1a: Giratina
+|-immune|p1a: Giratina
+|
+|-heal|p2a: Bronzong|23/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|17/100 brn|[from] brn
+|upkeep
+|turn|82
+|
+|-activate|p1a: Giratina|move: Struggle
+|move|p1a: Giratina|Struggle|p2a: Bronzong
+|-damage|p2a: Bronzong|15/100 brn
+|-damage|p1a: Giratina|0 fnt|[from] recoil
+|faint|p1a: Giratina
+|move|p2a: Bronzong|Psychic Noise|p1: Giratina|[notarget]
+|-fail|p2a: Bronzong
+|
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|
+|switch|p1a: Eternatus|Eternatus|484/484
+|-damage|p1a: Eternatus|424/484|[from] Stealth Rock
+|-ability|p1a: Eternatus|Pressure
+|turn|83
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p1a: Eternatus|454/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|84
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p1a: Eternatus|484/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|85
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|86
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|87
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Body Press|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|376/484
+|
+|-heal|p1a: Eternatus|406/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|88
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|-heal|p1a: Eternatus|436/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|89
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Body Press|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-crit|p1a: Eternatus
+|-damage|p1a: Eternatus|292/484
+|
+|-heal|p1a: Eternatus|322/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|90
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|-heal|p1a: Eternatus|352/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|91
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|-heal|p1a: Eternatus|382/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|92
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Psychic Noise|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|272/484
+|-start|p1a: Eternatus|move: Heal Block
+|
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|93
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|-end|p1a: Eternatus|move: Heal Block
+|upkeep
+|turn|94
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Psychic Noise|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-crit|p1a: Eternatus
+|-damage|p1a: Eternatus|98/484
+|-start|p1a: Eternatus|move: Heal Block
+|
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|turn|95
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Psychic Noise|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|0 fnt
+|faint|p1a: Eternatus
+|
+|-heal|p2a: Bronzong|21/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|15/100 brn|[from] brn
+|upkeep
+|
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|-damage|p1a: Arceus|389/444|[from] Stealth Rock
+|turn|96
+|
+|move|p1a: Arceus|Judgment|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|0 fnt
+|faint|p2a: Bronzong
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

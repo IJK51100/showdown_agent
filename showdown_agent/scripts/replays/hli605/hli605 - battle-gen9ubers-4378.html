@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-4378</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-4378<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-uu</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-4378|init|battle
+|title|hli605 vs. random-uu
+|j|☆hli605
+|j|☆random-uu
+|gametype|singles
+|player|p1|hli605|170|
+|player|p2|random-uu|102|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Giratina-Origin|
+|poke|p1|Great Tusk|
+|poke|p1|Chi-Yu|
+|poke|p2|Tornadus-Therian, M|
+|poke|p2|Clodsire, M|
+|poke|p2|Metagross|
+|poke|p2|Rotom-Wash|
+|poke|p2|Cobalion|
+|poke|p2|Zarude-Dada|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Giratina|Giratina-Origin|503/503
+|switch|p2a: Metagross|Metagross|100/100
+|turn|1
+|
+|-terastallize|p2a: Metagross|Steel
+|move|p2a: Metagross|Knock Off|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|319/503
+|move|p1a: Giratina|Will-O-Wisp|p2a: Metagross|[miss]
+|-miss|p1a: Giratina|p2a: Metagross
+|
+|upkeep
+|turn|2
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|move|p1a: Giratina|Will-O-Wisp|p2a: Tornadus
+|-status|p2a: Tornadus|brn
+|
+|-damage|p2a: Tornadus|94/100 brn|[from] brn
+|upkeep
+|turn|3
+|
+|switch|p2a: Rotom|Rotom-Wash|100/100
+|move|p1a: Giratina|Hex|p2a: Rotom
+|-damage|p2a: Rotom|74/100
+|
+|-heal|p2a: Rotom|80/100|[from] item: Leftovers
+|upkeep
+|turn|4
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100 brn
+|move|p1a: Giratina|Will-O-Wisp|p2a: Tornadus
+|-fail|p2a: Tornadus|brn
+|
+|-damage|p2a: Tornadus|94/100 brn|[from] brn
+|upkeep
+|turn|5
+|
+|switch|p2a: Zarude|Zarude-Dada|100/100
+|move|p1a: Giratina|Hex|p2a: Zarude
+|-resisted|p2a: Zarude
+|-damage|p2a: Zarude|87/100
+|
+|upkeep
+|turn|6
+|
+|switch|p2a: Metagross|Metagross, tera:Steel|100/100
+|move|p1a: Giratina|Will-O-Wisp|p2a: Metagross
+|-status|p2a: Metagross|brn
+|
+|-damage|p2a: Metagross|94/100 brn|[from] brn
+|upkeep
+|turn|7
+|
+|switch|p2a: Clodsire|Clodsire, M|100/100
+|move|p1a: Giratina|Hex|p2a: Clodsire
+|-damage|p2a: Clodsire|85/100
+|
+|upkeep
+|turn|8
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Clodsire
+|-status|p2a: Clodsire|brn
+|move|p2a: Clodsire|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|
+|-damage|p2a: Clodsire|79/100 brn|[from] brn
+|upkeep
+|turn|9
+|
+|switch|p2a: Cobalion|Cobalion|100/100
+|move|p1a: Giratina|Hex|p2a: Cobalion
+|-damage|p2a: Cobalion|66/100
+|
+|upkeep
+|turn|10
+|
+|move|p2a: Cobalion|Thunder Wave|p1a: Giratina
+|-status|p1a: Giratina|par
+|move|p1a: Giratina|Will-O-Wisp|p2a: Cobalion
+|-status|p2a: Cobalion|brn
+|
+|-damage|p2a: Cobalion|59/100 brn|[from] brn
+|upkeep
+|turn|11
+|
+|move|p2a: Cobalion|Thunder Wave|p1a: Giratina
+|-fail|p1a: Giratina|par
+|move|p1a: Giratina|Hex|p2a: Cobalion
+|-damage|p2a: Cobalion|0 fnt
+|faint|p2a: Cobalion
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Wash|80/100
+|turn|12
+|
+|switch|p2a: Clodsire|Clodsire, M|79/100 brn
+|cant|p1a: Giratina|par
+|
+|-damage|p2a: Clodsire|73/100 brn|[from] brn
+|upkeep
+|turn|13
+|
+|move|p1a: Giratina|Hex|p2a: Clodsire
+|-damage|p2a: Clodsire|38/100 brn
+|move|p2a: Clodsire|Recover|p2a: Clodsire
+|-heal|p2a: Clodsire|88/100 brn
+|
+|-damage|p2a: Clodsire|82/100 brn|[from] brn
+|upkeep
+|turn|14
+|
+|move|p1a: Giratina|Hex|p2a: Clodsire
+|-damage|p2a: Clodsire|51/100 brn
+|move|p2a: Clodsire|Poison Jab|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|305/503 par
+|
+|-damage|p2a: Clodsire|45/100 brn|[from] brn
+|upkeep
+|turn|15
+|
+|move|p1a: Giratina|Hex|p2a: Clodsire
+|-damage|p2a: Clodsire|15/100 brn
+|move|p2a: Clodsire|Spikes|p1a: Giratina
+|-sidestart|p1: hli605|Spikes
+|
+|-damage|p2a: Clodsire|8/100 brn|[from] brn
+|upkeep
+|turn|16
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100 brn
+|move|p1a: Giratina|Hex|p2a: Tornadus
+|-damage|p2a: Tornadus|38/100 brn
+|
+|-damage|p2a: Tornadus|32/100 brn|[from] brn
+|upkeep
+|turn|17
+|
+|switch|p2a: Clodsire|Clodsire, M|8/100 brn
+|move|p1a: Giratina|Hex|p2a: Clodsire
+|-damage|p2a: Clodsire|0 fnt
+|faint|p2a: Clodsire
+|
+|upkeep
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|65/100 brn
+|turn|18
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Giratina
+|-immune|p1a: Giratina
+|cant|p1a: Giratina|par
+|
+|-damage|p2a: Tornadus|59/100 brn|[from] brn
+|upkeep
+|turn|19
+|
+|move|p2a: Tornadus|U-turn|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|296/503 par
+|
+|switch|p2a: Rotom|Rotom-Wash|80/100|[from] U-turn
+|move|p1a: Giratina|Hex|p2a: Rotom
+|-damage|p2a: Rotom|56/100
+|
+|-heal|p2a: Rotom|62/100|[from] item: Leftovers
+|upkeep
+|turn|20
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|250/503 par
+|
+|switch|p2a: Metagross|Metagross, tera:Steel|94/100 brn|[from] Volt Switch
+|move|p1a: Giratina|Will-O-Wisp|p2a: Metagross|[miss]
+|-miss|p1a: Giratina|p2a: Metagross
+|
+|-damage|p2a: Metagross|88/100 brn|[from] brn
+|upkeep
+|turn|21
+|
+|move|p2a: Metagross|Heavy Slam|p1a: Giratina
+|-damage|p1a: Giratina|193/503 par
+|cant|p1a: Giratina|par
+|
+|-damage|p2a: Metagross|82/100 brn|[from] brn
+|upkeep
+|turn|22
+|
+|switch|p2a: Zarude|Zarude-Dada|87/100
+|cant|p1a: Giratina|par
+|
+|upkeep
+|turn|23
+|
+|move|p2a: Zarude|Knock Off|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|29/503 par
+|move|p1a: Giratina|Will-O-Wisp|p2a: Zarude
+|-status|p2a: Zarude|brn
+|
+|-damage|p2a: Zarude|81/100 brn|[from] brn
+|upkeep
+|turn|24
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|92/100 brn
+|cant|p1a: Giratina|par
+|
+|-damage|p2a: Tornadus|86/100 brn|[from] brn
+|upkeep
+|turn|25
+|
+|move|p2a: Tornadus|Hurricane|p1a: Giratina
+|-damage|p1a: Giratina|0 fnt
+|faint|p1a: Giratina
+|
+|-damage|p2a: Tornadus|80/100 brn|[from] brn
+|upkeep
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|-damage|p1a: Great Tusk|380/434|[from] Spikes
+|turn|26
+|
+|move|p2a: Tornadus|Nasty Plot|p2a: Tornadus
+|-boost|p2a: Tornadus|spa|2
+|move|p1a: Great Tusk|Headlong Rush|p2a: Tornadus
+|-immune|p2a: Tornadus
+|
+|-heal|p1a: Great Tusk|407/434|[from] item: Leftovers
+|-damage|p2a: Tornadus|74/100 brn|[from] brn
+|upkeep
+|turn|27
+|
+|switch|p2a: Rotom|Rotom-Wash|62/100
+|move|p1a: Great Tusk|Headlong Rush|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p2a: Rotom|67/100|[from] item: Leftovers
+|-heal|p1a: Great Tusk|434/434|[from] item: Leftovers
+|upkeep
+|turn|28
+|
+|switch|p2a: Metagross|Metagross, tera:Steel|82/100 brn
+|move|p1a: Great Tusk|Headlong Rush|p2a: Metagross
+|-supereffective|p2a: Metagross
+|-damage|p2a: Metagross|0 fnt
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|faint|p2a: Metagross
+|
+|upkeep
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100 brn
+|turn|29
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Great Tusk
+|-damage|p1a: Great Tusk|170/434
+|move|p1a: Great Tusk|Headlong Rush|p2a: Tornadus
+|-immune|p2a: Tornadus
+|
+|-heal|p1a: Great Tusk|197/434|[from] item: Leftovers
+|-damage|p2a: Tornadus|94/100 brn|[from] brn
+|upkeep
+|turn|30
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Great Tusk
+|-damage|p1a: Great Tusk|0 fnt
+|faint|p1a: Great Tusk
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|
+|-damage|p2a: Tornadus|88/100 brn|[from] brn
+|upkeep
+|
+|switch|p1a: Chi-Yu|Chi-Yu|251/251
+|-damage|p1a: Chi-Yu|220/251|[from] Spikes
+|-ability|p1a: Chi-Yu|Beads of Ruin
+|turn|31
+|
+|switch|p2a: Rotom|Rotom-Wash|67/100
+|move|p1a: Chi-Yu|Overheat|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|29/100
+|-unboost|p1a: Chi-Yu|spa|2
+|
+|-heal|p2a: Rotom|34/100|[from] item: Leftovers
+|upkeep
+|turn|32
+|
+|switch|p2a: Zarude|Zarude-Dada|81/100 brn
+|move|p1a: Chi-Yu|Overheat|p2a: Zarude
+|-supereffective|p2a: Zarude
+|-damage|p2a: Zarude|0 fnt
+|-unboost|p1a: Chi-Yu|spa|2
+|faint|p2a: Zarude
+|
+|upkeep
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100 brn
+|turn|33
+|
+|switch|p2a: Rotom|Rotom-Wash|34/100
+|move|p1a: Chi-Yu|Overheat|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|21/100
+|-unboost|p1a: Chi-Yu|spa|2
+|
+|-heal|p2a: Rotom|27/100|[from] item: Leftovers
+|upkeep
+|turn|34
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100 brn
+|move|p1a: Chi-Yu|Overheat|p2a: Tornadus
+|-damage|p2a: Tornadus|76/100 brn
+|
+|-damage|p2a: Tornadus|70/100 brn|[from] brn
+|upkeep
+|turn|35
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Tornadus
+|-damage|p2a: Tornadus|44/100 brn
+|move|p2a: Tornadus|Hurricane|p1a: Chi-Yu
+|-damage|p1a: Chi-Yu|78/251
+|
+|-damage|p2a: Tornadus|38/100 brn|[from] brn
+|upkeep
+|turn|36
+|
+|switch|p2a: Rotom|Rotom-Wash|27/100
+|move|p1a: Chi-Yu|Overheat|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|17/100
+|
+|-heal|p2a: Rotom|23/100|[from] item: Leftovers
+|upkeep
+|turn|37
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|14/100
+|move|p2a: Rotom|Thunder Wave|p1a: Chi-Yu
+|-status|p1a: Chi-Yu|par
+|
+|-heal|p2a: Rotom|20/100|[from] item: Leftovers
+|upkeep
+|turn|38
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|9/100
+|move|p2a: Rotom|Pain Split|p1a: Chi-Yu
+|-sethp|p1a: Chi-Yu|52/251 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|18/100|[from] move: Pain Split
+|
+|-heal|p2a: Rotom|24/100|[from] item: Leftovers
+|upkeep
+|turn|39
+|
+|-activate|p1a: Chi-Yu|move: Struggle
+|move|p1a: Chi-Yu|Struggle|p2a: Rotom
+|-damage|p2a: Rotom|15/100
+|-damage|p1a: Chi-Yu|0 fnt|[from] recoil
+|faint|p1a: Chi-Yu
+|move|p2a: Rotom|Pain Split|p1: Chi-Yu|[notarget]
+|-fail|p2a: Rotom
+|
+|-heal|p2a: Rotom|21/100|[from] item: Leftovers
+|upkeep
+|
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|turn|40
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|71/100 brn
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Tornadus
+|-damage|p2a: Tornadus|14/100 brn
+|
+|-damage|p2a: Tornadus|8/100 brn|[from] brn
+|upkeep
+|turn|41
+|
+|move|p2a: Tornadus|U-turn|p1a: Necrozma
+|-damage|p1a: Necrozma|382/398
+|
+|switch|p2a: Rotom|Rotom-Wash|21/100|[from] U-turn
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|9/100
+|
+|-heal|p2a: Rotom|15/100|[from] item: Leftovers
+|upkeep
+|turn|42
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|297/398
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|41/100 brn|[from] Volt Switch
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Tornadus
+|-damage|p2a: Tornadus|0 fnt
+|faint|p2a: Tornadus
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Wash|15/100
+|turn|43
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|216/398
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|3/100
+|
+|-heal|p2a: Rotom|9/100|[from] item: Leftovers
+|upkeep
+|turn|44
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Necrozma|[miss]
+|-miss|p2a: Rotom|p1a: Necrozma
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

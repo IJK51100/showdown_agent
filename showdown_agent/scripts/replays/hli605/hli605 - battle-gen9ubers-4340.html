@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-4340</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-4340<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">simple-uber</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-4340|init|battle
+|title|hli605 vs. simple-uber
+|j|☆hli605
+|j|☆simple-uber
+|gametype|singles
+|player|p1|hli605|170|
+|player|p2|simple-uber|170|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Giratina-Origin|
+|poke|p1|Great Tusk|
+|poke|p1|Chi-Yu|
+|poke|p2|Deoxys-Speed|
+|poke|p2|Kingambit, F|
+|poke|p2|Zacian-*|
+|poke|p2|Arceus-Fairy|
+|poke|p2|Eternatus|
+|poke|p2|Koraidon|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|switch|p2a: Eternatus|Eternatus|100/100
+|-ability|p2a: Eternatus|Pressure
+|turn|1
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Eternatus|Meteor Beam||[still]
+|-prepare|p2a: Eternatus|Meteor Beam
+|-boost|p2a: Eternatus|spa|1
+|-enditem|p2a: Eternatus|Power Herb
+|-anim|p2a: Eternatus|Meteor Beam|p1a: Arceus
+|-damage|p1a: Arceus|294/444
+|
+|upkeep
+|turn|2
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Eternatus|Meteor Beam||[still]
+|-prepare|p2a: Eternatus|Meteor Beam
+|-boost|p2a: Eternatus|spa|1
+|
+|upkeep
+|turn|3
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Eternatus|Meteor Beam|p1a: Arceus|[from] lockedmove
+|-damage|p1a: Arceus|185/444
+|
+|upkeep
+|turn|4
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|407/444
+|move|p2a: Eternatus|Meteor Beam||[still]
+|-prepare|p2a: Eternatus|Meteor Beam
+|-boost|p2a: Eternatus|spa|1
+|
+|upkeep
+|turn|5
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Eternatus|Meteor Beam|p1a: Arceus|[from] lockedmove
+|-damage|p1a: Arceus|283/444
+|
+|upkeep
+|turn|6
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Eternatus|Meteor Beam||[still]
+|-prepare|p2a: Eternatus|Meteor Beam
+|-boost|p2a: Eternatus|spa|1
+|
+|upkeep
+|turn|7
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Eternatus|Meteor Beam|p1a: Arceus|[from] lockedmove
+|-damage|p1a: Arceus|180/444
+|
+|upkeep
+|turn|8
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|402/444
+|move|p2a: Eternatus|Meteor Beam||[still]
+|-prepare|p2a: Eternatus|Meteor Beam
+|-boost|p2a: Eternatus|spa|1
+|
+|upkeep
+|turn|9
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Eternatus|Meteor Beam|p1a: Arceus|[from] lockedmove
+|-damage|p1a: Arceus|271/444
+|
+|upkeep
+|turn|10
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Eternatus|Meteor Beam||[still]
+|-prepare|p2a: Eternatus|Meteor Beam
+|-boost|p2a: Eternatus|spa|1
+|
+|upkeep
+|turn|11
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Eternatus|Meteor Beam|p1a: Arceus|[from] lockedmove
+|-damage|p1a: Arceus|135/444
+|
+|upkeep
+|turn|12
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|357/444
+|move|p2a: Eternatus|Meteor Beam||[still]
+|-prepare|p2a: Eternatus|Meteor Beam
+|-boost|p2a: Eternatus|spa|0
+|
+|upkeep
+|turn|13
+|
+|move|p1a: Arceus|Judgment|p2a: Eternatus
+|-damage|p2a: Eternatus|0 fnt
+|faint|p2a: Eternatus
+|
+|upkeep
+|
+|switch|p2a: Zacian|Zacian-Crowned|100/100
+|-ability|p2a: Zacian|Intrepid Sword|boost
+|-boost|p2a: Zacian|atk|1
+|turn|14
+|
+|move|p2a: Zacian|Behemoth Blade|p1a: Arceus
+|-supereffective|p1a: Arceus
+|-damage|p1a: Arceus|0 fnt
+|faint|p1a: Arceus
+|
+|upkeep
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|turn|15
+|
+|move|p2a: Zacian|Behemoth Blade|p1a: Great Tusk
+|-damage|p1a: Great Tusk|245/434
+|move|p1a: Great Tusk|Headlong Rush|p2a: Zacian
+|-supereffective|p2a: Zacian
+|-damage|p2a: Zacian|9/100
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|
+|-heal|p1a: Great Tusk|272/434|[from] item: Leftovers
+|upkeep
+|turn|16
+|
+|move|p2a: Zacian|Behemoth Blade|p1a: Great Tusk
+|-damage|p1a: Great Tusk|0 fnt
+|faint|p1a: Great Tusk
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|
+|upkeep
+|
+|switch|p1a: Chi-Yu|Chi-Yu|251/251
+|-ability|p1a: Chi-Yu|Beads of Ruin
+|turn|17
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Zacian|[miss]
+|-miss|p1a: Chi-Yu|p2a: Zacian
+|move|p2a: Zacian|Close Combat|p1a: Chi-Yu
+|-supereffective|p1a: Chi-Yu
+|-damage|p1a: Chi-Yu|0 fnt
+|-unboost|p2a: Zacian|def|1
+|-unboost|p2a: Zacian|spd|1
+|faint|p1a: Chi-Yu
+|
+|upkeep
+|
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|turn|18
+|
+|move|p2a: Zacian|Close Combat|p1a: Necrozma
+|-damage|p1a: Necrozma|254/398
+|-unboost|p2a: Zacian|def|1
+|-unboost|p2a: Zacian|spd|1
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Zacian
+|-damage|p2a: Zacian|0 fnt
+|faint|p2a: Zacian
+|
+|upkeep
+|
+|switch|p2a: Kingambit|Kingambit, F|100/100
+|-activate|p2a: Kingambit|ability: Supreme Overlord
+|-start|p2a: Kingambit|fallen2|[silent]
+|turn|19
+|
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Kingambit
+|-resisted|p2a: Kingambit
+|-damage|p2a: Kingambit|81/100
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|28/398
+|
+|upkeep
+|turn|20
+|
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|227/398
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|19/398
+|
+|upkeep
+|turn|21
+|
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|218/398
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|0 fnt
+|faint|p1a: Necrozma
+|
+|upkeep
+|
+|switch|p1a: Eternatus|Eternatus|484/484
+|-ability|p1a: Eternatus|Pressure
+|turn|22
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Kingambit
+|-immune|p2a: Kingambit
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Eternatus
+|-damage|p1a: Eternatus|216/484
+|
+|-heal|p1a: Eternatus|246/484|[from] item: Black Sludge
+|upkeep
+|turn|23
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Kingambit
+|-immune|p2a: Kingambit
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Eternatus
+|-damage|p1a: Eternatus|3/484
+|
+|-heal|p1a: Eternatus|33/484|[from] item: Black Sludge
+|upkeep
+|turn|24
+|
+|move|p1a: Eternatus|Recover|p1a: Eternatus
+|-heal|p1a: Eternatus|275/484
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Eternatus
+|-crit|p1a: Eternatus
+|-damage|p1a: Eternatus|0 fnt
+|faint|p1a: Eternatus
+|
+|upkeep
+|
+|switch|p1a: Giratina|Giratina-Origin|503/503
+|turn|25
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Kingambit
+|-status|p2a: Kingambit|brn
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|311/503
+|
+|-damage|p2a: Kingambit|75/100 brn|[from] brn
+|upkeep
+|turn|26
+|
+|move|p1a: Giratina|Hex|p2a: Kingambit
+|-resisted|p2a: Kingambit
+|-crit|p2a: Kingambit
+|-damage|p2a: Kingambit|27/100 brn
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|125/503
+|
+|-damage|p2a: Kingambit|21/100 brn|[from] brn
+|upkeep
+|turn|27
+|
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|337/503 slp
+|
+|-damage|p2a: Kingambit|15/100 brn|[from] brn
+|upkeep
+|turn|28
+|
+|cant|p1a: Giratina|slp
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|171/503 slp
+|
+|-damage|p2a: Kingambit|9/100 brn|[from] brn
+|upkeep
+|turn|29
+|
+|cant|p1a: Giratina|slp
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|9/503 slp
+|
+|-damage|p2a: Kingambit|2/100 brn|[from] brn
+|upkeep
+|turn|30
+|
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|323/503 slp
+|
+|-damage|p2a: Kingambit|0 fnt|[from] brn
+|faint|p2a: Kingambit
+|-end|p2a: Kingambit|fallen2|[silent]
+|upkeep
+|
+|switch|p2a: Arceus|Arceus-Fairy|100/100
+|turn|31
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|1
+|-boost|p2a: Arceus|spd|1
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|32
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|1
+|-boost|p2a: Arceus|spd|1
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|33
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|1
+|-boost|p2a: Arceus|spd|1
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Will-O-Wisp|p2a: Arceus
+|-status|p2a: Arceus|brn
+|
+|-damage|p2a: Arceus|94/100 brn|[from] brn
+|upkeep
+|turn|34
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|1
+|-boost|p2a: Arceus|spd|1
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|88/100 brn|[from] brn
+|upkeep
+|turn|35
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|1
+|-boost|p2a: Arceus|spd|1
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|82/100 brn|[from] brn
+|upkeep
+|turn|36
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|1
+|-boost|p2a: Arceus|spd|1
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|76/100 brn|[from] brn
+|upkeep
+|turn|37
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|70/100 brn|[from] brn
+|upkeep
+|turn|38
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|64/100 brn|[from] brn
+|upkeep
+|turn|39
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|58/100 brn|[from] brn
+|upkeep
+|turn|40
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|52/100 brn|[from] brn
+|upkeep
+|turn|41
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|46/100 brn|[from] brn
+|upkeep
+|turn|42
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|40/100 brn|[from] brn
+|upkeep
+|turn|43
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|33/100 brn|[from] brn
+|upkeep
+|turn|44
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|27/100 brn|[from] brn
+|upkeep
+|turn|45
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|21/100 brn|[from] brn
+|upkeep
+|turn|46
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|15/100 brn|[from] brn
+|upkeep
+|turn|47
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|9/100 brn|[from] brn
+|upkeep
+|turn|48
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|3/100 brn|[from] brn
+|upkeep
+|turn|49
+|
+|move|p2a: Arceus|Calm Mind|p2a: Arceus
+|-boost|p2a: Arceus|spa|0
+|-boost|p2a: Arceus|spd|0
+|move|p1a: Giratina|Dragon Tail|p2a: Arceus
+|-immune|p2a: Arceus
+|
+|-damage|p2a: Arceus|0 fnt|[from] brn
+|faint|p2a: Arceus
+|upkeep
+|
+|switch|p2a: Koraidon|Koraidon|100/100
+|-weather|SunnyDay|[from] ability: Orichalcum Pulse|[of] p2a: Koraidon
+|-activate|p2a: Koraidon|Orichalcum Pulse|[source]
+|turn|50
+|
+|move|p2a: Koraidon|Scale Shot|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|198/503
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|81/503
+|-hitcount|p1a: Giratina|2
+|-unboost|p2a: Koraidon|def|1
+|-boost|p2a: Koraidon|spe|1
+|-damage|p2a: Koraidon|91/100|[from] item: Life Orb
+|move|p1a: Giratina|Will-O-Wisp|p2a: Koraidon
+|-status|p2a: Koraidon|brn
+|
+|-weather|SunnyDay|[upkeep]
+|-damage|p2a: Koraidon|84/100 brn|[from] brn
+|upkeep
+|turn|51
+|
+|move|p2a: Koraidon|Scale Shot|p1a: Giratina|[miss]
+|-miss|p2a: Koraidon|p1a: Giratina
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|-weather|SunnyDay|[upkeep]
+|-damage|p2a: Koraidon|78/100 brn|[from] brn
+|upkeep
+|turn|52
+|
+|move|p2a: Koraidon|Scale Shot|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|445/503 slp
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|387/503 slp
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|329/503 slp
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|269/503 slp
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|209/503 slp
+|-hitcount|p1a: Giratina|5
+|-unboost|p2a: Koraidon|def|1
+|-boost|p2a: Koraidon|spe|1
+|-damage|p2a: Koraidon|68/100 brn|[from] item: Life Orb
+|cant|p1a: Giratina|slp
+|
+|-weather|SunnyDay|[upkeep]
+|-damage|p2a: Koraidon|62/100 brn|[from] brn
+|upkeep
+|turn|53
+|
+|move|p2a: Koraidon|Scale Shot|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|153/503 slp
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|98/503 slp
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|36/503 slp
+|-hitcount|p1a: Giratina|3
+|-unboost|p2a: Koraidon|def|1
+|-boost|p2a: Koraidon|spe|1
+|-damage|p2a: Koraidon|52/100 brn|[from] item: Life Orb
+|cant|p1a: Giratina|slp
+|
+|-weather|SunnyDay|[upkeep]
+|-damage|p2a: Koraidon|46/100 brn|[from] brn
+|upkeep
+|turn|54
+|
+|move|p2a: Koraidon|Scale Shot|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|0 fnt
+|faint|p1a: Giratina
+|-hitcount|p1: Giratina|1
+|-damage|p2a: Koraidon|36/100 brn|[from] item: Life Orb
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

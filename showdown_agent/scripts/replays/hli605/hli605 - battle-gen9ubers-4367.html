@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-4367</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-4367<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-nu</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-4367|init|battle
+|title|hli605 vs. random-nu
+|j|☆hli605
+|j|☆random-nu
+|gametype|singles
+|player|p1|hli605|170|
+|player|p2|random-nu|265|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Giratina-Origin|
+|poke|p1|Great Tusk|
+|poke|p1|Chi-Yu|
+|poke|p2|Entei|
+|poke|p2|Chesnaught, M|
+|poke|p2|Volcanion|
+|poke|p2|Muk-Alola, F|
+|poke|p2|Bronzong|
+|poke|p2|Zapdos-Galar|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Giratina|Giratina-Origin|503/503
+|switch|p2a: Bronzong|Bronzong|100/100
+|turn|1
+|
+|-terastallize|p2a: Bronzong|Fairy
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong
+|-status|p2a: Bronzong|brn
+|move|p2a: Bronzong|Body Press|p1a: Giratina
+|-immune|p1a: Giratina
+|
+|-damage|p2a: Bronzong|94/100 brn|[from] brn
+|upkeep
+|turn|2
+|
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|move|p1a: Giratina|Hex|p2a: Zapdos
+|-damage|p2a: Zapdos|65/100
+|
+|upkeep
+|turn|3
+|
+|move|p2a: Zapdos|Knock Off|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|401/503
+|move|p1a: Giratina|Will-O-Wisp|p2a: Zapdos
+|-status|p2a: Zapdos|brn
+|
+|-damage|p2a: Zapdos|59/100 brn|[from] brn
+|upkeep
+|turn|4
+|
+|switch|p2a: Chesnaught|Chesnaught, M|100/100
+|move|p1a: Giratina|Hex|p2a: Chesnaught
+|-crit|p2a: Chesnaught
+|-damage|p2a: Chesnaught|52/100
+|
+|upkeep
+|turn|5
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Chesnaught
+|-status|p2a: Chesnaught|brn
+|move|p2a: Chesnaught|Body Press|p1a: Giratina
+|-immune|p1a: Giratina
+|
+|-damage|p2a: Chesnaught|46/100 brn|[from] brn
+|upkeep
+|turn|6
+|
+|switch|p2a: Muk|Muk-Alola, F|100/100
+|move|p1a: Giratina|Hex|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|93/100
+|
+|-heal|p2a: Muk|99/100|[from] item: Leftovers
+|upkeep
+|turn|7
+|
+|switch|p2a: Bronzong|Bronzong, tera:Fairy|94/100 brn
+|move|p1a: Giratina|Will-O-Wisp|p2a: Bronzong
+|-fail|p2a: Bronzong|brn
+|
+|-heal|p2a: Bronzong|100/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|94/100 brn|[from] brn
+|upkeep
+|turn|8
+|
+|switch|p2a: Muk|Muk-Alola, F|99/100
+|move|p1a: Giratina|Hex|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|91/100
+|
+|-heal|p2a: Muk|97/100|[from] item: Leftovers
+|upkeep
+|turn|9
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Muk|[miss]
+|-miss|p1a: Giratina|p2a: Muk
+|move|p2a: Muk|Rest|p2a: Muk
+|-status|p2a: Muk|slp|[from] move: Rest
+|-heal|p2a: Muk|100/100 slp|[silent]
+|
+|upkeep
+|turn|10
+|
+|move|p1a: Giratina|Hex|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|84/100 slp
+|cant|p2a: Muk|slp
+|move|p2a: Muk|Sleep Talk|p2a: Muk
+|move|p2a: Muk|Rest||[from] move: Sleep Talk|[still]
+|-fail|p2a: Muk
+|
+|-heal|p2a: Muk|90/100 slp|[from] item: Leftovers
+|upkeep
+|turn|11
+|
+|switch|p2a: Volcanion|Volcanion|100/100
+|move|p1a: Giratina|Hex|p2a: Volcanion
+|-damage|p2a: Volcanion|64/100
+|
+|upkeep
+|turn|12
+|
+|move|p2a: Volcanion|Earth Power|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Volcanion
+|-damage|p2a: Volcanion|27/100
+|
+|upkeep
+|turn|13
+|
+|move|p2a: Volcanion|Flamethrower|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|311/503
+|move|p1a: Giratina|Hex|p2a: Volcanion
+|-damage|p2a: Volcanion|0 fnt
+|faint|p2a: Volcanion
+|
+|upkeep
+|
+|switch|p2a: Zapdos|Zapdos-Galar|59/100 brn
+|turn|14
+|
+|switch|p2a: Chesnaught|Chesnaught, M|46/100 brn
+|move|p1a: Giratina|Hex|p2a: Chesnaught
+|-damage|p2a: Chesnaught|0 fnt
+|faint|p2a: Chesnaught
+|
+|upkeep
+|
+|switch|p2a: Zapdos|Zapdos-Galar|59/100 brn
+|turn|15
+|
+|move|p2a: Zapdos|U-turn|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|296/503
+|
+|switch|p2a: Bronzong|Bronzong, tera:Fairy|94/100 brn|[from] U-turn
+|move|p1a: Giratina|Hex|p2a: Bronzong
+|-damage|p2a: Bronzong|46/100 brn
+|
+|-heal|p2a: Bronzong|53/100 brn|[from] item: Leftovers
+|-damage|p2a: Bronzong|46/100 brn|[from] brn
+|upkeep
+|turn|16
+|
+|move|p1a: Giratina|Hex|p2a: Bronzong
+|-damage|p2a: Bronzong|0 fnt
+|faint|p2a: Bronzong
+|
+|upkeep
+|
+|switch|p2a: Zapdos|Zapdos-Galar|59/100 brn
+|turn|17
+|
+|switch|p2a: Muk|Muk-Alola, F|90/100 slp
+|move|p1a: Giratina|Hex|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|73/100 slp
+|
+|-heal|p2a: Muk|79/100 slp|[from] item: Leftovers
+|upkeep
+|turn|18
+|
+|switch|p2a: Zapdos|Zapdos-Galar|59/100 brn
+|move|p1a: Giratina|Hex|p2a: Zapdos
+|-damage|p2a: Zapdos|0 fnt
+|faint|p2a: Zapdos
+|
+|upkeep
+|
+|switch|p2a: Entei|Entei|100/100
+|turn|19
+|
+|move|p2a: Entei|Stone Edge|p1a: Giratina
+|-damage|p1a: Giratina|212/503
+|move|p1a: Giratina|Hex|p2a: Entei
+|-damage|p2a: Entei|65/100
+|
+|upkeep
+|turn|20
+|
+|move|p2a: Entei|Double-Edge|p1a: Giratina
+|-immune|p1a: Giratina
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|upkeep
+|turn|21
+|
+|move|p2a: Entei|Extreme Speed|p1a: Giratina
+|-immune|p1a: Giratina
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|22
+|
+|switch|p2a: Muk|Muk-Alola, F|79/100 slp
+|cant|p1a: Giratina|slp
+|
+|-heal|p2a: Muk|85/100 slp|[from] item: Leftovers
+|upkeep
+|turn|23
+|
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Hex|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|70/100 slp
+|cant|p2a: Muk|slp
+|
+|-heal|p2a: Muk|76/100 slp|[from] item: Leftovers
+|upkeep
+|turn|24
+|
+|move|p1a: Giratina|Hex|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|60/100 slp
+|-curestatus|p2a: Muk|slp|[msg]
+|move|p2a: Muk|Sleep Talk||[still]
+|-fail|p2a: Muk
+|
+|-heal|p2a: Muk|66/100|[from] item: Leftovers
+|upkeep
+|turn|25
+|
+|switch|p2a: Entei|Entei|65/100
+|move|p1a: Giratina|Will-O-Wisp|p2a: Entei
+|-immune|p2a: Entei
+|
+|upkeep
+|turn|26
+|
+|move|p2a: Entei|Double-Edge|p1a: Giratina
+|-immune|p1a: Giratina
+|move|p1a: Giratina|Dragon Tail|p2a: Entei
+|-damage|p2a: Entei|33/100
+|drag|p2a: Muk|Muk-Alola, F|66/100
+|
+|-heal|p2a: Muk|72/100|[from] item: Leftovers
+|upkeep
+|turn|27
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Muk
+|-status|p2a: Muk|brn
+|move|p2a: Muk|Knock Off|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|449/503
+|-status|p1a: Giratina|psn|[from] ability: Poison Touch|[of] p2a: Muk
+|
+|-heal|p2a: Muk|78/100 brn|[from] item: Leftovers
+|-damage|p1a: Giratina|387/503 psn|[from] psn
+|-damage|p2a: Muk|72/100 brn|[from] brn
+|upkeep
+|turn|28
+|
+|move|p2a: Muk|Poison Jab|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|371/503 psn
+|move|p1a: Giratina|Dragon Tail|p2a: Muk
+|-damage|p2a: Muk|44/100 brn
+|drag|p2a: Entei|Entei|33/100
+|
+|-damage|p1a: Giratina|309/503 psn|[from] psn
+|upkeep
+|turn|29
+|
+|move|p2a: Entei|Extreme Speed|p1a: Giratina
+|-immune|p1a: Giratina
+|move|p1a: Giratina|Dragon Tail|p2a: Entei
+|-damage|p2a: Entei|2/100
+|drag|p2a: Muk|Muk-Alola, F|44/100 brn
+|
+|-heal|p2a: Muk|50/100 brn|[from] item: Leftovers
+|-damage|p1a: Giratina|247/503 psn|[from] psn
+|-damage|p2a: Muk|44/100 brn|[from] brn
+|upkeep
+|turn|30
+|
+|switch|p2a: Entei|Entei|2/100
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|upkeep
+|turn|31
+|
+|move|p2a: Entei|Extreme Speed|p1a: Giratina
+|-immune|p1a: Giratina
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|32
+|
+|move|p2a: Entei|Double-Edge|p1a: Giratina
+|-immune|p1a: Giratina
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|33
+|
+|move|p2a: Entei|Extreme Speed|p1a: Giratina
+|-immune|p1a: Giratina
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Dragon Tail|p2a: Entei
+|-crit|p2a: Entei
+|-damage|p2a: Entei|0 fnt
+|faint|p2a: Entei
+|
+|upkeep
+|
+|switch|p2a: Muk|Muk-Alola, F|44/100 brn
+|turn|34
+|
+|move|p2a: Muk|Poison Jab|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|487/503
+|-status|p1a: Giratina|psn
+|move|p1a: Giratina|Dragon Tail|p2a: Muk
+|-damage|p2a: Muk|14/100 brn
+|
+|-heal|p2a: Muk|20/100 brn|[from] item: Leftovers
+|-damage|p1a: Giratina|425/503 psn|[from] psn
+|-damage|p2a: Muk|14/100 brn|[from] brn
+|upkeep
+|turn|35
+|
+|move|p2a: Muk|Knock Off|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|365/503 psn
+|move|p1a: Giratina|Dragon Tail|p2a: Muk|[miss]
+|-miss|p1a: Giratina|p2a: Muk
+|
+|-heal|p2a: Muk|20/100 brn|[from] item: Leftovers
+|-damage|p1a: Giratina|303/503 psn|[from] psn
+|-damage|p2a: Muk|14/100 brn|[from] brn
+|upkeep
+|turn|36
+|
+|move|p2a: Muk|Poison Jab|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|285/503 psn
+|move|p1a: Giratina|Dragon Tail|p2a: Muk
+|-damage|p2a: Muk|0 fnt
+|faint|p2a: Muk
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
