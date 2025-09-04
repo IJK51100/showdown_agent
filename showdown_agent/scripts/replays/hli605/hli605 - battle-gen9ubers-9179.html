@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-9179</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-9179<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-ou</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-9179|init|battle
+|title|hli605 vs. random-ou
+|j|☆hli605
+|j|☆random-ou
+|gametype|singles
+|player|p1|hli605|266|
+|player|p2|random-ou|265|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Kyogre|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Great Tusk|
+|poke|p1|Kingambit, M|
+|poke|p2|Ogerpon-Wellspring, F|
+|poke|p2|Garganacl, F|
+|poke|p2|Great Tusk|
+|poke|p2|Dragonite, F|
+|poke|p2|Moltres|
+|poke|p2|Darkrai|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|switch|p2a: Dragonite|Dragonite, F|100/100
+|turn|1
+|
+|move|p2a: Dragonite|Dragon Dance|p2a: Dragonite
+|-boost|p2a: Dragonite|atk|1
+|-boost|p2a: Dragonite|spe|1
+|move|p1a: Great Tusk|Knock Off|p2a: Dragonite
+|-damage|p2a: Dragonite|85/100
+|-enditem|p2a: Dragonite|Heavy-Duty Boots|[from] move: Knock Off|[of] p1a: Great Tusk
+|
+|upkeep
+|turn|2
+|
+|move|p2a: Dragonite|Extreme Speed|p1a: Great Tusk
+|-damage|p1a: Great Tusk|346/434
+|move|p1a: Great Tusk|Knock Off|p2a: Dragonite
+|-damage|p2a: Dragonite|65/100
+|
+|-heal|p1a: Great Tusk|373/434|[from] item: Leftovers
+|upkeep
+|turn|3
+|
+|switch|p2a: Garganacl|Garganacl, F|100/100
+|move|p1a: Great Tusk|Knock Off|p2a: Garganacl
+|-damage|p2a: Garganacl|83/100
+|-enditem|p2a: Garganacl|Leftovers|[from] move: Knock Off|[of] p1a: Great Tusk
+|
+|-heal|p1a: Great Tusk|400/434|[from] item: Leftovers
+|upkeep
+|turn|4
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Garganacl
+|-supereffective|p2a: Garganacl
+|-damage|p2a: Garganacl|13/100
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|move|p2a: Garganacl|Recover|p2a: Garganacl
+|-heal|p2a: Garganacl|63/100
+|
+|-heal|p1a: Great Tusk|427/434|[from] item: Leftovers
+|upkeep
+|turn|5
+|
+|switch|p2a: Darkrai|Darkrai|100/100
+|move|p1a: Great Tusk|Headlong Rush|p2a: Darkrai
+|-damage|p2a: Darkrai|30/100
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|
+|-heal|p1a: Great Tusk|434/434|[from] item: Leftovers
+|upkeep
+|turn|6
+|
+|switch|p2a: Great Tusk|Great Tusk|100/100
+|move|p1a: Great Tusk|Body Press|p2a: Great Tusk
+|-damage|p2a: Great Tusk|84/100
+|
+|upkeep
+|turn|7
+|
+|-end|p2a: Great Tusk|Protosynthesis|[silent]
+|switch|p2a: Ogerpon|Ogerpon-Wellspring, F|100/100
+|move|p1a: Great Tusk|Headlong Rush|p2a: Ogerpon
+|-resisted|p2a: Ogerpon
+|-damage|p2a: Ogerpon|65/100
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|
+|upkeep
+|turn|8
+|
+|move|p2a: Ogerpon|Ivy Cudgel|p1a: Great Tusk|[anim] Ivy Cudgel Water
+|-supereffective|p1a: Great Tusk
+|-damage|p1a: Great Tusk|0 fnt
+|faint|p1a: Great Tusk
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|
+|upkeep
+|
+|switch|p1a: Eternatus|Eternatus|484/484
+|-ability|p1a: Eternatus|Pressure
+|turn|9
+|
+|switch|p2a: Garganacl|Garganacl, F|63/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Garganacl
+|-damage|p2a: Garganacl|30/100
+|
+|upkeep
+|turn|10
+|
+|switch|p2a: Ogerpon|Ogerpon-Wellspring, F|65/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Ogerpon
+|-damage|p2a: Ogerpon|9/100
+|
+|upkeep
+|turn|11
+|
+|move|p2a: Ogerpon|Knock Off|p1a: Eternatus
+|-damage|p1a: Eternatus|357/484
+|-enditem|p1a: Eternatus|Black Sludge|[from] move: Knock Off|[of] p2a: Ogerpon
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Ogerpon
+|-damage|p2a: Ogerpon|0 fnt
+|faint|p2a: Ogerpon
+|
+|upkeep
+|
+|switch|p2a: Darkrai|Darkrai|30/100
+|turn|12
+|
+|-terastallize|p2a: Darkrai|Poison
+|move|p2a: Darkrai|Sludge Bomb|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|291/484
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Darkrai
+|-damage|p2a: Darkrai|0 fnt
+|faint|p2a: Darkrai
+|
+|upkeep
+|
+|switch|p2a: Garganacl|Garganacl, F|30/100
+|turn|13
+|
+|switch|p2a: Great Tusk|Great Tusk|84/100
+|move|p1a: Eternatus|Recover|p1a: Eternatus
+|-heal|p1a: Eternatus|484/484
+|
+|upkeep
+|turn|14
+|
+|-end|p2a: Great Tusk|Protosynthesis|[silent]
+|switch|p2a: Garganacl|Garganacl, F|30/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Garganacl
+|-damage|p2a: Garganacl|0 fnt
+|faint|p2a: Garganacl
+|
+|upkeep
+|
+|switch|p2a: Great Tusk|Great Tusk|84/100
+|turn|15
+|
+|move|p2a: Great Tusk|Knock Off|p1a: Eternatus
+|-damage|p1a: Eternatus|408/484
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Great Tusk
+|-damage|p2a: Great Tusk|7/100
+|
+|upkeep
+|turn|16
+|
+|move|p2a: Great Tusk|Headlong Rush|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|0 fnt
+|-unboost|p2a: Great Tusk|def|1
+|-unboost|p2a: Great Tusk|spd|1
+|faint|p1a: Eternatus
+|
+|upkeep
+|
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|turn|17
+|
+|move|p2a: Great Tusk|Ice Spinner|p1a: Arceus
+|-damage|p1a: Arceus|383/444
+|move|p1a: Arceus|Judgment|p2a: Great Tusk
+|-supereffective|p2a: Great Tusk
+|-damage|p2a: Great Tusk|0 fnt
+|faint|p2a: Great Tusk
+|-end|p2a: Great Tusk|Protosynthesis|[silent]
+|
+|upkeep
+|
+|switch|p2a: Moltres|Moltres|100/100
+|turn|18
+|
+|move|p1a: Arceus|Judgment|p2a: Moltres
+|-resisted|p2a: Moltres
+|-damage|p2a: Moltres|76/100
+|move|p2a: Moltres|Roost|p2a: Moltres
+|-heal|p2a: Moltres|100/100
+|-singleturn|p2a: Moltres|move: Roost
+|
+|upkeep
+|turn|19
+|
+|move|p1a: Arceus|Judgment|p2a: Moltres
+|-resisted|p2a: Moltres
+|-damage|p2a: Moltres|76/100
+|move|p2a: Moltres|Will-O-Wisp|p1a: Arceus
+|-status|p1a: Arceus|brn
+|
+|-damage|p1a: Arceus|356/444 brn|[from] brn
+|upkeep
+|turn|20
+|
+|move|p1a: Arceus|Judgment|p2a: Moltres
+|-resisted|p2a: Moltres
+|-damage|p2a: Moltres|52/100
+|move|p2a: Moltres|Will-O-Wisp|p1a: Arceus
+|-fail|p1a: Arceus|brn
+|
+|-damage|p1a: Arceus|329/444 brn|[from] brn
+|upkeep
+|turn|21
+|
+|move|p1a: Arceus|Judgment|p2a: Moltres
+|-resisted|p2a: Moltres
+|-damage|p2a: Moltres|28/100
+|move|p2a: Moltres|Roost|p2a: Moltres
+|-heal|p2a: Moltres|78/100
+|-singleturn|p2a: Moltres|move: Roost
+|
+|-damage|p1a: Arceus|302/444 brn|[from] brn
+|upkeep
+|turn|22
+|
+|move|p1a: Arceus|Judgment|p2a: Moltres
+|-resisted|p2a: Moltres
+|-damage|p2a: Moltres|52/100
+|move|p2a: Moltres|Will-O-Wisp|p1a: Arceus
+|-fail|p1a: Arceus|brn
+|
+|-damage|p1a: Arceus|275/444 brn|[from] brn
+|upkeep
+|turn|23
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444 brn
+|move|p2a: Moltres|Flamethrower|p1a: Arceus
+|-damage|p1a: Arceus|350/444 brn
+|
+|-damage|p1a: Arceus|323/444 brn|[from] brn
+|upkeep
+|turn|24
+|
+|move|p1a: Arceus|Judgment|p2a: Moltres
+|-resisted|p2a: Moltres
+|-damage|p2a: Moltres|27/100
+|move|p2a: Moltres|Brave Bird|p1a: Arceus
+|-damage|p1a: Arceus|209/444 brn
+|-damage|p2a: Moltres|17/100|[from] Recoil
+|
+|-damage|p1a: Arceus|182/444 brn|[from] brn
+|upkeep
+|turn|25
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|404/444 brn
+|move|p2a: Moltres|Brave Bird|p1a: Arceus
+|-damage|p1a: Arceus|305/444 brn
+|-damage|p2a: Moltres|9/100|[from] Recoil
+|
+|-damage|p1a: Arceus|278/444 brn|[from] brn
+|upkeep
+|turn|26
+|
+|switch|p2a: Dragonite|Dragonite, F|65/100
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444 brn
+|
+|-damage|p1a: Arceus|417/444 brn|[from] brn
+|upkeep
+|turn|27
+|
+|move|p1a: Arceus|Judgment|p2a: Dragonite
+|-supereffective|p2a: Dragonite
+|-damage|p2a: Dragonite|0 fnt
+|faint|p2a: Dragonite
+|
+|-damage|p1a: Arceus|390/444 brn|[from] brn
+|upkeep
+|
+|switch|p2a: Moltres|Moltres|9/100
+|turn|28
+|
+|move|p1a: Arceus|Judgment|p2a: Moltres
+|-resisted|p2a: Moltres
+|-damage|p2a: Moltres|0 fnt
+|faint|p2a: Moltres
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

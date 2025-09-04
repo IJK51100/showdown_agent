@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-8096</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-8096<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">max_damage-uu</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-8096|init|battle
+|title|hli605 vs. max_damage-uu
+|j|☆hli605
+|j|☆max_damage-uu
+|gametype|singles
+|player|p1|hli605|266|
+|player|p2|max_damage-uu|101|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Kyogre|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Great Tusk|
+|poke|p1|Kingambit, F|
+|poke|p2|Tornadus-Therian, M|
+|poke|p2|Clodsire, F|
+|poke|p2|Metagross|
+|poke|p2|Rotom-Wash|
+|poke|p2|Cobalion|
+|poke|p2|Zarude-Dada|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Eternatus|Eternatus|484/484
+|switch|p2a: Zarude|Zarude-Dada|100/100
+|-ability|p1a: Eternatus|Pressure
+|turn|1
+|
+|move|p2a: Zarude|Power Whip|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|432/484
+|move|p1a: Eternatus|Flamethrower|p2a: Zarude
+|-supereffective|p2a: Zarude
+|-damage|p2a: Zarude|48/100
+|
+|-heal|p1a: Eternatus|462/484|[from] item: Black Sludge
+|upkeep
+|turn|2
+|
+|move|p2a: Zarude|Power Whip|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|408/484
+|move|p1a: Eternatus|Flamethrower|p2a: Zarude
+|-supereffective|p2a: Zarude
+|-damage|p2a: Zarude|0 fnt
+|faint|p2a: Zarude
+|
+|-heal|p1a: Eternatus|438/484|[from] item: Black Sludge
+|upkeep
+|
+|switch|p2a: Cobalion|Cobalion|100/100
+|turn|3
+|
+|move|p2a: Cobalion|Body Press|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|368/484
+|move|p1a: Eternatus|Flamethrower|p2a: Cobalion
+|-supereffective|p2a: Cobalion
+|-damage|p2a: Cobalion|34/100
+|
+|-heal|p1a: Eternatus|398/484|[from] item: Black Sludge
+|upkeep
+|turn|4
+|
+|move|p2a: Cobalion|Body Press|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|334/484
+|move|p1a: Eternatus|Flamethrower|p2a: Cobalion
+|-supereffective|p2a: Cobalion
+|-damage|p2a: Cobalion|0 fnt
+|faint|p2a: Cobalion
+|
+|-heal|p1a: Eternatus|364/484|[from] item: Black Sludge
+|upkeep
+|
+|switch|p2a: Metagross|Metagross|100/100
+|turn|5
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Metagross
+|-supereffective|p2a: Metagross
+|-crit|p2a: Metagross
+|-damage|p2a: Metagross|0 fnt
+|faint|p2a: Metagross
+|
+|-heal|p1a: Eternatus|394/484|[from] item: Black Sludge
+|upkeep
+|
+|switch|p2a: Clodsire|Clodsire, F|100/100
+|turn|6
+|
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Clodsire
+|-damage|p2a: Clodsire|71/100
+|move|p2a: Clodsire|Earthquake|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|200/484
+|
+|-heal|p1a: Eternatus|230/484|[from] item: Black Sludge
+|upkeep
+|turn|7
+|
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Clodsire
+|-damage|p2a: Clodsire|43/100
+|move|p2a: Clodsire|Earthquake|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|50/484
+|
+|-heal|p1a: Eternatus|80/484|[from] item: Black Sludge
+|upkeep
+|turn|8
+|
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Clodsire
+|-damage|p2a: Clodsire|14/100
+|move|p2a: Clodsire|Earthquake|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|0 fnt
+|faint|p1a: Eternatus
+|
+|upkeep
+|
+|switch|p1a: Kyogre|Kyogre|341/341
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Kyogre
+|turn|9
+|
+|move|p1a: Kyogre|Water Spout|p2a: Clodsire
+|-heal|p2a: Clodsire|39/100|[from] ability: Water Absorb|[of] p1a: Kyogre
+|move|p2a: Clodsire|Earthquake|p1a: Kyogre
+|-damage|p1a: Kyogre|236/341
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|10
+|
+|move|p1a: Kyogre|Water Spout|p2a: Clodsire
+|-heal|p2a: Clodsire|63/100|[from] ability: Water Absorb|[of] p1a: Kyogre
+|move|p2a: Clodsire|Earthquake|p1a: Kyogre
+|-damage|p1a: Kyogre|136/341
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|11
+|
+|move|p1a: Kyogre|Water Spout|p2a: Clodsire
+|-heal|p2a: Clodsire|88/100|[from] ability: Water Absorb|[of] p1a: Kyogre
+|move|p2a: Clodsire|Earthquake|p1a: Kyogre
+|-damage|p1a: Kyogre|37/341
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|12
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|move|p2a: Clodsire|Earthquake|p1a: Great Tusk
+|-damage|p1a: Great Tusk|374/434
+|
+|-weather|RainDance|[upkeep]
+|-heal|p1a: Great Tusk|401/434|[from] item: Leftovers
+|upkeep
+|turn|13
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Clodsire
+|-supereffective|p2a: Clodsire
+|-damage|p2a: Clodsire|0 fnt
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|faint|p2a: Clodsire
+|
+|-weather|none
+|-heal|p1a: Great Tusk|428/434|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Wash|100/100
+|turn|14
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Great Tusk
+|-supereffective|p1a: Great Tusk
+|-damage|p1a: Great Tusk|0 fnt
+|faint|p1a: Great Tusk
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|
+|upkeep
+|
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|turn|15
+|
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-damage|p2a: Rotom|60/100
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus
+|-damage|p1a: Arceus|333/444
+|
+|-heal|p2a: Rotom|66/100|[from] item: Leftovers
+|upkeep
+|turn|16
+|
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-damage|p2a: Rotom|23/100
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus
+|-damage|p1a: Arceus|207/444
+|
+|-heal|p2a: Rotom|29/100|[from] item: Leftovers
+|upkeep
+|turn|17
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|429/444
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus|[miss]
+|-miss|p2a: Rotom|p1a: Arceus
+|
+|-heal|p2a: Rotom|35/100|[from] item: Leftovers
+|upkeep
+|turn|18
+|
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|
+|upkeep
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|turn|19
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|381/444
+|move|p1a: Arceus|Judgment|p2a: Tornadus
+|-damage|p2a: Tornadus|51/100
+|
+|upkeep
+|turn|20
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Arceus
+|-resisted|p1a: Arceus
+|-crit|p1a: Arceus
+|-damage|p1a: Arceus|307/444
+|move|p1a: Arceus|Judgment|p2a: Tornadus
+|-damage|p2a: Tornadus|1/100
+|
+|upkeep
+|turn|21
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|258/444
+|move|p1a: Arceus|Judgment|p2a: Tornadus
+|-damage|p2a: Tornadus|0 fnt
+|faint|p2a: Tornadus
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

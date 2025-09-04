@@ -91,48 +91,56 @@ class CustomAgent(Player):
     def __init__(self, *args, **kwargs):
         super().__init__(team=team, *args, **kwargs)
 
-    def _get_threat_multiplier(self, pokemon, opponent):
-        """Calculates the highest damage multiplier against a pokemon from an opponent's STABs."""
-        if not opponent or not opponent.types or not pokemon:
+    def _get_danger_level(self, pokemon, opponent):
+        """Calculates the highest damage multiplier against a pokemon."""
+        if not pokemon or not opponent or not opponent.types:
             return 1.0
         return max(
             (pokemon.damage_multiplier(opp_type) for opp_type in opponent.types if opp_type),
-            default=1.0,
+            default=1.0
         )
 
-    def _should_switch(self, battle: AbstractBattle) -> bool:
-        """Determines if a switch is strategically necessary."""
-        me = battle.active_pokemon
-        opponent = battle.opponent_active_pokemon
-        if battle.trapped or not battle.available_switches:
-            return False
+    def _evaluate_move(self, move, me, opponent, battle):
+        """Calculates a score for a given move."""
+        if move.category.name == 'STATUS':
+            # Give base scores to key status moves
+            if move.id in ['stealthrock', 'toxicspikes']:
+                # Only score if hazards aren't already up
+                if move.id not in battle.opponent_side_conditions:
+                    return 95
+            if move.id == 'willowisp' and opponent.status is None and 'Fire' not in opponent.types:
+                return 90
+            if move.id in ['swordsdance', 'calmmind']:
+                return 85 # Scored higher in dedicated functions
+            if move.id in ['recover', 'morningsun']:
+                return 100 # Scored higher in dedicated functions
+            return 0
 
-        threat_level = self._get_threat_multiplier(me, opponent)
-
-        # 1. Extreme danger: 4x weakness or more. Switch is almost always correct.
-        if threat_level >= 4:
-            return True
-
-        # 2. High danger (2x weakness) AND we can't threaten back effectively.
-        best_move, move_score = self._get_best_move(battle, consider_utility=False)
-        if threat_level >= 2 and move_score < 120:  # 120 is a heuristic for a strong hit
-            return True
-
-        # 3. Low HP and no recovery option, and can't secure a KO.
-        has_recovery = any(move.id in ["recover", "morningsun"] for move in battle.available_moves)
-        if me.current_hp_fraction < 0.25 and not has_recovery and move_score < opponent.current_hp * 1.5:
-             return True
+        # Factor in base power, type effectiveness, and STAB for damaging moves
+        power = move.base_power
         
-        # 4. Choice-locked into a terrible move (e.g., immune or resisted).
-        if me.item == "choicescarf" and len(battle.available_moves) == 1:
-            locked_move = battle.available_moves[0]
-            if opponent.damage_multiplier(locked_move) < 0.5:
-                return True
+        # Special handling for variable power moves
+        if move.id == 'waterspout':
+            power = 150 * (me.current_hp_fraction)
+        
+        type_multiplier = opponent.damage_multiplier(move)
+        score = power * type_multiplier
+        
+        if move.type in me.types:
+            score *= 1.5
+            
+        # Bonus for priority moves to finish off low-health opponents
+        if move.priority > 0 and opponent.current_hp_fraction < 0.3:
+            score *= 1.3
+            
+        # Bonus for Knock Off if opponent likely has an item
+        if move.id == 'knockoff' and opponent.item:
+            score *= 1.2
 
-        return False
+        return score
 
     def _get_best_switch(self, battle: AbstractBattle) -> (object, float):
-        """Finds the best pokemon to switch into based on a scoring system."""
+        """Finds the best pokemon to switch into."""
         opponent = battle.opponent_active_pokemon
         if not opponent or not battle.available_switches:
             return None, -math.inf
@@ -141,22 +149,14 @@ class CustomAgent(Player):
         max_score = -math.inf
 
         for pokemon in battle.available_switches:
-            # 1. Defensive Score: How well can this pokemon take a hit from the opponent's STABs?
-            threat_multiplier = self._get_threat_multiplier(pokemon, opponent)
-            if threat_multiplier > 0:
-                defensive_score = 1 / threat_multiplier
-            else:
-                defensive_score = 4.0  # Immunity is highly valued
-
-            # 2. Offensive Score: How well can this pokemon threaten the opponent back?
+            defensive_score = 1 / max(self._get_danger_level(pokemon, opponent), 0.25) # Avoid division by zero
+            
             offensive_score = 0
             for move_type in pokemon.types:
                 if move_type:
-                    effectiveness = opponent.damage_multiplier(move_type)
-                    offensive_score = max(offensive_score, effectiveness)
+                    offensive_score = max(offensive_score, opponent.damage_multiplier(move_type))
 
-            # Final score: Combine defense and offense, weighting defense more heavily.
-            score = (defensive_score * 2.0) + offensive_score
+            score = (defensive_score * 1.5) + offensive_score
             score *= pokemon.current_hp_fraction # Prioritize healthy switches
 
             if score > max_score:
@@ -165,122 +165,96 @@ class CustomAgent(Player):
 
         return best_switch, max_score
 
-    def _get_best_move(self, battle: AbstractBattle, consider_utility=True) -> (object, float):
-        """
-        Calculates the best move to use, considering offensive, and optionally, utility moves.
-        """
+    def choose_move(self, battle: AbstractBattle):
         me = battle.active_pokemon
         opponent = battle.opponent_active_pokemon
-        if not battle.available_moves:
-            return None, -1
 
-        best_move = None
-        max_score = -math.inf
-        threat_level = self._get_threat_multiplier(me, opponent)
-
-        for move in battle.available_moves:
-            score = 0
-            
-            # --- Part 1: Score Damaging Moves ---
-            if move.category.name != 'STATUS':
-                type_multiplier = opponent.damage_multiplier(move)
-                stab_bonus = 1.5 if move.type in me.types else 1.0
-                score = move.base_power * type_multiplier * stab_bonus
-
-                # Special move heuristics
-                if move.id == 'waterspout':
-                    score *= me.current_hp_fraction
-                elif move.id == 'suckerpunch':
-                    # High-risk, high-reward. Good for finishing off faster foes.
-                    is_faster = (opponent.base_stats['spe'] > me.base_stats['spe'])
-                    if is_faster and opponent.current_hp_fraction < 0.4:
-                        score *= 1.5 # Boost priority for revenge killing
-                    else:
-                        score *= 0.1 # Risky otherwise, might fail
-                elif move.id == 'knockoff':
-                    # Item removal is valuable early on
-                    if opponent.item and battle.turn < 10:
-                        score += 40 # Add a flat bonus equivalent to 40 base power
-            
-            # --- Part 2: Score Utility Moves (if considered) ---
-            elif consider_utility:
-                if move.id in ['recover', 'morningsun']:
-                    # Heal if below 2/3 health and not severely threatened
-                    if me.current_hp_fraction < 0.7 and threat_level < 2:
-                        score = 200 # High priority to heal
-                elif move.id in ['calmmind', 'swordsdance']:
-                    # Set up if it's safe
-                    if threat_level < 1.0 and me.current_hp_fraction > 0.8:
-                        score = 95
-                elif move.id == 'stealthrock':
-                    if 'stealthrock' not in battle.opponent_side_conditions:
-                        score = 110
-                elif move.id == 'toxicspikes':
-                    if 'toxicspikes' not in battle.opponent_side_conditions:
-                        score = 100
-                elif move.id == 'willowisp':
-                    # Good against physical attackers
-                    is_physical = opponent.base_stats['atk'] > opponent.base_stats['spa']
-                    if is_physical and not opponent.status and 'Fire' not in opponent.types:
-                        score = 90
-                elif move.id == 'rapidspin':
-                    # Use if we have hazards and opponent is not a ghost
-                    if battle.side_conditions and 'Ghost' not in opponent.types:
-                        score = 80
-            
-            # --- Part 3: Adjust score based on risk ---
-            # Don't use risky setup/status moves if threatened
-            if threat_level >= 2 and move.category.name == 'STATUS':
-                score *= 0.1
-
-            if score > max_score:
-                max_score = score
-                best_move = move
-        
-        return best_move, max_score
-
-    def choose_move(self, battle: AbstractBattle):
         # 1. Handle forced switches
         if battle.force_switch:
             best_switch, _ = self._get_best_switch(battle)
-            if best_switch:
-                return self.create_order(best_switch)
-            return self.choose_random_move(battle)
+            return self.create_order(best_switch) if best_switch else self.choose_random_move(battle)
 
-        me = battle.active_pokemon
-        opponent = battle.opponent_active_pokemon
         if not me or not opponent:
             return self.choose_random_move(battle)
 
-        # 2. Evaluate if a switch is the best strategic option
-        if self._should_switch(battle):
-            best_switch, _ = self._get_best_switch(battle)
-            if best_switch:
-                return self.create_order(best_switch)
+        danger_level = self._get_danger_level(me, opponent)
 
-        # 3. If not switching, find the best move to make
-        best_move, best_score = self._get_best_move(battle)
+        # 2. High-Priority Recovery: Heal if below 65% health and not facing an immediate KO threat
+        if me.current_hp_fraction < 0.65 and danger_level < 2:
+            recovery_moves = [m for m in battle.available_moves if m.id in ['recover', 'morningsun']]
+            if recovery_moves:
+                return self.create_order(recovery_moves[0])
 
-        # 4. Consider an offensive Terastallization to secure a KO
-        if battle.can_terastallize and best_move and best_move.category.name != 'STATUS':
-            # Heuristic: If a super-effective move can KO with a Tera boost
-            # This is a simplified damage estimation
-            type_multiplier = opponent.damage_multiplier(best_move)
-            stab_bonus = 1.5 if best_move.type in me.types else 1.0
-            tera_stab_bonus = 1.5 if best_move.type == me.tera_type else stab_bonus
-            
-            current_damage_est = best_move.base_power * type_multiplier * stab_bonus
-            tera_damage_est = best_move.base_power * type_multiplier * tera_stab_bonus
+        # 3. Terastallization Logic
+        # For poke-env v0.10.0, the raw request is stored in `self._last_request`.
+        can_tera = False
+        if hasattr(self, '_last_request') and self._last_request:
+            if "active" in self._last_request and self._last_request["active"]:
+                if "canTerastallize" in self._last_request["active"][0]:
+                    can_tera = True
+        
+        if can_tera:
+            # Defensive Tera: If in extreme danger (>=4x weak) and Tera can save you
+            if danger_level >= 4:
+                try:
+                    # Get the Type object for our Tera type to calculate future damage
+                    tera_type_obj = self.dex.types[me.tera_type.lower()]
+                    tera_danger = opponent.damage_multiplier(tera_type_obj)
 
-            # If current damage is not enough, but Tera damage is, and opponent is a threat
-            if (current_damage_est < opponent.current_hp and 
-                tera_damage_est > opponent.current_hp and
-                type_multiplier >= 1.5):
-                return self.create_order(best_move, terastallize=True)
+                    if tera_danger < 1:
+                        # Find best move to use post-Tera
+                        best_move, _ = max(
+                            ((m, self._evaluate_move(m, me, opponent, battle)) for m in battle.available_moves),
+                            key=lambda x: x[1], default=(None, 0)
+                        )
+                        if best_move:
+                            return self.create_order(best_move, terastallize=True)
+                except (AttributeError, KeyError):
+                    # Failsafe in case self.dex isn't ready or type is invalid
+                    pass
 
-        # 5. Execute the best calculated move
+            # Offensive Tera: If it guarantees a KO on a key threat
+            for move in battle.available_moves:
+                if move.type.name.upper() == me.tera_type.upper():
+                    tera_score = self._evaluate_move(move, me, opponent, battle)
+                    if move.type not in me.types:
+                        tera_score *= 2.0
+                    else:
+                        tera_score *= (2.0 / 1.5)
+
+                    if tera_score > 300 and opponent.current_hp_fraction < 0.6:
+                         return self.create_order(move, terastallize=True)
+
+        # 4. Setup Opportunity: Use Calm Mind/Swords Dance if safe and opponent is passive
+        if danger_level < 1:
+            setup_moves = [m for m in battle.available_moves if m.id in ['swordsdance', 'calmmind']]
+            if setup_moves:
+                stat = 'atk' if setup_moves[0].id == 'swordsdance' else 'spa'
+                if me.boosts[stat] < 6:
+                    return self.create_order(setup_moves[0])
+
+        # 5. Evaluate all available moves and find the best one
+        best_move, best_score = max(
+            ((m, self._evaluate_move(m, me, opponent, battle)) for m in battle.available_moves),
+            key=lambda x: x[1], default=(None, 0)
+        )
+
+        # 6. Decide between attacking and switching
+        should_switch = False
+        if not battle.trapped:
+            best_switch, switch_score = self._get_best_switch(battle)
+            if danger_level >= 2 and best_score < 150:
+                if best_switch and (1 / max(self._get_danger_level(best_switch, opponent), 0.25)) > 2:
+                    should_switch = True
+            elif best_score < 50 and switch_score > 2.5:
+                should_switch = True
+        
+        if should_switch:
+            return self.create_order(best_switch)
+
+        # 7. Default to the best evaluated move
         if best_move:
             return self.create_order(best_move)
 
-        # 6. Fallback to a random move if no other logic applies
+        # 8. Fallback to random if no other choice is made
         return self.choose_random_move(battle)
