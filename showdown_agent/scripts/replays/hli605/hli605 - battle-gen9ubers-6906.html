@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-6906</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-6906<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-ru</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-6906|init|battle
+|title|hli605 vs. random-ru
+|j|☆hli605
+|j|☆random-ru
+|gametype|singles
+|player|p1|hli605|102|
+|player|p2|random-ru|169|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Kyogre|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Great Tusk|
+|poke|p1|Kingambit, F|
+|poke|p2|Rotom-Heat|
+|poke|p2|Krookodile, M|
+|poke|p2|Slowbro, M|
+|poke|p2|Cyclizar, M|
+|poke|p2|Jirachi|
+|poke|p2|Zapdos-Galar|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Kyogre|Kyogre|341/341
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Kyogre
+|turn|1
+|
+|move|p2a: Zapdos|Brave Bird|p1a: Kyogre
+|-damage|p1a: Kyogre|133/341
+|-damage|p2a: Zapdos|79/100|[from] Recoil
+|move|p1a: Kyogre|Water Spout|p2a: Zapdos
+|-damage|p2a: Zapdos|21/100
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|2
+|
+|switch|p2a: Krookodile|Krookodile, M|100/100
+|-ability|p2a: Krookodile|Intimidate|boost
+|-unboost|p1a: Kyogre|atk|1
+|move|p1a: Kyogre|Water Spout|p2a: Krookodile
+|-supereffective|p2a: Krookodile
+|-damage|p2a: Krookodile|0 fnt
+|faint|p2a: Krookodile
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|
+|switch|p2a: Jirachi|Jirachi|100/100
+|turn|3
+|
+|-terastallize|p2a: Jirachi|Fighting
+|move|p1a: Kyogre|Water Spout|p2a: Jirachi
+|-damage|p2a: Jirachi|52/100
+|move|p2a: Jirachi|Psychic Noise|p1a: Kyogre
+|-damage|p1a: Kyogre|49/341
+|-start|p1a: Kyogre|move: Heal Block
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Jirachi|58/100|[from] item: Leftovers
+|upkeep
+|turn|4
+|
+|move|p1a: Kyogre|Water Spout|p2a: Jirachi
+|-damage|p2a: Jirachi|40/100
+|move|p2a: Jirachi|Thunderbolt|p1a: Kyogre
+|-supereffective|p1a: Kyogre
+|-damage|p1a: Kyogre|0 fnt
+|faint|p1a: Kyogre
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Jirachi|46/100|[from] item: Leftovers
+|upkeep
+|
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|turn|5
+|
+|move|p2a: Jirachi|Aura Sphere|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|393/444
+|move|p1a: Arceus|Judgment|p2a: Jirachi
+|-supereffective|p2a: Jirachi
+|-damage|p2a: Jirachi|0 fnt
+|faint|p2a: Jirachi
+|
+|-weather|none
+|upkeep
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|turn|6
+|
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|77/100
+|
+|upkeep
+|turn|7
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|move|p1a: Arceus|Judgment|p2a: Slowbro
+|-damage|p2a: Slowbro|49/100
+|
+|upkeep
+|turn|8
+|
+|switch|p2a: Zapdos|Zapdos-Galar|21/100
+|move|p1a: Arceus|Judgment|p2a: Zapdos
+|-supereffective|p2a: Zapdos
+|-damage|p2a: Zapdos|0 fnt
+|faint|p2a: Zapdos
+|
+|upkeep
+|
+|switch|p2a: Slowbro|Slowbro, M|83/100
+|turn|9
+|
+|move|p1a: Arceus|Judgment|p2a: Slowbro
+|-damage|p2a: Slowbro|36/100
+|move|p2a: Slowbro|Future Sight|p1a: Arceus
+|-start|p2a: Slowbro|move: Future Sight
+|
+|upkeep
+|turn|10
+|
+|move|p1a: Arceus|Judgment|p2a: Slowbro
+|-damage|p2a: Slowbro|0 fnt
+|faint|p2a: Slowbro
+|
+|upkeep
+|
+|switch|p2a: Cyclizar|Cyclizar, M|100/100
+|turn|11
+|
+|move|p2a: Cyclizar|Knock Off|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|376/444
+|move|p1a: Arceus|Judgment|p2a: Cyclizar
+|-supereffective|p2a: Cyclizar
+|-damage|p2a: Cyclizar|17/100
+|
+|-end|p1a: Arceus|move: Future Sight
+|-damage|p1a: Arceus|256/444
+|upkeep
+|turn|12
+|
+|move|p2a: Cyclizar|U-turn|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|240/444
+|
+|switch|p2a: Rotom|Rotom-Heat|77/100|[from] U-turn
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|50/100
+|
+|upkeep
+|turn|13
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|195/444|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|65/100|[from] move: Pain Split
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|39/100
+|
+|upkeep
+|turn|14
+|
+|move|p2a: Rotom|Will-O-Wisp|p1a: Arceus
+|-status|p1a: Arceus|brn
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|15/100
+|
+|-damage|p1a: Arceus|168/444 brn|[from] brn
+|upkeep
+|turn|15
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|106/444 brn|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|35/100|[from] move: Pain Split
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|8/100
+|
+|-damage|p1a: Arceus|79/444 brn|[from] brn
+|upkeep
+|turn|16
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|50/444 brn|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|17/100|[from] move: Pain Split
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|
+|-damage|p1a: Arceus|23/444 brn|[from] brn
+|upkeep
+|
+|switch|p2a: Cyclizar|Cyclizar, M|50/100
+|turn|17
+|
+|move|p2a: Cyclizar|Knock Off|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|7/444 brn
+|move|p1a: Arceus|Judgment|p2a: Cyclizar
+|-supereffective|p2a: Cyclizar
+|-damage|p2a: Cyclizar|0 fnt
+|faint|p2a: Cyclizar
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-6540</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-6540<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-nu</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-6540|init|battle
+|title|hli605 vs. random-nu
+|j|☆hli605
+|j|☆random-nu
+|gametype|singles
+|player|p1|hli605|102|
+|player|p2|random-nu|102|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Kyogre|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Great Tusk|
+|poke|p1|Kingambit, F|
+|poke|p2|Entei|
+|poke|p2|Chesnaught, M|
+|poke|p2|Volcanion|
+|poke|p2|Muk-Alola, F|
+|poke|p2|Bronzong|
+|poke|p2|Zapdos-Galar|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|switch|p2a: Bronzong|Bronzong|100/100
+|turn|1
+|
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|switch|p1a: Kingambit|Kingambit, F|341/341
+|switch|p2a: Muk|Muk-Alola, F|100/100
+|
+|upkeep
+|turn|2
+|
+|-terastallize|p2a: Muk|Steel
+|move|p1a: Kingambit|Iron Head|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|77/100
+|move|p2a: Muk|Poison Jab|p1a: Kingambit
+|-immune|p1a: Kingambit
+|
+|-heal|p2a: Muk|83/100|[from] item: Leftovers
+|upkeep
+|turn|3
+|
+|switch|p2a: Entei|Entei|100/100
+|move|p1a: Kingambit|Kowtow Cleave|p2a: Entei
+|-damage|p2a: Entei|42/100
+|
+|upkeep
+|turn|4
+|
+|switch|p2a: Chesnaught|Chesnaught, M|100/100
+|-end|p1a: Kingambit|fallenundefined|[silent]
+|switch|p1a: Kyogre|Kyogre|341/341
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Kyogre
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|5
+|
+|switch|p1a: Eternatus|Eternatus|484/484
+|-ability|p1a: Eternatus|Pressure
+|switch|p2a: Muk|Muk-Alola, F, tera:Steel|83/100
+|
+|-weather|RainDance|[upkeep]
+|-heal|p2a: Muk|89/100|[from] item: Leftovers
+|upkeep
+|turn|6
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Muk
+|-supereffective|p2a: Muk
+|-damage|p2a: Muk|73/100
+|move|p2a: Muk|Poison Jab|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|436/484
+|
+|-weather|RainDance|[upkeep]
+|-heal|p1a: Eternatus|466/484|[from] item: Black Sludge
+|-heal|p2a: Muk|79/100|[from] item: Leftovers
+|upkeep
+|turn|7
+|
+|switch|p2a: Volcanion|Volcanion|100/100
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|96/100
+|
+|-weather|RainDance|[upkeep]
+|-heal|p1a: Eternatus|484/484|[from] item: Black Sludge
+|upkeep
+|turn|8
+|
+|switch|p2a: Bronzong|Bronzong|100/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|80/100
+|
+|-weather|none
+|-heal|p2a: Bronzong|86/100|[from] item: Leftovers
+|upkeep
+|turn|9
+|
+|switch|p1a: Kingambit|Kingambit, F|341/341
+|switch|p2a: Muk|Muk-Alola, F, tera:Steel|79/100
+|
+|-heal|p2a: Muk|85/100|[from] item: Leftovers
+|upkeep
+|turn|10
+|
+|switch|p2a: Volcanion|Volcanion|96/100
+|move|p1a: Kingambit|Kowtow Cleave|p2a: Volcanion
+|-damage|p2a: Volcanion|38/100
+|
+|upkeep
+|turn|11
+|
+|-end|p1a: Kingambit|fallenundefined|[silent]
+|switch|p1a: Eternatus|Eternatus|484/484
+|-ability|p1a: Eternatus|Pressure
+|move|p2a: Volcanion|Earth Power|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|294/484
+|
+|-heal|p1a: Eternatus|324/484|[from] item: Black Sludge
+|upkeep
+|turn|12
+|
+|switch|p2a: Muk|Muk-Alola, F, tera:Steel|85/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|72/100
+|
+|-heal|p1a: Eternatus|354/484|[from] item: Black Sludge
+|-heal|p2a: Muk|78/100|[from] item: Leftovers
+|upkeep
+|turn|13
+|
+|switch|p2a: Bronzong|Bronzong|86/100
+|move|p1a: Eternatus|Flamethrower|p2a: Bronzong
+|-supereffective|p2a: Bronzong
+|-damage|p2a: Bronzong|34/100
+|
+|-heal|p1a: Eternatus|384/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|40/100|[from] item: Leftovers
+|upkeep
+|turn|14
+|
+|switch|p1a: Kingambit|Kingambit, F|341/341
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|
+|upkeep
+|turn|15
+|
+|switch|p2a: Entei|Entei|42/100
+|-end|p1a: Kingambit|fallenundefined|[silent]
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|
+|upkeep
+|turn|16
+|
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|switch|p1a: Kyogre|Kyogre|341/341
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Kyogre
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|17
+|
+|move|p2a: Zapdos|Knock Off|p1a: Kyogre
+|-damage|p1a: Kyogre|223/341
+|-enditem|p1a: Kyogre|Choice Scarf|[from] move: Knock Off|[of] p2a: Zapdos
+|move|p1a: Kyogre|Water Spout|p2a: Zapdos
+|-damage|p2a: Zapdos|0 fnt
+|faint|p2a: Zapdos
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|
+|switch|p2a: Muk|Muk-Alola, F, tera:Steel|78/100
+|turn|18
+|
+|switch|p2a: Entei|Entei|42/100
+|move|p1a: Kyogre|Water Spout|p2a: Entei
+|-supereffective|p2a: Entei
+|-damage|p2a: Entei|0 fnt
+|faint|p2a: Entei
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|
+|switch|p2a: Volcanion|Volcanion|38/100
+|turn|19
+|
+|move|p1a: Kyogre|Water Spout|p2a: Volcanion
+|-heal|p2a: Volcanion|62/100|[from] ability: Water Absorb|[of] p1a: Kyogre
+|move|p2a: Volcanion|Flamethrower|p1a: Kyogre
+|-resisted|p1a: Kyogre
+|-damage|p1a: Kyogre|190/341
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|20
+|
+|move|p1a: Kyogre|Water Spout|p2a: Volcanion
+|-heal|p2a: Volcanion|87/100|[from] ability: Water Absorb|[of] p1a: Kyogre
+|move|p2a: Volcanion|Roar|p1a: Kyogre
+|drag|p1a: Kingambit|Kingambit, F|341/341
+|
+|-weather|none
+|upkeep
+|turn|21
+|
+|-end|p1a: Kingambit|fallenundefined|[silent]
+|switch|p1a: Eternatus|Eternatus|384/484
+|-ability|p1a: Eternatus|Pressure
+|move|p2a: Volcanion|Flamethrower|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|318/484
+|
+|-heal|p1a: Eternatus|348/484|[from] item: Black Sludge
+|upkeep
+|turn|22
+|
+|switch|p2a: Muk|Muk-Alola, F, tera:Steel|78/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|63/100
+|
+|-heal|p1a: Eternatus|378/484|[from] item: Black Sludge
+|-heal|p2a: Muk|69/100|[from] item: Leftovers
+|upkeep
+|turn|23
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Muk
+|-supereffective|p2a: Muk
+|-damage|p2a: Muk|36/100
+|move|p2a: Muk|Knock Off|p1a: Eternatus
+|-damage|p1a: Eternatus|252/484
+|-enditem|p1a: Eternatus|Black Sludge|[from] move: Knock Off|[of] p2a: Muk
+|
+|-heal|p2a: Muk|42/100|[from] item: Leftovers
+|upkeep
+|turn|24
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Muk
+|-supereffective|p2a: Muk
+|-crit|p2a: Muk
+|-damage|p2a: Muk|0 fnt
+|faint|p2a: Muk
+|
+|upkeep
+|
+|switch|p2a: Chesnaught|Chesnaught, M|100/100
+|turn|25
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Chesnaught
+|-supereffective|p2a: Chesnaught
+|-damage|p2a: Chesnaught|40/100
+|move|p2a: Chesnaught|Spikes|p1a: Eternatus
+|-sidestart|p1: hli605|Spikes
+|
+|upkeep
+|turn|26
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Chesnaught
+|-supereffective|p2a: Chesnaught
+|-damage|p2a: Chesnaught|0 fnt
+|faint|p2a: Chesnaught
+|
+|upkeep
+|
+|switch|p2a: Volcanion|Volcanion|87/100
+|turn|27
+|
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Volcanion
+|-damage|p2a: Volcanion|25/100
+|move|p2a: Volcanion|Roar|p1a: Eternatus
+|drag|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|-damage|p1a: Necrozma|349/398|[from] Spikes
+|
+|-heal|p1a: Necrozma|373/398|[from] item: Leftovers
+|upkeep
+|turn|28
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|-damage|p1a: Great Tusk|380/434|[from] Spikes
+|move|p2a: Volcanion|Steam Eruption|p1a: Great Tusk
+|-supereffective|p1a: Great Tusk
+|-damage|p1a: Great Tusk|0 fnt
+|faint|p1a: Great Tusk
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|
+|upkeep
+|
+|switch|p1a: Kyogre|Kyogre|190/341
+|-damage|p1a: Kyogre|148/341|[from] Spikes
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Kyogre
+|turn|29
+|
+|move|p1a: Kyogre|Water Spout|p2a: Volcanion
+|-heal|p2a: Volcanion|50/100|[from] ability: Water Absorb|[of] p1a: Kyogre
+|move|p2a: Volcanion|Earth Power|p1a: Kyogre
+|-damage|p1a: Kyogre|57/341
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|30
+|
+|move|p1a: Kyogre|Water Spout|p2a: Volcanion
+|-heal|p2a: Volcanion|75/100|[from] ability: Water Absorb|[of] p1a: Kyogre
+|move|p2a: Volcanion|Flamethrower|p1a: Kyogre
+|-resisted|p1a: Kyogre
+|-damage|p1a: Kyogre|24/341
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|31
+|
+|move|p1a: Kyogre|Water Spout|p2a: Volcanion
+|-heal|p2a: Volcanion|99/100|[from] ability: Water Absorb|[of] p1a: Kyogre
+|move|p2a: Volcanion|Roar|p1a: Kyogre
+|drag|p1a: Necrozma|Necrozma-Dusk-Mane|373/398
+|-damage|p1a: Necrozma|324/398|[from] Spikes
+|
+|-weather|RainDance|[upkeep]
+|-heal|p1a: Necrozma|348/398|[from] item: Leftovers
+|upkeep
+|turn|32
+|
+|switch|p1a: Eternatus|Eternatus|252/484
+|-damage|p1a: Eternatus|192/484|[from] Spikes
+|-ability|p1a: Eternatus|Pressure
+|move|p2a: Volcanion|Earth Power|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|16/484
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|33
+|
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Volcanion
+|-damage|p2a: Volcanion|41/100
+|move|p2a: Volcanion|Earth Power|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|0 fnt
+|faint|p1a: Eternatus
+|
+|-weather|none
+|upkeep
+|
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|-damage|p1a: Arceus|389/444|[from] Spikes
+|turn|34
+|
+|switch|p2a: Bronzong|Bronzong|40/100
+|move|p1a: Arceus|Judgment|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|20/100
+|
+|-heal|p2a: Bronzong|26/100|[from] item: Leftovers
+|upkeep
+|turn|35
+|
+|switch|p1a: Kingambit|Kingambit, F|341/341
+|-damage|p1a: Kingambit|299/341|[from] Spikes
+|-activate|p1a: Kingambit|ability: Supreme Overlord
+|-start|p1a: Kingambit|fallen2|[silent]
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|2
+|
+|-heal|p2a: Bronzong|32/100|[from] item: Leftovers
+|upkeep
+|turn|36
+|
+|move|p1a: Kingambit|Kowtow Cleave|p2a: Bronzong
+|-supereffective|p2a: Bronzong
+|-damage|p2a: Bronzong|0 fnt
+|faint|p2a: Bronzong
+|
+|upkeep
+|
+|switch|p2a: Volcanion|Volcanion|41/100
+|turn|37
+|
+|-end|p1a: Kingambit|fallen2|[silent]
+|switch|p1a: Arceus|Arceus-Fairy|389/444
+|-damage|p1a: Arceus|334/444|[from] Spikes
+|move|p2a: Volcanion|Flamethrower|p1a: Arceus
+|-damage|p1a: Arceus|193/444
+|
+|upkeep
+|turn|38
+|
+|move|p1a: Arceus|Judgment|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|10/100
+|move|p2a: Volcanion|Roar|p1a: Arceus
+|drag|p1a: Kyogre|Kyogre|24/341
+|-damage|p1a: Kyogre|0 fnt|[from] Spikes
+|faint|p1a: Kyogre
+|
+|upkeep
+|
+|switch|p1a: Kingambit|Kingambit, F|299/341
+|-damage|p1a: Kingambit|257/341|[from] Spikes
+|-activate|p1a: Kingambit|ability: Supreme Overlord
+|-start|p1a: Kingambit|fallen3|[silent]
+|turn|39
+|
+|-end|p1a: Kingambit|fallen3|[silent]
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|348/398
+|-damage|p1a: Necrozma|299/398|[from] Spikes
+|move|p2a: Volcanion|Steam Eruption|p1a: Necrozma
+|-damage|p1a: Necrozma|100/398
+|-status|p1a: Necrozma|brn
+|
+|-heal|p1a: Necrozma|124/398 brn|[from] item: Leftovers
+|-damage|p1a: Necrozma|100/398 brn|[from] brn
+|upkeep
+|turn|40
+|
+|move|p2a: Volcanion|Steam Eruption|p1a: Necrozma
+|-damage|p1a: Necrozma|0 fnt
+|faint|p1a: Necrozma
+|
+|upkeep
+|
+|switch|p1a: Kingambit|Kingambit, F|257/341
+|-damage|p1a: Kingambit|215/341|[from] Spikes
+|-activate|p1a: Kingambit|ability: Supreme Overlord
+|-start|p1a: Kingambit|fallen4|[silent]
+|turn|41
+|
+|move|p1a: Kingambit|Kowtow Cleave|p2a: Volcanion
+|-damage|p2a: Volcanion|0 fnt
+|faint|p2a: Volcanion
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
