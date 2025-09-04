@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-2181</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-2181<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">max_damage-nu</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-2181|init|battle
+|title|hli605 vs. max_damage-nu
+|j|☆hli605
+|j|☆max_damage-nu
+|gametype|singles
+|player|p1|hli605|170|
+|player|p2|max_damage-nu|266|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Giratina-Origin|
+|poke|p1|Great Tusk|
+|poke|p1|Chi-Yu|
+|poke|p2|Entei|
+|poke|p2|Chesnaught, F|
+|poke|p2|Volcanion|
+|poke|p2|Muk-Alola, M|
+|poke|p2|Bronzong|
+|poke|p2|Zapdos-Galar|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Chi-Yu|Chi-Yu|251/251
+|switch|p2a: Chesnaught|Chesnaught, F|100/100
+|-ability|p1a: Chi-Yu|Beads of Ruin
+|turn|1
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Chesnaught
+|-supereffective|p2a: Chesnaught
+|-damage|p2a: Chesnaught|0 fnt
+|-unboost|p1a: Chi-Yu|spa|2
+|faint|p2a: Chesnaught
+|
+|upkeep
+|
+|switch|p2a: Entei|Entei|100/100
+|turn|2
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Entei
+|-resisted|p2a: Entei
+|-damage|p2a: Entei|74/100
+|-unboost|p1a: Chi-Yu|spa|2
+|move|p2a: Entei|Double-Edge|p1a: Chi-Yu
+|-damage|p1a: Chi-Yu|92/251
+|-damage|p2a: Entei|60/100|[from] Recoil
+|
+|upkeep
+|turn|3
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Entei
+|-resisted|p2a: Entei
+|-damage|p2a: Entei|41/100
+|-unboost|p1a: Chi-Yu|spa|2
+|move|p2a: Entei|Double-Edge|p1a: Chi-Yu
+|-damage|p1a: Chi-Yu|0 fnt
+|faint|p1a: Chi-Yu
+|-damage|p2a: Entei|33/100|[from] Recoil
+|
+|upkeep
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|turn|4
+|
+|move|p2a: Entei|Double-Edge|p1a: Great Tusk
+|-damage|p1a: Great Tusk|342/434
+|-damage|p2a: Entei|24/100|[from] Recoil
+|move|p1a: Great Tusk|Headlong Rush|p2a: Entei
+|-supereffective|p2a: Entei
+|-damage|p2a: Entei|0 fnt
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|faint|p2a: Entei
+|
+|-heal|p1a: Great Tusk|369/434|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Bronzong|Bronzong|100/100
+|turn|5
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Body Press|p1a: Great Tusk
+|-damage|p1a: Great Tusk|275/434
+|
+|-heal|p1a: Great Tusk|302/434|[from] item: Leftovers
+|upkeep
+|turn|6
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Body Press|p1a: Great Tusk
+|-damage|p1a: Great Tusk|216/434
+|
+|-heal|p1a: Great Tusk|243/434|[from] item: Leftovers
+|upkeep
+|turn|7
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Body Press|p1a: Great Tusk
+|-damage|p1a: Great Tusk|156/434
+|
+|-heal|p1a: Great Tusk|183/434|[from] item: Leftovers
+|upkeep
+|turn|8
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Body Press|p1a: Great Tusk
+|-damage|p1a: Great Tusk|102/434
+|
+|-heal|p1a: Great Tusk|129/434|[from] item: Leftovers
+|upkeep
+|turn|9
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Body Press|p1a: Great Tusk
+|-crit|p1a: Great Tusk
+|-damage|p1a: Great Tusk|1/434
+|
+|-heal|p1a: Great Tusk|28/434|[from] item: Leftovers
+|upkeep
+|turn|10
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Body Press|p1a: Great Tusk
+|-damage|p1a: Great Tusk|0 fnt
+|faint|p1a: Great Tusk
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|
+|upkeep
+|
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|turn|11
+|
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|85/100
+|move|p2a: Bronzong|Body Press|p1a: Necrozma
+|-damage|p1a: Necrozma|336/398
+|
+|-heal|p2a: Bronzong|91/100|[from] item: Leftovers
+|upkeep
+|turn|12
+|
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|74/100
+|move|p2a: Bronzong|Body Press|p1a: Necrozma
+|-damage|p1a: Necrozma|281/398
+|
+|-heal|p2a: Bronzong|80/100|[from] item: Leftovers
+|upkeep
+|turn|13
+|
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|62/100
+|move|p2a: Bronzong|Body Press|p1a: Necrozma
+|-damage|p1a: Necrozma|218/398
+|
+|-heal|p2a: Bronzong|68/100|[from] item: Leftovers
+|upkeep
+|turn|14
+|
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|52/100
+|move|p2a: Bronzong|Body Press|p1a: Necrozma
+|-damage|p1a: Necrozma|158/398
+|
+|-heal|p2a: Bronzong|58/100|[from] item: Leftovers
+|upkeep
+|turn|15
+|
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|357/398
+|move|p2a: Bronzong|Body Press|p1a: Necrozma
+|-damage|p1a: Necrozma|294/398
+|
+|-heal|p2a: Bronzong|64/100|[from] item: Leftovers
+|upkeep
+|turn|16
+|
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|46/100
+|move|p2a: Bronzong|Body Press|p1a: Necrozma
+|-damage|p1a: Necrozma|237/398
+|
+|-heal|p2a: Bronzong|52/100|[from] item: Leftovers
+|upkeep
+|turn|17
+|
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|37/100
+|move|p2a: Bronzong|Body Press|p1a: Necrozma
+|-damage|p1a: Necrozma|178/398
+|
+|-heal|p2a: Bronzong|43/100|[from] item: Leftovers
+|upkeep
+|turn|18
+|
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|377/398
+|move|p2a: Bronzong|Body Press|p1a: Necrozma
+|-damage|p1a: Necrozma|316/398
+|
+|-heal|p2a: Bronzong|49/100|[from] item: Leftovers
+|upkeep
+|turn|19
+|
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|33/100
+|move|p2a: Bronzong|Body Press|p1a: Necrozma
+|-damage|p1a: Necrozma|255/398
+|
+|-heal|p2a: Bronzong|39/100|[from] item: Leftovers
+|upkeep
+|turn|20
+|
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Bronzong
+|-resisted|p2a: Bronzong
+|-damage|p2a: Bronzong|24/100
+|move|p2a: Bronzong|Body Press|p1a: Necrozma
+|-damage|p1a: Necrozma|191/398
+|
+|-heal|p2a: Bronzong|30/100|[from] item: Leftovers
+|upkeep
+|turn|21
+|
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|390/398
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|372/398
+|-start|p1a: Necrozma|move: Heal Block
+|
+|-heal|p2a: Bronzong|36/100|[from] item: Leftovers
+|upkeep
+|turn|22
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|355/398
+|
+|-heal|p2a: Bronzong|42/100|[from] item: Leftovers
+|-end|p1a: Necrozma|move: Heal Block
+|upkeep
+|turn|23
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|339/398
+|-start|p1a: Necrozma|move: Heal Block
+|
+|-heal|p2a: Bronzong|48/100|[from] item: Leftovers
+|upkeep
+|turn|24
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|322/398
+|
+|-heal|p2a: Bronzong|55/100|[from] item: Leftovers
+|-end|p1a: Necrozma|move: Heal Block
+|upkeep
+|turn|25
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|306/398
+|-start|p1a: Necrozma|move: Heal Block
+|
+|-heal|p2a: Bronzong|61/100|[from] item: Leftovers
+|upkeep
+|turn|26
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|290/398
+|
+|-heal|p2a: Bronzong|67/100|[from] item: Leftovers
+|-end|p1a: Necrozma|move: Heal Block
+|upkeep
+|turn|27
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|274/398
+|-start|p1a: Necrozma|move: Heal Block
+|
+|-heal|p2a: Bronzong|73/100|[from] item: Leftovers
+|upkeep
+|turn|28
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|257/398
+|
+|-heal|p2a: Bronzong|79/100|[from] item: Leftovers
+|-end|p1a: Necrozma|move: Heal Block
+|upkeep
+|turn|29
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|241/398
+|-start|p1a: Necrozma|move: Heal Block
+|
+|-heal|p2a: Bronzong|86/100|[from] item: Leftovers
+|upkeep
+|turn|30
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|223/398
+|
+|-heal|p2a: Bronzong|92/100|[from] item: Leftovers
+|-end|p1a: Necrozma|move: Heal Block
+|upkeep
+|turn|31
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|206/398
+|-start|p1a: Necrozma|move: Heal Block
+|
+|-heal|p2a: Bronzong|98/100|[from] item: Leftovers
+|upkeep
+|turn|32
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|190/398
+|
+|-heal|p2a: Bronzong|100/100|[from] item: Leftovers
+|-end|p1a: Necrozma|move: Heal Block
+|upkeep
+|turn|33
+|
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|389/398
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|371/398
+|-start|p1a: Necrozma|move: Heal Block
+|
+|upkeep
+|turn|34
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|356/398
+|
+|-end|p1a: Necrozma|move: Heal Block
+|upkeep
+|turn|35
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|338/398
+|-start|p1a: Necrozma|move: Heal Block
+|
+|upkeep
+|turn|36
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|321/398
+|
+|-end|p1a: Necrozma|move: Heal Block
+|upkeep
+|turn|37
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|2
+|
+|upkeep
+|turn|38
+|
+|move|p1a: Necrozma|Earthquake|p2a: Bronzong
+|-immune|p2a: Bronzong|[from] ability: Levitate
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|2
+|
+|upkeep
+|turn|39
+|
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|2
+|
+|upkeep
+|turn|40
+|
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-fail|p1a: Necrozma|heal
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|41
+|
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-fail|p1a: Necrozma|heal
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|42
+|
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-fail|p1a: Necrozma|heal
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|43
+|
+|move|p1a: Necrozma|Stealth Rock|p2a: Bronzong
+|-sidestart|p2: max_damage-nu|move: Stealth Rock
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|44
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|45
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|46
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|47
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|48
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|49
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|50
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|51
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|52
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|53
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|54
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|55
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|56
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|57
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|58
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|59
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|60
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Iron Defense|p2a: Bronzong
+|-boost|p2a: Bronzong|def|0
+|
+|upkeep
+|turn|61
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock|p1a: Necrozma
+|-sidestart|p1: hli605|move: Stealth Rock
+|
+|upkeep
+|turn|62
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|63
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|64
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|65
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|66
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|67
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|68
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|69
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|70
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|71
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|72
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|73
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|74
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|75
+|
+|-activate|p1a: Necrozma|move: Struggle
+|move|p1a: Necrozma|Struggle|p2a: Bronzong
+|-damage|p2a: Bronzong|97/100
+|-damage|p1a: Necrozma|298/398|[from] recoil
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p2a: Bronzong|100/100|[from] item: Leftovers
+|upkeep
+|turn|76
+|
+|-activate|p1a: Necrozma|move: Struggle
+|move|p1a: Necrozma|Struggle|p2a: Bronzong
+|-damage|p2a: Bronzong|98/100
+|-damage|p1a: Necrozma|198/398|[from] recoil
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p2a: Bronzong|100/100|[from] item: Leftovers
+|upkeep
+|turn|77
+|
+|-activate|p1a: Necrozma|move: Struggle
+|move|p1a: Necrozma|Struggle|p2a: Bronzong
+|-damage|p2a: Bronzong|97/100
+|-damage|p1a: Necrozma|98/398|[from] recoil
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p2a: Bronzong|100/100|[from] item: Leftovers
+|upkeep
+|turn|78
+|
+|-activate|p1a: Necrozma|move: Struggle
+|move|p1a: Necrozma|Struggle|p2a: Bronzong
+|-damage|p2a: Bronzong|97/100
+|-damage|p1a: Necrozma|0 fnt|[from] recoil
+|faint|p1a: Necrozma
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p2a: Bronzong|100/100|[from] item: Leftovers
+|upkeep
+|
+|switch|p1a: Eternatus|Eternatus|484/484
+|-damage|p1a: Eternatus|424/484|[from] Stealth Rock
+|-ability|p1a: Eternatus|Pressure
+|turn|79
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p1a: Eternatus|454/484|[from] item: Black Sludge
+|upkeep
+|turn|80
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|-heal|p1a: Eternatus|484/484|[from] item: Black Sludge
+|upkeep
+|turn|81
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|82
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|83
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|84
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|85
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|move|p2a: Bronzong|Stealth Rock||[still]
+|-fail|p2a: Bronzong
+|
+|upkeep
+|turn|86
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|-activate|p2a: Bronzong|move: Struggle
+|move|p2a: Bronzong|Struggle|p1a: Eternatus
+|-damage|p1a: Eternatus|453/484
+|-damage|p2a: Bronzong|75/100|[from] recoil
+|
+|-heal|p1a: Eternatus|483/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|82/100|[from] item: Leftovers
+|upkeep
+|turn|87
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|-activate|p2a: Bronzong|move: Struggle
+|move|p2a: Bronzong|Struggle|p1a: Eternatus
+|-crit|p1a: Eternatus
+|-damage|p1a: Eternatus|441/484
+|-damage|p2a: Bronzong|56/100|[from] recoil
+|
+|-heal|p1a: Eternatus|471/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|63/100|[from] item: Leftovers
+|upkeep
+|turn|88
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|-activate|p2a: Bronzong|move: Struggle
+|move|p2a: Bronzong|Struggle|p1a: Eternatus
+|-damage|p1a: Eternatus|444/484
+|-damage|p2a: Bronzong|37/100|[from] recoil
+|
+|-heal|p1a: Eternatus|474/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|44/100|[from] item: Leftovers
+|upkeep
+|turn|89
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|-activate|p2a: Bronzong|move: Struggle
+|move|p2a: Bronzong|Struggle|p1a: Eternatus
+|-damage|p1a: Eternatus|443/484
+|-damage|p2a: Bronzong|19/100|[from] recoil
+|
+|-heal|p1a: Eternatus|473/484|[from] item: Black Sludge
+|-heal|p2a: Bronzong|25/100|[from] item: Leftovers
+|upkeep
+|turn|90
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Bronzong
+|-immune|p2a: Bronzong
+|-activate|p2a: Bronzong|move: Struggle
+|move|p2a: Bronzong|Struggle|p1a: Eternatus
+|-damage|p1a: Eternatus|446/484
+|-damage|p2a: Bronzong|0 fnt|[from] recoil
+|faint|p2a: Bronzong
+|
+|-heal|p1a: Eternatus|476/484|[from] item: Black Sludge
+|upkeep
+|
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|-damage|p2a: Zapdos|88/100|[from] Stealth Rock
+|turn|91
+|
+|move|p2a: Zapdos|Brave Bird|p1a: Eternatus
+|-damage|p1a: Eternatus|256/484
+|-damage|p2a: Zapdos|65/100|[from] Recoil
+|move|p1a: Eternatus|Sludge Bomb|p2a: Zapdos
+|-crit|p2a: Zapdos
+|-damage|p2a: Zapdos|0 fnt
+|faint|p2a: Zapdos
+|
+|-heal|p1a: Eternatus|286/484|[from] item: Black Sludge
+|upkeep
+|
+|switch|p2a: Muk|Muk-Alola, M|100/100
+|-damage|p2a: Muk|88/100|[from] Stealth Rock
+|turn|92
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|75/100
+|move|p2a: Muk|Poison Jab|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|235/484
+|
+|-heal|p1a: Eternatus|265/484|[from] item: Black Sludge
+|-heal|p2a: Muk|81/100|[from] item: Leftovers
+|upkeep
+|turn|93
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|69/100
+|move|p2a: Muk|Poison Jab|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|211/484
+|
+|-heal|p1a: Eternatus|241/484|[from] item: Black Sludge
+|-heal|p2a: Muk|75/100|[from] item: Leftovers
+|upkeep
+|turn|94
+|
+|move|p1a: Eternatus|Recover|p1a: Eternatus
+|-heal|p1a: Eternatus|483/484
+|move|p2a: Muk|Poison Jab|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|432/484
+|
+|-heal|p1a: Eternatus|462/484|[from] item: Black Sludge
+|-heal|p2a: Muk|81/100|[from] item: Leftovers
+|upkeep
+|turn|95
+|
+|move|p1a: Eternatus|Sludge Bomb|p2a: Muk
+|-resisted|p2a: Muk
+|-damage|p2a: Muk|68/100
+|move|p2a: Muk|Poison Jab|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|411/484
+|
+|-heal|p1a: Eternatus|441/484|[from] item: Black Sludge
+|-heal|p2a: Muk|74/100|[from] item: Leftovers
+|upkeep
+|turn|96
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Muk
+|-damage|p2a: Muk|56/100
+|-status|p2a: Muk|brn
+|move|p2a: Muk|Poison Jab|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|417/484
+|
+|-heal|p1a: Eternatus|447/484|[from] item: Black Sludge
+|-heal|p2a: Muk|62/100 brn|[from] item: Leftovers
+|-damage|p2a: Muk|56/100 brn|[from] brn
+|upkeep
+|turn|97
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Muk
+|-damage|p2a: Muk|39/100 brn
+|move|p2a: Muk|Poison Jab|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|423/484
+|
+|-heal|p1a: Eternatus|453/484|[from] item: Black Sludge
+|-heal|p2a: Muk|45/100 brn|[from] item: Leftovers
+|-damage|p2a: Muk|39/100 brn|[from] brn
+|upkeep
+|turn|98
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Muk
+|-crit|p2a: Muk
+|-damage|p2a: Muk|13/100 brn
+|move|p2a: Muk|Poison Jab|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-crit|p1a: Eternatus
+|-damage|p1a: Eternatus|417/484
+|
+|-heal|p1a: Eternatus|447/484|[from] item: Black Sludge
+|-heal|p2a: Muk|19/100 brn|[from] item: Leftovers
+|-damage|p2a: Muk|13/100 brn|[from] brn
+|upkeep
+|turn|99
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Muk
+|-damage|p2a: Muk|0 fnt
+|faint|p2a: Muk
+|
+|-heal|p1a: Eternatus|477/484|[from] item: Black Sludge
+|upkeep
+|
+|switch|p2a: Volcanion|Volcanion|100/100
+|turn|100
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|93/100
+|move|p2a: Volcanion|Steam Eruption|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|403/484
+|-status|p1a: Eternatus|brn
+|
+|-heal|p1a: Eternatus|433/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|403/484 brn|[from] brn
+|upkeep
+|turn|101
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|84/100
+|move|p2a: Volcanion|Steam Eruption|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|324/484 brn
+|
+|-heal|p1a: Eternatus|354/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|324/484 brn|[from] brn
+|upkeep
+|turn|102
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|75/100
+|move|p2a: Volcanion|Steam Eruption|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|239/484 brn
+|
+|-heal|p1a: Eternatus|269/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|239/484 brn|[from] brn
+|upkeep
+|turn|103
+|
+|move|p1a: Eternatus|Recover|p1a: Eternatus
+|-heal|p1a: Eternatus|481/484 brn
+|move|p2a: Volcanion|Steam Eruption|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|404/484 brn
+|
+|-heal|p1a: Eternatus|434/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|404/484 brn|[from] brn
+|upkeep
+|turn|104
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|66/100
+|move|p2a: Volcanion|Flamethrower|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|335/484 brn
+|
+|-heal|p1a: Eternatus|365/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|335/484 brn|[from] brn
+|upkeep
+|turn|105
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|58/100
+|move|p2a: Volcanion|Flamethrower|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|275/484 brn
+|
+|-heal|p1a: Eternatus|305/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|275/484 brn|[from] brn
+|upkeep
+|turn|106
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|49/100
+|move|p2a: Volcanion|Flamethrower|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|209/484 brn
+|
+|-heal|p1a: Eternatus|239/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|209/484 brn|[from] brn
+|upkeep
+|turn|107
+|
+|move|p1a: Eternatus|Recover|p1a: Eternatus
+|-heal|p1a: Eternatus|451/484 brn
+|move|p2a: Volcanion|Flamethrower|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|388/484 brn
+|
+|-heal|p1a: Eternatus|418/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|388/484 brn|[from] brn
+|upkeep
+|turn|108
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-crit|p2a: Volcanion
+|-damage|p2a: Volcanion|36/100
+|move|p2a: Volcanion|Flamethrower|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|319/484 brn
+|
+|-heal|p1a: Eternatus|349/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|319/484 brn|[from] brn
+|upkeep
+|turn|109
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|26/100
+|move|p2a: Volcanion|Flamethrower|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|259/484 brn
+|
+|-heal|p1a: Eternatus|289/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|259/484 brn|[from] brn
+|upkeep
+|turn|110
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|17/100
+|move|p2a: Volcanion|Flamethrower|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|194/484 brn
+|
+|-heal|p1a: Eternatus|224/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|194/484 brn|[from] brn
+|upkeep
+|turn|111
+|
+|move|p1a: Eternatus|Recover|p1a: Eternatus
+|-heal|p1a: Eternatus|436/484 brn
+|move|p2a: Volcanion|Flamethrower|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|373/484 brn
+|
+|-heal|p1a: Eternatus|403/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|373/484 brn|[from] brn
+|upkeep
+|turn|112
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|8/100
+|move|p2a: Volcanion|Flamethrower|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|313/484 brn
+|
+|-heal|p1a: Eternatus|343/484 brn|[from] item: Black Sludge
+|-damage|p1a: Eternatus|313/484 brn|[from] brn
+|upkeep
+|turn|113
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Volcanion
+|-resisted|p2a: Volcanion
+|-damage|p2a: Volcanion|0 fnt
+|faint|p2a: Volcanion
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
