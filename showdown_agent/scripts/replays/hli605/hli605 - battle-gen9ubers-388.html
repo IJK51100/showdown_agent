@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-388</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-388<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">max_damage-ru</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-388|init|battle
+|title|hli605 vs. max_damage-ru
+|j|☆hli605
+|j|☆max_damage-ru
+|gametype|singles
+|player|p1|hli605|2|
+|player|p2|max_damage-ru|1|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Giratina-Origin|
+|poke|p1|Great Tusk|
+|poke|p1|Chi-Yu|
+|poke|p2|Rotom-Heat|
+|poke|p2|Krookodile, F|
+|poke|p2|Slowbro, F|
+|poke|p2|Cyclizar, F|
+|poke|p2|Jirachi|
+|poke|p2|Zapdos-Galar|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|turn|1
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Rotom|Overheat|p1a: Arceus
+|-damage|p1a: Arceus|354/444
+|-unboost|p2a: Rotom|spa|2
+|
+|upkeep
+|turn|2
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Rotom|Overheat|p1a: Arceus|[miss]
+|-miss|p2a: Rotom|p1a: Arceus
+|
+|upkeep
+|turn|3
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Rotom|Overheat|p1a: Arceus|[miss]
+|-miss|p2a: Rotom|p1a: Arceus
+|
+|upkeep
+|turn|4
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Rotom|Overheat|p1a: Arceus|[miss]
+|-miss|p2a: Rotom|p1a: Arceus
+|
+|upkeep
+|turn|5
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Rotom|Overheat|p1a: Arceus
+|-damage|p1a: Arceus|333/444
+|-unboost|p2a: Rotom|spa|2
+|
+|upkeep
+|turn|6
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Rotom|Overheat|p1a: Arceus
+|-damage|p1a: Arceus|321/444
+|-unboost|p2a: Rotom|spa|2
+|
+|upkeep
+|turn|7
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Rotom|Overheat|p1a: Arceus
+|-damage|p1a: Arceus|311/444
+|
+|upkeep
+|turn|8
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Rotom|Overheat|p1a: Arceus
+|-damage|p1a: Arceus|301/444
+|
+|upkeep
+|turn|9
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|295/444
+|
+|switch|p2a: Jirachi|Jirachi|100/100|[from] Volt Switch
+|
+|upkeep
+|turn|10
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Jirachi|Thunderbolt|p1a: Arceus
+|-damage|p1a: Arceus|277/444
+|
+|upkeep
+|turn|11
+|
+|move|p1a: Arceus|Judgment|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|11/100
+|move|p2a: Jirachi|Thunderbolt|p1a: Arceus
+|-damage|p1a: Arceus|256/444
+|-status|p1a: Arceus|par
+|
+|-heal|p2a: Jirachi|17/100|[from] item: Leftovers
+|upkeep
+|turn|12
+|
+|move|p2a: Jirachi|Thunderbolt|p1a: Arceus
+|-damage|p1a: Arceus|236/444 par
+|move|p1a: Arceus|Judgment|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|0 fnt
+|faint|p2a: Jirachi
+|
+|upkeep
+|
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|turn|13
+|
+|move|p2a: Zapdos|Close Combat|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|145/444 par
+|-unboost|p2a: Zapdos|def|1
+|-unboost|p2a: Zapdos|spd|1
+|move|p1a: Arceus|Judgment|p2a: Zapdos
+|-supereffective|p2a: Zapdos
+|-damage|p2a: Zapdos|0 fnt
+|faint|p2a: Zapdos
+|
+|upkeep
+|
+|switch|p2a: Krookodile|Krookodile, F|100/100
+|-ability|p2a: Krookodile|Intimidate|boost
+|-unboost|p1a: Arceus|atk|1
+|turn|14
+|
+|move|p2a: Krookodile|Earthquake|p1a: Arceus
+|-damage|p1a: Arceus|22/444 par
+|cant|p1a: Arceus|par
+|
+|upkeep
+|turn|15
+|
+|move|p2a: Krookodile|Earthquake|p1a: Arceus
+|-damage|p1a: Arceus|0 fnt
+|faint|p1a: Arceus
+|
+|upkeep
+|
+|switch|p1a: Giratina|Giratina-Origin|503/503
+|turn|16
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|88/100
+|
+|-heal|p2a: Krookodile|94/100|[from] item: Leftovers
+|upkeep
+|turn|17
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|82/100
+|
+|-heal|p2a: Krookodile|88/100|[from] item: Leftovers
+|upkeep
+|turn|18
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|75/100
+|
+|-heal|p2a: Krookodile|82/100|[from] item: Leftovers
+|upkeep
+|turn|19
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|69/100
+|
+|-heal|p2a: Krookodile|75/100|[from] item: Leftovers
+|upkeep
+|turn|20
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|63/100
+|
+|-heal|p2a: Krookodile|69/100|[from] item: Leftovers
+|upkeep
+|turn|21
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|56/100
+|
+|-heal|p2a: Krookodile|62/100|[from] item: Leftovers
+|upkeep
+|turn|22
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|50/100
+|
+|-heal|p2a: Krookodile|56/100|[from] item: Leftovers
+|upkeep
+|turn|23
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|42/100
+|
+|-heal|p2a: Krookodile|49/100|[from] item: Leftovers
+|upkeep
+|turn|24
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|35/100
+|
+|-heal|p2a: Krookodile|42/100|[from] item: Leftovers
+|upkeep
+|turn|25
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|28/100
+|
+|-heal|p2a: Krookodile|34/100|[from] item: Leftovers
+|upkeep
+|turn|26
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|21/100
+|
+|-heal|p2a: Krookodile|27/100|[from] item: Leftovers
+|upkeep
+|turn|27
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|14/100
+|
+|-heal|p2a: Krookodile|20/100|[from] item: Leftovers
+|upkeep
+|turn|28
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|8/100
+|
+|-heal|p2a: Krookodile|14/100|[from] item: Leftovers
+|upkeep
+|turn|29
+|
+|move|p2a: Krookodile|Earthquake|p1a: Giratina
+|-immune|p1a: Giratina|[from] ability: Levitate
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|2/100
+|
+|-heal|p2a: Krookodile|8/100|[from] item: Leftovers
+|upkeep
+|turn|30
+|
+|move|p2a: Krookodile|Knock Off|p1a: Giratina
+|-supereffective|p1a: Giratina
+|-damage|p1a: Giratina|387/503
+|move|p1a: Giratina|Hex|p2a: Krookodile
+|-resisted|p2a: Krookodile
+|-damage|p2a: Krookodile|0 fnt
+|faint|p2a: Krookodile
+|
+|upkeep
+|
+|switch|p2a: Slowbro|Slowbro, F|100/100
+|turn|31
+|
+|move|p1a: Giratina|Hex|p2a: Slowbro
+|-supereffective|p2a: Slowbro
+|-damage|p2a: Slowbro|46/100
+|move|p2a: Slowbro|Future Sight|p1a: Giratina
+|-start|p2a: Slowbro|move: Future Sight
+|
+|upkeep
+|turn|32
+|
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|27/100
+|-damage|p1a: Giratina|304/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|upkeep
+|turn|33
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|265/503
+|
+|switch|p2a: Slowbro|Slowbro, F|61/100|[from] Volt Switch
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|42/100
+|-damage|p1a: Giratina|182/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Cyclizar|Cyclizar, F|100/100
+|
+|-end|p1a: Giratina|move: Future Sight
+|-damage|p1a: Giratina|46/503
+|upkeep
+|turn|34
+|
+|move|p2a: Cyclizar|Double-Edge|p1a: Giratina
+|-immune|p1a: Giratina
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|upkeep
+|turn|35
+|
+|move|p2a: Cyclizar|Double-Edge|p1a: Giratina
+|-immune|p1a: Giratina
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|36
+|
+|move|p2a: Cyclizar|Double-Edge|p1a: Giratina
+|-immune|p1a: Giratina
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|37
+|
+|move|p2a: Cyclizar|Double-Edge|p1a: Giratina
+|-immune|p1a: Giratina
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Dragon Tail|p2a: Cyclizar
+|-supereffective|p2a: Cyclizar
+|-damage|p2a: Cyclizar|10/100
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|upkeep
+|turn|38
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|464/503
+|
+|switch|p2a: Slowbro|Slowbro, F|76/100|[from] Volt Switch
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|59/100
+|-damage|p1a: Giratina|381/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Cyclizar|Cyclizar, F|44/100
+|
+|upkeep
+|turn|39
+|
+|move|p2a: Cyclizar|Double-Edge|p1a: Giratina
+|-immune|p1a: Giratina
+|move|p1a: Giratina|Dragon Tail|p2a: Cyclizar
+|-supereffective|p2a: Cyclizar
+|-damage|p2a: Cyclizar|0 fnt
+|faint|p2a: Cyclizar
+|
+|upkeep
+|
+|switch|p2a: Slowbro|Slowbro, F|92/100
+|turn|40
+|
+|move|p2a: Slowbro|Future Sight|p1a: Giratina
+|-start|p2a: Slowbro|move: Future Sight
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|74/100
+|-damage|p1a: Giratina|298/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|upkeep
+|turn|41
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|259/503
+|
+|switch|p2a: Slowbro|Slowbro, F|100/100|[from] Volt Switch
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|85/100
+|-damage|p1a: Giratina|176/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|upkeep
+|turn|42
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|131/503
+|
+|switch|p2a: Slowbro|Slowbro, F|100/100|[from] Volt Switch
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|-end|p1a: Giratina|move: Future Sight
+|-damage|p1a: Giratina|356/503 slp
+|upkeep
+|turn|43
+|
+|move|p2a: Slowbro|Future Sight|p1a: Giratina
+|-start|p2a: Slowbro|move: Future Sight
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|44
+|
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|45
+|
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|83/100
+|-damage|p1a: Giratina|273/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|-end|p1a: Giratina|move: Future Sight
+|-damage|p1a: Giratina|135/503
+|upkeep
+|turn|46
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|93/503
+|
+|switch|p2a: Slowbro|Slowbro, F|100/100|[from] Volt Switch
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|upkeep
+|turn|47
+|
+|move|p2a: Slowbro|Future Sight|p1a: Giratina
+|-start|p2a: Slowbro|move: Future Sight
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|48
+|
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|49
+|
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|83/100
+|-damage|p1a: Giratina|420/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|-end|p1a: Giratina|move: Future Sight
+|-damage|p1a: Giratina|290/503
+|upkeep
+|turn|50
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|250/503
+|
+|switch|p2a: Slowbro|Slowbro, F|100/100|[from] Volt Switch
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-crit|p2a: Slowbro
+|-damage|p2a: Slowbro|74/100
+|-damage|p1a: Giratina|167/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|upkeep
+|turn|51
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|123/503
+|
+|switch|p2a: Slowbro|Slowbro, F|100/100|[from] Volt Switch
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|upkeep
+|turn|52
+|
+|move|p2a: Slowbro|Future Sight|p1a: Giratina
+|-start|p2a: Slowbro|move: Future Sight
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|53
+|
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|54
+|
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|82/100
+|-damage|p1a: Giratina|420/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|-end|p1a: Giratina|move: Future Sight
+|-damage|p1a: Giratina|288/503
+|upkeep
+|turn|55
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|243/503
+|
+|switch|p2a: Slowbro|Slowbro, F|100/100|[from] Volt Switch
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|83/100
+|-damage|p1a: Giratina|160/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|upkeep
+|turn|56
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-crit|p1a: Giratina
+|-damage|p1a: Giratina|93/503
+|
+|switch|p2a: Slowbro|Slowbro, F|100/100|[from] Volt Switch
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|upkeep
+|turn|57
+|
+|move|p2a: Slowbro|Future Sight|p1a: Giratina
+|-start|p2a: Slowbro|move: Future Sight
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|58
+|
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|59
+|
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|84/100
+|-damage|p1a: Giratina|420/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|-end|p1a: Giratina|move: Future Sight
+|-damage|p1a: Giratina|293/503
+|upkeep
+|turn|60
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|252/503
+|
+|switch|p2a: Slowbro|Slowbro, F|100/100|[from] Volt Switch
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro|[miss]
+|-miss|p1a: Giratina|p2a: Slowbro
+|
+|upkeep
+|turn|61
+|
+|move|p2a: Slowbro|Future Sight|p1a: Giratina
+|-start|p2a: Slowbro|move: Future Sight
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro
+|-damage|p2a: Slowbro|83/100
+|-damage|p1a: Giratina|169/503|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|drag|p2a: Rotom|Rotom-Heat|100/100
+|
+|upkeep
+|turn|62
+|
+|move|p2a: Rotom|Volt Switch|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|129/503
+|
+|switch|p2a: Slowbro|Slowbro, F|100/100|[from] Volt Switch
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|
+|upkeep
+|turn|63
+|
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|457/503 slp
+|cant|p1a: Giratina|slp
+|
+|-end|p1a: Giratina|move: Future Sight
+|-damage|p1a: Giratina|316/503 slp
+|upkeep
+|turn|64
+|
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|266/503 slp
+|cant|p1a: Giratina|slp
+|
+|upkeep
+|turn|65
+|
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|217/503 slp
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Dragon Tail|p2a: Slowbro|[miss]
+|-miss|p1a: Giratina|p2a: Slowbro
+|
+|upkeep
+|turn|66
+|
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|454/503 slp
+|
+|upkeep
+|turn|67
+|
+|cant|p1a: Giratina|slp
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|409/503 slp
+|
+|upkeep
+|turn|68
+|
+|cant|p1a: Giratina|slp
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|367/503 slp
+|
+|upkeep
+|turn|69
+|
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro
+|-status|p2a: Slowbro|brn
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|323/503
+|
+|-damage|p2a: Slowbro|94/100 brn|[from] brn
+|upkeep
+|turn|70
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro
+|-fail|p2a: Slowbro|brn
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|278/503
+|-status|p1a: Giratina|brn
+|
+|-damage|p1a: Giratina|247/503 brn|[from] brn
+|-damage|p2a: Slowbro|88/100 brn|[from] brn
+|upkeep
+|turn|71
+|
+|move|p1a: Giratina|Rest|p1a: Giratina
+|-status|p1a: Giratina|slp|[from] move: Rest
+|-heal|p1a: Giratina|503/503 slp|[silent]
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|458/503 slp
+|
+|-damage|p2a: Slowbro|82/100 brn|[from] brn
+|upkeep
+|turn|72
+|
+|cant|p1a: Giratina|slp
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|413/503 slp
+|
+|-damage|p2a: Slowbro|76/100 brn|[from] brn
+|upkeep
+|turn|73
+|
+|cant|p1a: Giratina|slp
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|371/503 slp
+|
+|-damage|p2a: Slowbro|70/100 brn|[from] brn
+|upkeep
+|turn|74
+|
+|-curestatus|p1a: Giratina|slp|[msg]
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro
+|-fail|p2a: Slowbro|brn
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|324/503
+|
+|-damage|p2a: Slowbro|64/100 brn|[from] brn
+|upkeep
+|turn|75
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro
+|-fail|p2a: Slowbro|brn
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|278/503
+|
+|-damage|p2a: Slowbro|58/100 brn|[from] brn
+|upkeep
+|turn|76
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro|[miss]
+|-miss|p1a: Giratina|p2a: Slowbro
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|230/503
+|
+|-damage|p2a: Slowbro|52/100 brn|[from] brn
+|upkeep
+|turn|77
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro
+|-fail|p2a: Slowbro|brn
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|185/503
+|
+|-damage|p2a: Slowbro|46/100 brn|[from] brn
+|upkeep
+|turn|78
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro
+|-fail|p2a: Slowbro|brn
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|141/503
+|
+|-damage|p2a: Slowbro|40/100 brn|[from] brn
+|upkeep
+|turn|79
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro
+|-fail|p2a: Slowbro|brn
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|93/503
+|
+|-damage|p2a: Slowbro|33/100 brn|[from] brn
+|upkeep
+|turn|80
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro
+|-fail|p2a: Slowbro|brn
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|49/503
+|
+|-damage|p2a: Slowbro|27/100 brn|[from] brn
+|upkeep
+|turn|81
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro
+|-fail|p2a: Slowbro|brn
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|2/503
+|
+|-damage|p2a: Slowbro|21/100 brn|[from] brn
+|upkeep
+|turn|82
+|
+|move|p1a: Giratina|Will-O-Wisp|p2a: Slowbro
+|-fail|p2a: Slowbro|brn
+|move|p2a: Slowbro|Scald|p1a: Giratina
+|-resisted|p1a: Giratina
+|-damage|p1a: Giratina|0 fnt
+|faint|p1a: Giratina
+|
+|-damage|p2a: Slowbro|15/100 brn|[from] brn
+|upkeep
+|
+|switch|p1a: Chi-Yu|Chi-Yu|251/251
+|-ability|p1a: Chi-Yu|Beads of Ruin
+|turn|83
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Slowbro
+|-resisted|p2a: Slowbro
+|-damage|p2a: Slowbro|0 fnt
+|-unboost|p1a: Chi-Yu|spa|2
+|faint|p2a: Slowbro
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|turn|84
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|78/100
+|-unboost|p1a: Chi-Yu|spa|2
+|move|p2a: Rotom|Volt Switch|p1a: Chi-Yu
+|-crit|p1a: Chi-Yu
+|-damage|p1a: Chi-Yu|148/251
+|
+|upkeep
+|turn|85
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|62/100
+|-unboost|p1a: Chi-Yu|spa|2
+|move|p2a: Rotom|Volt Switch|p1a: Chi-Yu
+|-damage|p1a: Chi-Yu|79/251
+|
+|upkeep
+|turn|86
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|50/100
+|move|p2a: Rotom|Volt Switch|p1a: Chi-Yu
+|-damage|p1a: Chi-Yu|3/251
+|
+|upkeep
+|turn|87
+|
+|move|p1a: Chi-Yu|Overheat|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|38/100
+|move|p2a: Rotom|Volt Switch|p1a: Chi-Yu
+|-damage|p1a: Chi-Yu|0 fnt
+|faint|p1a: Chi-Yu
+|
+|upkeep
+|
+|switch|p1a: Eternatus|Eternatus|484/484
+|-ability|p1a: Eternatus|Pressure
+|turn|88
+|
+|move|p2a: Rotom|Volt Switch|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|450/484
+|move|p1a: Eternatus|Sludge Bomb|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
