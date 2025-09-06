@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-10618</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-10618<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">simple-ru</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-10618|init|battle
+|title|hli605 vs. simple-ru
+|j|☆hli605
+|j|☆simple-ru
+|gametype|singles
+|player|p1|hli605|102|
+|player|p2|simple-ru|2|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Kyogre|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Great Tusk|
+|poke|p1|Kingambit, F|
+|poke|p2|Rotom-Heat|
+|poke|p2|Krookodile, F|
+|poke|p2|Slowbro, M|
+|poke|p2|Cyclizar, M|
+|poke|p2|Jirachi|
+|poke|p2|Zapdos-Galar|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|turn|1
+|
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|switch|p1a: Kyogre|Kyogre|341/341
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Kyogre
+|move|p2a: Zapdos|Brave Bird|p1a: Kyogre
+|-damage|p1a: Kyogre|95/341
+|-damage|p2a: Zapdos|75/100|[from] Recoil
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|2
+|
+|move|p2a: Zapdos|Brave Bird|p1a: Kyogre
+|-damage|p1a: Kyogre|0 fnt
+|faint|p1a: Kyogre
+|-damage|p2a: Zapdos|66/100|[from] Recoil
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|turn|3
+|
+|move|p2a: Zapdos|Brave Bird|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|340/398
+|-damage|p2a: Zapdos|60/100|[from] Recoil
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Zapdos
+|-damage|p2a: Zapdos|1/100
+|
+|-weather|RainDance|[upkeep]
+|-heal|p1a: Necrozma|364/398|[from] item: Leftovers
+|upkeep
+|turn|4
+|
+|move|p2a: Zapdos|Brave Bird|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|306/398
+|-damage|p2a: Zapdos|0 fnt|[from] Recoil
+|faint|p2a: Zapdos
+|move|p1a: Necrozma|Sunsteel Strike|p2: Zapdos|[notarget]
+|-fail|p1a: Necrozma
+|
+|-weather|RainDance|[upkeep]
+|-heal|p1a: Necrozma|330/398|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Krookodile|Krookodile, F|100/100
+|-ability|p2a: Krookodile|Intimidate|boost
+|-unboost|p1a: Necrozma|atk|1
+|turn|5
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|move|p2a: Krookodile|Earthquake|p1a: Great Tusk
+|-damage|p1a: Great Tusk|352/434
+|
+|-weather|none
+|-heal|p1a: Great Tusk|379/434|[from] item: Leftovers
+|upkeep
+|turn|6
+|
+|move|p2a: Krookodile|Earthquake|p1a: Great Tusk
+|-damage|p1a: Great Tusk|303/434
+|move|p1a: Great Tusk|Body Press|p2a: Krookodile
+|-supereffective|p2a: Krookodile
+|-damage|p2a: Krookodile|0 fnt
+|faint|p2a: Krookodile
+|
+|-heal|p1a: Great Tusk|330/434|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|turn|7
+|
+|move|p1a: Great Tusk|Knock Off|p2a: Slowbro
+|-supereffective|p2a: Slowbro
+|-damage|p2a: Slowbro|65/100
+|-damage|p1a: Great Tusk|258/434|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|-enditem|p2a: Slowbro|Rocky Helmet|[from] move: Knock Off|[of] p1a: Great Tusk
+|move|p2a: Slowbro|Future Sight|p1a: Great Tusk
+|-start|p2a: Slowbro|move: Future Sight
+|
+|-heal|p1a: Great Tusk|285/434|[from] item: Leftovers
+|upkeep
+|turn|8
+|
+|move|p1a: Great Tusk|Knock Off|p2a: Slowbro
+|-supereffective|p2a: Slowbro
+|-damage|p2a: Slowbro|44/100
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|
+|-heal|p1a: Great Tusk|312/434|[from] item: Leftovers
+|upkeep
+|turn|9
+|
+|move|p1a: Great Tusk|Knock Off|p2a: Slowbro
+|-supereffective|p2a: Slowbro
+|-damage|p2a: Slowbro|20/100
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|
+|-end|p1a: Great Tusk|move: Future Sight
+|-supereffective|p1a: Great Tusk
+|-damage|p1a: Great Tusk|0 fnt
+|faint|p1a: Great Tusk
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|upkeep
+|
+|switch|p1a: Kingambit|Kingambit, F|341/341
+|-activate|p1a: Kingambit|ability: Supreme Overlord
+|-start|p1a: Kingambit|fallen2|[silent]
+|turn|10
+|
+|move|p1a: Kingambit|Kowtow Cleave|p2a: Slowbro
+|-supereffective|p2a: Slowbro
+|-damage|p2a: Slowbro|0 fnt
+|faint|p2a: Slowbro
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|turn|11
+|
+|-end|p1a: Kingambit|fallen2|[silent]
+|switch|p1a: Eternatus|Eternatus|484/484
+|-ability|p1a: Eternatus|Pressure
+|move|p2a: Rotom|Overheat|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|424/484
+|-unboost|p2a: Rotom|spa|2
+|
+|-heal|p1a: Eternatus|454/484|[from] item: Black Sludge
+|upkeep
+|turn|12
+|
+|move|p2a: Rotom|Overheat|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-crit|p1a: Eternatus
+|-damage|p1a: Eternatus|372/484
+|-unboost|p2a: Rotom|spa|2
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Rotom
+|-damage|p2a: Rotom|52/100
+|
+|-heal|p1a: Eternatus|402/484|[from] item: Black Sludge
+|upkeep
+|turn|13
+|
+|switch|p2a: Jirachi|Jirachi|100/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Jirachi
+|-resisted|p2a: Jirachi
+|-damage|p2a: Jirachi|78/100
+|
+|-heal|p2a: Jirachi|85/100|[from] item: Leftovers
+|-heal|p1a: Eternatus|432/484|[from] item: Black Sludge
+|upkeep
+|turn|14
+|
+|move|p2a: Jirachi|Psychic Noise|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|264/484
+|-start|p1a: Eternatus|move: Heal Block
+|move|p1a: Eternatus|Flamethrower|p2a: Jirachi
+|-supereffective|p2a: Jirachi
+|-damage|p2a: Jirachi|24/100
+|
+|-heal|p2a: Jirachi|31/100|[from] item: Leftovers
+|upkeep
+|turn|15
+|
+|move|p2a: Jirachi|Psychic Noise|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|112/484
+|move|p1a: Eternatus|Flamethrower|p2a: Jirachi
+|-supereffective|p2a: Jirachi
+|-damage|p2a: Jirachi|0 fnt
+|faint|p2a: Jirachi
+|
+|-end|p1a: Eternatus|move: Heal Block
+|upkeep
+|
+|switch|p2a: Cyclizar|Cyclizar, M|100/100
+|turn|16
+|
+|move|p2a: Cyclizar|Double-Edge|p1a: Eternatus
+|-damage|p1a: Eternatus|0 fnt
+|faint|p1a: Eternatus
+|-damage|p2a: Cyclizar|90/100|[from] Recoil
+|
+|upkeep
+|
+|switch|p1a: Kingambit|Kingambit, F|341/341
+|-activate|p1a: Kingambit|ability: Supreme Overlord
+|-start|p1a: Kingambit|fallen3|[silent]
+|turn|17
+|
+|move|p2a: Cyclizar|Double-Edge|p1a: Kingambit
+|-resisted|p1a: Kingambit
+|-damage|p1a: Kingambit|287/341
+|-damage|p2a: Cyclizar|84/100|[from] Recoil
+|move|p1a: Kingambit|Kowtow Cleave|p2a: Cyclizar
+|-damage|p2a: Cyclizar|0 fnt
+|faint|p2a: Cyclizar
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Heat|52/100
+|turn|18
+|
+|-end|p1a: Kingambit|fallen3|[silent]
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|330/398
+|move|p2a: Rotom|Overheat|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|110/398
+|-unboost|p2a: Rotom|spa|2
+|
+|-heal|p1a: Necrozma|134/398|[from] item: Leftovers
+|upkeep
+|turn|19
+|
+|move|p2a: Rotom|Overheat|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|20/398
+|-unboost|p2a: Rotom|spa|2
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p1a: Necrozma|44/398|[from] item: Leftovers
+|upkeep
+|turn|20
+|
+|move|p2a: Rotom|Overheat|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|0 fnt
+|-unboost|p2a: Rotom|spa|2
+|faint|p1a: Necrozma
+|
+|upkeep
+|
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|turn|21
+|
+|move|p2a: Rotom|Overheat|p1a: Arceus
+|-damage|p1a: Arceus|408/444
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|25/100
+|
+|upkeep
+|turn|22
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|390/444
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|2/100
+|
+|upkeep
+|turn|23
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|371/444
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
