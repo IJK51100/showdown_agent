@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-16771</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-16771<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-ru</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-16771|init|battle
+|title|hli605 vs. random-ru
+|j|☆hli605
+|j|☆random-ru
+|gametype|singles
+|player|p1|hli605|169|
+|player|p2|random-ru|101|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Kyogre|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Great Tusk|
+|poke|p1|Kingambit, M|
+|poke|p2|Rotom-Heat|
+|poke|p2|Krookodile, M|
+|poke|p2|Slowbro, M|
+|poke|p2|Cyclizar, M|
+|poke|p2|Jirachi|
+|poke|p2|Zapdos-Galar|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|turn|1
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Slowbro
+|-resisted|p2a: Slowbro
+|-damage|p2a: Slowbro|86/100
+|-damage|p1a: Necrozma|332/398|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|
+|-heal|p1a: Necrozma|356/398|[from] item: Leftovers
+|upkeep
+|turn|2
+|
+|switch|p2a: Jirachi|Jirachi|100/100
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398
+|
+|upkeep
+|turn|3
+|
+|move|p2a: Jirachi|Thunderbolt|p1a: Necrozma
+|-damage|p1a: Necrozma|313/398
+|-status|p1a: Necrozma|par
+|move|p1a: Necrozma|Earthquake|p2a: Jirachi
+|-supereffective|p2a: Jirachi
+|-damage|p2a: Jirachi|38/100
+|
+|-heal|p2a: Jirachi|44/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|337/398 par|[from] item: Leftovers
+|upkeep
+|turn|4
+|
+|switch|p2a: Zapdos|Zapdos-Galar|100/100
+|move|p1a: Necrozma|Earthquake|p2a: Zapdos
+|-immune|p2a: Zapdos
+|
+|-heal|p1a: Necrozma|361/398 par|[from] item: Leftovers
+|upkeep
+|turn|5
+|
+|move|p2a: Zapdos|Brave Bird|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|298/398 par
+|-damage|p2a: Zapdos|94/100|[from] Recoil
+|cant|p1a: Necrozma|par
+|
+|-heal|p1a: Necrozma|322/398 par|[from] item: Leftovers
+|upkeep
+|turn|6
+|
+|-terastallize|p2a: Zapdos|Flying
+|move|p2a: Zapdos|Brave Bird|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|230/398 par
+|-damage|p2a: Zapdos|85/100|[from] Recoil
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Zapdos
+|-damage|p2a: Zapdos|25/100
+|
+|-heal|p1a: Necrozma|254/398 par|[from] item: Leftovers
+|upkeep
+|turn|7
+|
+|switch|p2a: Jirachi|Jirachi|44/100
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398 par
+|
+|-heal|p2a: Jirachi|50/100|[from] item: Leftovers
+|upkeep
+|turn|8
+|
+|move|p2a: Jirachi|Psychic Noise|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|372/398 par
+|-start|p1a: Necrozma|move: Heal Block
+|move|p1a: Necrozma|Earthquake|p2a: Jirachi
+|-supereffective|p2a: Jirachi
+|-damage|p2a: Jirachi|0 fnt
+|faint|p2a: Jirachi
+|
+|upkeep
+|
+|switch|p2a: Zapdos|Zapdos-Galar, tera:Flying|25/100
+|turn|9
+|
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|cant|p1a: Necrozma|par
+|
+|-end|p1a: Necrozma|move: Heal Block
+|upkeep
+|turn|10
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|move|p1a: Necrozma|Earthquake|p2a: Slowbro
+|-damage|p2a: Slowbro|80/100
+|
+|-heal|p1a: Necrozma|396/398 par|[from] item: Leftovers
+|upkeep
+|turn|11
+|
+|move|p2a: Slowbro|Scald|p1a: Necrozma
+|-damage|p1a: Necrozma|312/398 par
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398 par
+|
+|upkeep
+|turn|12
+|
+|move|p2a: Slowbro|Slack Off|p2a: Slowbro
+|-heal|p2a: Slowbro|100/100
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-fail|p1a: Necrozma|heal
+|
+|upkeep
+|turn|13
+|
+|move|p2a: Slowbro|Future Sight|p1a: Necrozma
+|-start|p2a: Slowbro|move: Future Sight
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-fail|p1a: Necrozma|heal
+|
+|upkeep
+|turn|14
+|
+|move|p2a: Slowbro|Scald|p1a: Necrozma
+|-damage|p1a: Necrozma|311/398 par
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398 par
+|
+|upkeep
+|turn|15
+|
+|switch|p2a: Zapdos|Zapdos-Galar, tera:Flying|25/100
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-fail|p1a: Necrozma|heal
+|
+|-end|p1a: Necrozma|move: Future Sight
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|367/398 par
+|-heal|p1a: Necrozma|391/398 par|[from] item: Leftovers
+|upkeep
+|turn|16
+|
+|switch|p2a: Krookodile|Krookodile, M|100/100
+|-ability|p2a: Krookodile|Intimidate|boost
+|-unboost|p1a: Necrozma|atk|1
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Krookodile
+|-damage|p2a: Krookodile|61/100
+|
+|-heal|p2a: Krookodile|67/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|398/398 par|[from] item: Leftovers
+|upkeep
+|turn|17
+|
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|92/100
+|
+|upkeep
+|turn|18
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|338/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p1a: Necrozma|362/398 par|[from] item: Leftovers
+|upkeep
+|turn|19
+|
+|switch|p2a: Krookodile|Krookodile, M|67/100
+|-ability|p2a: Krookodile|Intimidate|boost
+|-unboost|p1a: Necrozma|atk|1
+|move|p1a: Necrozma|Earthquake|p2a: Krookodile
+|-damage|p2a: Krookodile|46/100
+|
+|-heal|p2a: Krookodile|52/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|386/398 par|[from] item: Leftovers
+|upkeep
+|turn|20
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Slowbro
+|-resisted|p2a: Slowbro
+|-damage|p2a: Slowbro|93/100
+|-damage|p1a: Necrozma|320/398 par|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|
+|-heal|p1a: Necrozma|344/398 par|[from] item: Leftovers
+|upkeep
+|turn|21
+|
+|switch|p2a: Cyclizar|Cyclizar, M|100/100
+|cant|p1a: Necrozma|par
+|
+|-heal|p1a: Necrozma|368/398 par|[from] item: Leftovers
+|upkeep
+|turn|22
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Slowbro
+|-resisted|p2a: Slowbro
+|-damage|p2a: Slowbro|93/100
+|-damage|p1a: Necrozma|302/398 par|[from] item: Rocky Helmet|[of] p2a: Slowbro
+|
+|-heal|p1a: Necrozma|326/398 par|[from] item: Leftovers
+|upkeep
+|turn|23
+|
+|move|p2a: Slowbro|Future Sight|p1a: Necrozma
+|-start|p2a: Slowbro|move: Future Sight
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398 par
+|
+|upkeep
+|turn|24
+|
+|move|p2a: Slowbro|Slack Off|p2a: Slowbro
+|-heal|p2a: Slowbro|100/100
+|move|p1a: Necrozma|Earthquake|p2a: Slowbro
+|-damage|p2a: Slowbro|90/100
+|
+|upkeep
+|turn|25
+|
+|switch|p2a: Krookodile|Krookodile, M|52/100
+|-ability|p2a: Krookodile|Intimidate|boost
+|-unboost|p1a: Necrozma|atk|1
+|move|p1a: Necrozma|Earthquake|p2a: Krookodile
+|-damage|p2a: Krookodile|37/100
+|
+|-end|p1a: Necrozma|move: Future Sight
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|367/398 par
+|-heal|p2a: Krookodile|43/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|391/398 par|[from] item: Leftovers
+|upkeep
+|turn|26
+|
+|move|p2a: Krookodile|Taunt|p1a: Necrozma
+|-start|p1a: Necrozma|move: Taunt
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Krookodile
+|-damage|p2a: Krookodile|21/100
+|
+|-heal|p2a: Krookodile|27/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|398/398 par|[from] item: Leftovers
+|upkeep
+|turn|27
+|
+|switch|p2a: Cyclizar|Cyclizar, M|100/100
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Cyclizar
+|-damage|p2a: Cyclizar|69/100
+|
+|upkeep
+|turn|28
+|
+|move|p2a: Cyclizar|Double-Edge|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|356/398 par
+|-damage|p2a: Cyclizar|65/100|[from] Recoil
+|move|p1a: Necrozma|Earthquake|p2a: Cyclizar
+|-damage|p2a: Cyclizar|46/100
+|
+|-heal|p1a: Necrozma|380/398 par|[from] item: Leftovers
+|-end|p1a: Necrozma|move: Taunt
+|upkeep
+|turn|29
+|
+|switch|p2a: Zapdos|Zapdos-Galar, tera:Flying|25/100
+|move|p1a: Necrozma|Earthquake|p2a: Zapdos
+|-immune|p2a: Zapdos
+|
+|-heal|p1a: Necrozma|398/398 par|[from] item: Leftovers
+|upkeep
+|turn|30
+|
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|move|p1a: Necrozma|Stealth Rock|p2a: Rotom
+|-sidestart|p2: random-ru|move: Stealth Rock
+|
+|upkeep
+|turn|31
+|
+|move|p2a: Rotom|Will-O-Wisp||[still]
+|-fail|p2a: Rotom
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|upkeep
+|turn|32
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|350/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|cant|p1a: Necrozma|par
+|
+|-heal|p1a: Necrozma|374/398 par|[from] item: Leftovers
+|upkeep
+|turn|33
+|
+|move|p2a: Rotom|Will-O-Wisp||[still]
+|-fail|p2a: Rotom
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p1a: Necrozma|398/398 par|[from] item: Leftovers
+|upkeep
+|turn|34
+|
+|switch|p2a: Zapdos|Zapdos-Galar, tera:Flying|25/100
+|-damage|p2a: Zapdos|0 fnt|[from] Stealth Rock
+|faint|p2a: Zapdos
+|move|p1a: Necrozma|Earthquake|p2: Zapdos|[notarget]
+|-fail|p1a: Necrozma
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|turn|35
+|
+|move|p2a: Rotom|Overheat|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|196/398 par
+|-unboost|p2a: Rotom|spa|2
+|cant|p1a: Necrozma|par
+|
+|-heal|p1a: Necrozma|220/398 par|[from] item: Leftovers
+|upkeep
+|turn|36
+|
+|move|p2a: Rotom|Will-O-Wisp||[still]
+|-fail|p2a: Rotom
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p1a: Necrozma|244/398 par|[from] item: Leftovers
+|upkeep
+|turn|37
+|
+|switch|p2a: Cyclizar|Cyclizar, M|79/100
+|-damage|p2a: Cyclizar|67/100|[from] Stealth Rock
+|move|p1a: Necrozma|Earthquake|p2a: Cyclizar
+|-damage|p2a: Cyclizar|49/100
+|
+|-heal|p1a: Necrozma|268/398 par|[from] item: Leftovers
+|upkeep
+|turn|38
+|
+|move|p2a: Cyclizar|Knock Off|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|207/398 par
+|-enditem|p1a: Necrozma|Leftovers|[from] move: Knock Off|[of] p2a: Cyclizar
+|move|p1a: Necrozma|Earthquake|p2a: Cyclizar
+|-crit|p2a: Cyclizar
+|-damage|p2a: Cyclizar|0 fnt
+|faint|p2a: Cyclizar
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|turn|39
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|134/398 par
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100|[from] Volt Switch
+|-damage|p2a: Slowbro|88/100|[from] Stealth Rock
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|40
+|
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|41
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|52/398 par
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100|[from] Volt Switch
+|-damage|p2a: Slowbro|88/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|upkeep
+|turn|42
+|
+|move|p2a: Slowbro|Future Sight|p1a: Necrozma
+|-start|p2a: Slowbro|move: Future Sight
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|upkeep
+|turn|43
+|
+|move|p2a: Slowbro|Future Sight||[still]
+|-fail|p2a: Slowbro
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|44
+|
+|switch|p2a: Rotom|Rotom-Heat|100/100
+|cant|p1a: Necrozma|par
+|
+|-end|p1a: Necrozma|move: Future Sight
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|19/398 par
+|upkeep
+|turn|45
+|
+|move|p2a: Rotom|Will-O-Wisp||[still]
+|-fail|p2a: Rotom
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|upkeep
+|turn|46
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|161/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|54/100|[from] move: Pain Split
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|upkeep
+|turn|47
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|-damage|p2a: Slowbro|88/100|[from] Stealth Rock
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|48
+|
+|switch|p2a: Krookodile|Krookodile, M|27/100
+|-damage|p2a: Krookodile|21/100|[from] Stealth Rock
+|-ability|p2a: Krookodile|Intimidate|boost
+|-unboost|p1a: Necrozma|atk|1
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Krookodile|27/100|[from] item: Leftovers
+|upkeep
+|turn|49
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|-damage|p2a: Slowbro|88/100|[from] Stealth Rock
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|50
+|
+|switch|p2a: Krookodile|Krookodile, M|27/100
+|-damage|p2a: Krookodile|21/100|[from] Stealth Rock
+|-ability|p2a: Krookodile|Intimidate|boost
+|-unboost|p1a: Necrozma|atk|1
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Krookodile|27/100|[from] item: Leftovers
+|upkeep
+|turn|51
+|
+|move|p2a: Krookodile|Taunt|p1a: Necrozma
+|-start|p1a: Necrozma|move: Taunt
+|cant|p1a: Necrozma|move: Taunt|Stealth Rock
+|
+|-heal|p2a: Krookodile|33/100|[from] item: Leftovers
+|upkeep
+|turn|52
+|
+|move|p2a: Krookodile|Knock Off|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|88/398 par
+|-activate|p1a: Necrozma|move: Struggle
+|move|p1a: Necrozma|Struggle|p2a: Krookodile
+|-damage|p2a: Krookodile|28/100
+|-damage|p1a: Necrozma|0 fnt|[from] recoil
+|faint|p1a: Necrozma
+|
+|-heal|p2a: Krookodile|34/100|[from] item: Leftovers
+|upkeep
+|
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|turn|53
+|
+|move|p1a: Arceus|Judgment|p2a: Krookodile
+|-supereffective|p2a: Krookodile
+|-damage|p2a: Krookodile|0 fnt
+|faint|p2a: Krookodile
+|
+|upkeep
+|
+|switch|p2a: Slowbro|Slowbro, M|100/100
+|-damage|p2a: Slowbro|88/100|[from] Stealth Rock
+|turn|54
+|
+|move|p1a: Arceus|Judgment|p2a: Slowbro
+|-damage|p2a: Slowbro|39/100
+|move|p2a: Slowbro|Scald|p1a: Arceus
+|-damage|p1a: Arceus|357/444
+|
+|upkeep
+|turn|55
+|
+|move|p1a: Arceus|Judgment|p2a: Slowbro
+|-damage|p2a: Slowbro|0 fnt
+|faint|p2a: Slowbro
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Heat|54/100
+|turn|56
+|
+|move|p2a: Rotom|Overheat|p1a: Arceus
+|-damage|p1a: Arceus|213/444
+|-unboost|p2a: Rotom|spa|2
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|30/100
+|
+|upkeep
+|turn|57
+|
+|move|p2a: Rotom|Overheat|p1a: Arceus
+|-damage|p1a: Arceus|144/444
+|-unboost|p2a: Rotom|spa|2
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|366/444
+|
+|upkeep
+|turn|58
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|339/444
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-crit|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

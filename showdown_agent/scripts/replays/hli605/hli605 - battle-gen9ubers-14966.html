@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-14966</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-14966<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-uber</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-14966|init|battle
+|title|hli605 vs. random-uber
+|j|☆hli605
+|j|☆random-uber
+|gametype|singles
+|player|p1|hli605|169|
+|player|p2|random-uber|266|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Kyogre|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Great Tusk|
+|poke|p1|Kingambit, F|
+|poke|p2|Deoxys-Speed|
+|poke|p2|Kingambit, F|
+|poke|p2|Zacian-*|
+|poke|p2|Arceus-Fairy|
+|poke|p2|Eternatus|
+|poke|p2|Koraidon|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Kingambit|Kingambit, F|341/341
+|switch|p2a: Koraidon|Koraidon|100/100
+|-weather|SunnyDay|[from] ability: Orichalcum Pulse|[of] p2a: Koraidon
+|-activate|p2a: Koraidon|Orichalcum Pulse|[source]
+|turn|1
+|
+|-end|p1a: Kingambit|fallenundefined|[silent]
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|move|p2a: Koraidon|Swords Dance|p2a: Koraidon
+|-boost|p2a: Koraidon|atk|2
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|2
+|
+|-terastallize|p2a: Koraidon|Fire
+|move|p2a: Koraidon|Close Combat|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|206/444
+|-unboost|p2a: Koraidon|def|1
+|-unboost|p2a: Koraidon|spd|1
+|-damage|p2a: Koraidon|91/100|[from] item: Life Orb
+|move|p1a: Arceus|Judgment|p2a: Koraidon
+|-resisted|p2a: Koraidon
+|-damage|p2a: Koraidon|52/100
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|3
+|
+|move|p2a: Koraidon|Scale Shot|p1a: Arceus
+|-immune|p1a: Arceus
+|move|p1a: Arceus|Judgment|p2a: Koraidon
+|-resisted|p2a: Koraidon
+|-damage|p2a: Koraidon|15/100
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|turn|4
+|
+|move|p2a: Koraidon|Swords Dance|p2a: Koraidon
+|-boost|p2a: Koraidon|atk|2
+|move|p1a: Arceus|Judgment|p2a: Koraidon
+|-resisted|p2a: Koraidon
+|-crit|p2a: Koraidon
+|-damage|p2a: Koraidon|0 fnt
+|faint|p2a: Koraidon
+|
+|-weather|SunnyDay|[upkeep]
+|upkeep
+|
+|switch|p2a: Zacian|Zacian-Crowned|100/100
+|-ability|p2a: Zacian|Intrepid Sword|boost
+|-boost|p2a: Zacian|atk|1
+|turn|5
+|
+|switch|p2a: Kingambit|Kingambit, F|100/100
+|-activate|p2a: Kingambit|ability: Supreme Overlord
+|-start|p2a: Kingambit|fallen1|[silent]
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|
+|-weather|none
+|upkeep
+|turn|6
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|-end|p2a: Kingambit|fallen1|[silent]
+|switch|p2a: Zacian|Zacian-Crowned|100/100
+|
+|upkeep
+|turn|7
+|
+|switch|p2a: Eternatus|Eternatus|100/100
+|-ability|p2a: Eternatus|Pressure
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|
+|upkeep
+|turn|8
+|
+|switch|p2a: Zacian|Zacian-Crowned|100/100
+|move|p1a: Necrozma|Stealth Rock|p2a: Zacian
+|-sidestart|p2: random-uber|move: Stealth Rock
+|
+|upkeep
+|turn|9
+|
+|move|p2a: Zacian|Wild Charge|p1a: Necrozma
+|-damage|p1a: Necrozma|322/398
+|-damage|p2a: Zacian|95/100|[from] Recoil
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|346/398|[from] item: Leftovers
+|upkeep
+|turn|10
+|
+|move|p2a: Zacian|Swords Dance|p2a: Zacian
+|-boost|p2a: Zacian|atk|2
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|370/398|[from] item: Leftovers
+|upkeep
+|turn|11
+|
+|switch|p2a: Arceus|Arceus-Fairy|100/100
+|-damage|p2a: Arceus|88/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|394/398|[from] item: Leftovers
+|upkeep
+|turn|12
+|
+|move|p2a: Arceus|Judgment|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|311/398
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|335/398|[from] item: Leftovers
+|upkeep
+|turn|13
+|
+|switch|p2a: Zacian|Zacian-Crowned|95/100
+|-damage|p2a: Zacian|88/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|359/398|[from] item: Leftovers
+|upkeep
+|turn|14
+|
+|switch|p2a: Kingambit|Kingambit, F|100/100
+|-damage|p2a: Kingambit|94/100|[from] Stealth Rock
+|-activate|p2a: Kingambit|ability: Supreme Overlord
+|-start|p2a: Kingambit|fallen1|[silent]
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|383/398|[from] item: Leftovers
+|upkeep
+|turn|15
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|-end|p2a: Kingambit|fallen1|[silent]
+|switch|p2a: Zacian|Zacian-Crowned|88/100
+|-damage|p2a: Zacian|82/100|[from] Stealth Rock
+|
+|upkeep
+|turn|16
+|
+|switch|p2a: Deoxys|Deoxys-Speed|100/100
+|-damage|p2a: Deoxys|88/100|[from] Stealth Rock
+|-ability|p2a: Deoxys|Pressure
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|383/398
+|
+|-heal|p1a: Necrozma|398/398|[from] item: Leftovers
+|upkeep
+|turn|17
+|
+|move|p2a: Deoxys|Psycho Boost|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|362/398
+|-unboost|p2a: Deoxys|spa|2
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|386/398|[from] item: Leftovers
+|upkeep
+|turn|18
+|
+|switch|p2a: Zacian|Zacian-Crowned|82/100
+|-damage|p2a: Zacian|76/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|398/398|[from] item: Leftovers
+|upkeep
+|turn|19
+|
+|switch|p2a: Kingambit|Kingambit, F|94/100
+|-damage|p2a: Kingambit|88/100|[from] Stealth Rock
+|-activate|p2a: Kingambit|ability: Supreme Overlord
+|-start|p2a: Kingambit|fallen1|[silent]
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|upkeep
+|turn|20
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|-end|p2a: Kingambit|fallen1|[silent]
+|switch|p2a: Zacian|Zacian-Crowned|76/100
+|-damage|p2a: Zacian|70/100|[from] Stealth Rock
+|
+|upkeep
+|turn|21
+|
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|move|p2a: Zacian|Close Combat|p1a: Necrozma
+|-damage|p1a: Necrozma|304/398
+|-unboost|p2a: Zacian|def|1
+|-unboost|p2a: Zacian|spd|1
+|
+|-heal|p1a: Necrozma|328/398|[from] item: Leftovers
+|upkeep
+|turn|22
+|
+|switch|p2a: Eternatus|Eternatus|100/100
+|-damage|p2a: Eternatus|88/100|[from] Stealth Rock
+|-ability|p2a: Eternatus|Pressure
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|352/398|[from] item: Leftovers
+|upkeep
+|turn|23
+|
+|switch|p2a: Zacian|Zacian-Crowned|70/100
+|-damage|p2a: Zacian|64/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|376/398|[from] item: Leftovers
+|upkeep
+|turn|24
+|
+|move|p2a: Zacian|Wild Charge|p1a: Necrozma
+|-damage|p1a: Necrozma|304/398
+|-damage|p2a: Zacian|58/100|[from] Recoil
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|328/398|[from] item: Leftovers
+|upkeep
+|turn|25
+|
+|move|p2a: Zacian|Wild Charge|p1a: Necrozma
+|-damage|p1a: Necrozma|255/398
+|-damage|p2a: Zacian|53/100|[from] Recoil
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|279/398|[from] item: Leftovers
+|upkeep
+|turn|26
+|
+|switch|p2a: Arceus|Arceus-Fairy|88/100
+|-damage|p2a: Arceus|76/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|303/398|[from] item: Leftovers
+|upkeep
+|turn|27
+|
+|switch|p2a: Kingambit|Kingambit, F|88/100
+|-damage|p2a: Kingambit|82/100|[from] Stealth Rock
+|-activate|p2a: Kingambit|ability: Supreme Overlord
+|-start|p2a: Kingambit|fallen1|[silent]
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|327/398|[from] item: Leftovers
+|upkeep
+|turn|28
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|move|p2a: Kingambit|Kowtow Cleave|p1a: Great Tusk
+|-resisted|p1a: Great Tusk
+|-damage|p1a: Great Tusk|363/434
+|
+|-heal|p1a: Great Tusk|390/434|[from] item: Leftovers
+|upkeep
+|turn|29
+|
+|move|p1a: Great Tusk|Body Press|p2a: Kingambit
+|-supereffective|p2a: Kingambit
+|-damage|p2a: Kingambit|0 fnt
+|faint|p2a: Kingambit
+|-end|p2a: Kingambit|fallen1|[silent]
+|
+|-heal|p1a: Great Tusk|417/434|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Eternatus|Eternatus|88/100
+|-damage|p2a: Eternatus|76/100|[from] Stealth Rock
+|-ability|p2a: Eternatus|Pressure
+|turn|30
+|
+|move|p2a: Eternatus|Dynamax Cannon|p1a: Great Tusk
+|-damage|p1a: Great Tusk|41/434
+|move|p1a: Great Tusk|Headlong Rush|p2a: Eternatus
+|-supereffective|p2a: Eternatus
+|-damage|p2a: Eternatus|0 fnt
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|faint|p2a: Eternatus
+|
+|-heal|p1a: Great Tusk|68/434|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Zacian|Zacian-Crowned|53/100
+|-damage|p2a: Zacian|47/100|[from] Stealth Rock
+|turn|31
+|
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|327/398
+|move|p2a: Zacian|Behemoth Blade|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|265/398
+|
+|-heal|p1a: Necrozma|289/398|[from] item: Leftovers
+|upkeep
+|turn|32
+|
+|move|p2a: Zacian|Close Combat|p1a: Necrozma
+|-damage|p1a: Necrozma|184/398
+|-unboost|p2a: Zacian|def|1
+|-unboost|p2a: Zacian|spd|1
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|208/398|[from] item: Leftovers
+|upkeep
+|turn|33
+|
+|switch|p2a: Deoxys|Deoxys-Speed|88/100
+|-damage|p2a: Deoxys|76/100|[from] Stealth Rock
+|-ability|p2a: Deoxys|Pressure
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|232/398|[from] item: Leftovers
+|upkeep
+|turn|34
+|
+|switch|p2a: Arceus|Arceus-Fairy|76/100
+|-damage|p2a: Arceus|63/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|256/398|[from] item: Leftovers
+|upkeep
+|turn|35
+|
+|switch|p2a: Deoxys|Deoxys-Speed|76/100
+|-damage|p2a: Deoxys|64/100|[from] Stealth Rock
+|-ability|p2a: Deoxys|Pressure
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|280/398|[from] item: Leftovers
+|upkeep
+|turn|36
+|
+|switch|p2a: Zacian|Zacian-Crowned|47/100
+|-damage|p2a: Zacian|40/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|304/398|[from] item: Leftovers
+|upkeep
+|turn|37
+|
+|move|p2a: Zacian|Wild Charge|p1a: Necrozma
+|-damage|p1a: Necrozma|234/398
+|-damage|p2a: Zacian|35/100|[from] Recoil
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|258/398|[from] item: Leftovers
+|upkeep
+|turn|38
+|
+|switch|p2a: Arceus|Arceus-Fairy|63/100
+|-damage|p2a: Arceus|51/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|282/398|[from] item: Leftovers
+|upkeep
+|turn|39
+|
+|switch|p2a: Deoxys|Deoxys-Speed|64/100
+|-damage|p2a: Deoxys|52/100|[from] Stealth Rock
+|-ability|p2a: Deoxys|Pressure
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|306/398|[from] item: Leftovers
+|upkeep
+|turn|40
+|
+|move|p2a: Deoxys|Taunt|p1a: Necrozma
+|-start|p1a: Necrozma|move: Taunt
+|cant|p1a: Necrozma|move: Taunt|Stealth Rock
+|
+|-heal|p1a: Necrozma|330/398|[from] item: Leftovers
+|upkeep
+|turn|41
+|
+|move|p2a: Deoxys|Thunder Wave|p1a: Necrozma
+|-status|p1a: Necrozma|par
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Deoxys
+|-damage|p2a: Deoxys|0 fnt
+|faint|p2a: Deoxys
+|
+|-heal|p1a: Necrozma|354/398 par|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Arceus|Arceus-Fairy|51/100
+|-damage|p2a: Arceus|38/100|[from] Stealth Rock
+|turn|42
+|
+|move|p2a: Arceus|Judgment|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|277/398 par
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Arceus
+|-supereffective|p2a: Arceus
+|-damage|p2a: Arceus|0 fnt
+|faint|p2a: Arceus
+|
+|-heal|p1a: Necrozma|301/398 par|[from] item: Leftovers
+|-end|p1a: Necrozma|move: Taunt
+|upkeep
+|
+|switch|p2a: Zacian|Zacian-Crowned|35/100
+|-damage|p2a: Zacian|29/100|[from] Stealth Rock
+|turn|43
+|
+|move|p2a: Zacian|Behemoth Blade|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|244/398 par
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|268/398 par|[from] item: Leftovers
+|upkeep
+|turn|44
+|
+|move|p2a: Zacian|Close Combat|p1a: Necrozma
+|-damage|p1a: Necrozma|166/398 par
+|-unboost|p2a: Zacian|def|1
+|-unboost|p2a: Zacian|spd|1
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|190/398 par|[from] item: Leftovers
+|upkeep
+|turn|45
+|
+|move|p2a: Zacian|Close Combat|p1a: Necrozma
+|-damage|p1a: Necrozma|99/398 par
+|-unboost|p2a: Zacian|def|1
+|-unboost|p2a: Zacian|spd|1
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|123/398 par|[from] item: Leftovers
+|upkeep
+|turn|46
+|
+|move|p2a: Zacian|Wild Charge|p1a: Necrozma
+|-damage|p1a: Necrozma|48/398 par
+|-damage|p2a: Zacian|23/100|[from] Recoil
+|move|p1a: Necrozma|Earthquake|p2a: Zacian
+|-supereffective|p2a: Zacian
+|-damage|p2a: Zacian|0 fnt
+|faint|p2a: Zacian
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

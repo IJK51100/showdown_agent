@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-13534</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-13534<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-uu</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-13534|init|battle
+|title|hli605 vs. random-uu
+|j|☆hli605
+|j|☆random-uu
+|gametype|singles
+|player|p1|hli605|169|
+|player|p2|random-uu|1|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Kyogre|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Great Tusk|
+|poke|p1|Kingambit, F|
+|poke|p2|Tornadus-Therian, M|
+|poke|p2|Clodsire, F|
+|poke|p2|Metagross|
+|poke|p2|Rotom-Wash|
+|poke|p2|Cobalion|
+|poke|p2|Zarude-Dada|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Eternatus|Eternatus|484/484
+|switch|p2a: Zarude|Zarude-Dada|100/100
+|-ability|p1a: Eternatus|Pressure
+|turn|1
+|
+|switch|p2a: Rotom|Rotom-Wash|100/100
+|move|p1a: Eternatus|Flamethrower|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|87/100
+|
+|-heal|p2a: Rotom|93/100|[from] item: Leftovers
+|upkeep
+|turn|2
+|
+|switch|p2a: Clodsire|Clodsire, F|100/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Clodsire
+|-damage|p2a: Clodsire|73/100
+|
+|upkeep
+|turn|3
+|
+|switch|p1a: Kyogre|Kyogre|341/341
+|-weather|RainDance|[from] ability: Drizzle|[of] p1a: Kyogre
+|switch|p2a: Cobalion|Cobalion|100/100
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|4
+|
+|move|p1a: Kyogre|Water Spout|p2a: Cobalion
+|-damage|p2a: Cobalion|0 fnt
+|faint|p2a: Cobalion
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|
+|switch|p2a: Clodsire|Clodsire, F|73/100
+|turn|5
+|
+|switch|p2a: Metagross|Metagross|100/100
+|move|p1a: Kyogre|Water Spout|p2a: Metagross
+|-damage|p2a: Metagross|0 fnt
+|faint|p2a: Metagross
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Wash|93/100
+|turn|6
+|
+|switch|p1a: Eternatus|Eternatus|484/484
+|-ability|p1a: Eternatus|Pressure
+|switch|p2a: Clodsire|Clodsire, F|73/100
+|
+|-weather|RainDance|[upkeep]
+|upkeep
+|turn|7
+|
+|switch|p1a: Kyogre|Kyogre|341/341
+|move|p2a: Clodsire|Poison Jab|p1a: Kyogre
+|-damage|p1a: Kyogre|256/341
+|-status|p1a: Kyogre|psn
+|
+|-weather|none
+|-damage|p1a: Kyogre|214/341 psn|[from] psn
+|upkeep
+|turn|8
+|
+|move|p1a: Kyogre|Water Spout|p2a: Clodsire
+|-heal|p2a: Clodsire|97/100|[from] ability: Water Absorb|[of] p1a: Kyogre
+|move|p2a: Clodsire|Recover|p2a: Clodsire
+|-heal|p2a: Clodsire|100/100
+|
+|-damage|p1a: Kyogre|172/341 psn|[from] psn
+|upkeep
+|turn|9
+|
+|-terastallize|p2a: Clodsire|Fairy
+|move|p1a: Kyogre|Water Spout|p2a: Clodsire
+|-immune|p2a: Clodsire|[from] ability: Water Absorb
+|move|p2a: Clodsire|Recover||[still]
+|-fail|p2a: Clodsire|heal
+|
+|-damage|p1a: Kyogre|130/341 psn|[from] psn
+|upkeep
+|turn|10
+|
+|move|p1a: Kyogre|Water Spout|p2a: Clodsire
+|-immune|p2a: Clodsire|[from] ability: Water Absorb
+|move|p2a: Clodsire|Poison Jab|p1a: Kyogre
+|-damage|p1a: Kyogre|52/341 psn
+|
+|-damage|p1a: Kyogre|10/341 psn|[from] psn
+|upkeep
+|turn|11
+|
+|switch|p2a: Rotom|Rotom-Wash|93/100
+|move|p1a: Kyogre|Water Spout|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|92/100
+|
+|-heal|p2a: Rotom|98/100|[from] item: Leftovers
+|-damage|p1a: Kyogre|0 fnt|[from] psn
+|faint|p1a: Kyogre
+|upkeep
+|
+|switch|p1a: Eternatus|Eternatus|484/484
+|-ability|p1a: Eternatus|Pressure
+|turn|12
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|100/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Clodsire
+|-immune|p2a: Clodsire
+|
+|upkeep
+|turn|13
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Clodsire
+|-damage|p2a: Clodsire|84/100
+|move|p2a: Clodsire|Spikes|p1a: Eternatus
+|-sidestart|p1: hli605|Spikes
+|
+|upkeep
+|turn|14
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|move|p1a: Eternatus|Flamethrower|p2a: Tornadus
+|-crit|p2a: Tornadus
+|-damage|p2a: Tornadus|54/100
+|
+|upkeep
+|turn|15
+|
+|move|p2a: Tornadus|U-turn|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-crit|p1a: Eternatus
+|-damage|p1a: Eternatus|448/484
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|84/100|[from] U-turn
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Clodsire
+|-immune|p2a: Clodsire
+|
+|-heal|p1a: Eternatus|478/484|[from] item: Black Sludge
+|upkeep
+|turn|16
+|
+|switch|p2a: Zarude|Zarude-Dada|100/100
+|move|p1a: Eternatus|Flamethrower|p2a: Zarude
+|-supereffective|p2a: Zarude
+|-damage|p2a: Zarude|41/100
+|
+|-heal|p1a: Eternatus|484/484|[from] item: Black Sludge
+|upkeep
+|turn|17
+|
+|move|p2a: Zarude|Jungle Healing|p2a: Zarude
+|-heal|p2a: Zarude|66/100
+|move|p1a: Eternatus|Flamethrower|p2a: Zarude
+|-supereffective|p2a: Zarude
+|-damage|p2a: Zarude|9/100
+|
+|upkeep
+|turn|18
+|
+|move|p2a: Zarude|Swords Dance|p2a: Zarude
+|-boost|p2a: Zarude|atk|2
+|move|p1a: Eternatus|Flamethrower|p2a: Zarude
+|-supereffective|p2a: Zarude
+|-damage|p2a: Zarude|0 fnt
+|faint|p2a: Zarude
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Wash|98/100
+|turn|19
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|88/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Tornadus
+|-damage|p2a: Tornadus|40/100
+|
+|upkeep
+|turn|20
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|84/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Clodsire
+|-immune|p2a: Clodsire
+|
+|upkeep
+|turn|21
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Clodsire
+|-damage|p2a: Clodsire|69/100
+|move|p2a: Clodsire|Earthquake|p1a: Eternatus
+|-supereffective|p1a: Eternatus
+|-damage|p1a: Eternatus|278/484
+|
+|-heal|p1a: Eternatus|308/484|[from] item: Black Sludge
+|upkeep
+|turn|22
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Clodsire
+|-damage|p2a: Clodsire|52/100
+|move|p2a: Clodsire|Poison Jab|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|271/484
+|
+|-heal|p1a: Eternatus|301/484|[from] item: Black Sludge
+|upkeep
+|turn|23
+|
+|move|p1a: Eternatus|Flamethrower|p2a: Clodsire
+|-damage|p2a: Clodsire|35/100
+|move|p2a: Clodsire|Poison Jab|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|259/484
+|
+|-heal|p1a: Eternatus|289/484|[from] item: Black Sludge
+|upkeep
+|turn|24
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|74/100
+|move|p1a: Eternatus|Flamethrower|p2a: Tornadus
+|-damage|p2a: Tornadus|45/100
+|
+|-heal|p1a: Eternatus|319/484|[from] item: Black Sludge
+|upkeep
+|turn|25
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|35/100
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Clodsire
+|-immune|p2a: Clodsire
+|
+|-heal|p1a: Eternatus|349/484|[from] item: Black Sludge
+|upkeep
+|turn|26
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|78/100
+|move|p1a: Eternatus|Flamethrower|p2a: Tornadus
+|-damage|p2a: Tornadus|49/100
+|
+|-heal|p1a: Eternatus|379/484|[from] item: Black Sludge
+|upkeep
+|turn|27
+|
+|move|p2a: Tornadus|Hurricane|p1a: Eternatus
+|-damage|p1a: Eternatus|259/484
+|-start|p1a: Eternatus|confusion
+|-activate|p1a: Eternatus|confusion
+|-damage|p1a: Eternatus|236/484|[from] confusion
+|
+|-heal|p1a: Eternatus|266/484|[from] item: Black Sludge
+|upkeep
+|turn|28
+|
+|move|p2a: Tornadus|Hurricane|p1a: Eternatus
+|-damage|p1a: Eternatus|149/484
+|-activate|p1a: Eternatus|confusion
+|-damage|p1a: Eternatus|128/484|[from] confusion
+|
+|-heal|p1a: Eternatus|158/484|[from] item: Black Sludge
+|upkeep
+|turn|29
+|
+|move|p2a: Tornadus|Hurricane|p1a: Eternatus
+|-damage|p1a: Eternatus|38/484
+|-end|p1a: Eternatus|confusion
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Tornadus
+|-damage|p2a: Tornadus|0 fnt
+|faint|p2a: Tornadus
+|
+|-heal|p1a: Eternatus|68/484|[from] item: Black Sludge
+|upkeep
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|35/100
+|turn|30
+|
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|-damage|p1a: Necrozma|349/398|[from] Spikes
+|move|p2a: Clodsire|Spikes|p1a: Necrozma
+|-sidestart|p1: hli605|Spikes
+|
+|-heal|p1a: Necrozma|373/398|[from] item: Leftovers
+|upkeep
+|turn|31
+|
+|move|p1a: Necrozma|Stealth Rock|p2a: Clodsire
+|-sidestart|p2: random-uu|move: Stealth Rock
+|move|p2a: Clodsire|Poison Jab|p1a: Necrozma
+|-immune|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|397/398|[from] item: Leftovers
+|upkeep
+|turn|32
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Spikes|p1a: Necrozma
+|-sidestart|p1: hli605|Spikes
+|
+|-heal|p1a: Necrozma|398/398|[from] item: Leftovers
+|upkeep
+|turn|33
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Spikes||[still]
+|-fail|p2a: Clodsire
+|
+|upkeep
+|turn|34
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Spikes||[still]
+|-fail|p2a: Clodsire
+|
+|upkeep
+|turn|35
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Recover|p2a: Clodsire
+|-heal|p2a: Clodsire|85/100
+|
+|upkeep
+|turn|36
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Poison Jab|p1a: Necrozma
+|-immune|p1a: Necrozma
+|
+|upkeep
+|turn|37
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Earthquake|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|307/398
+|
+|-heal|p1a: Necrozma|331/398|[from] item: Leftovers
+|upkeep
+|turn|38
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Poison Jab|p1a: Necrozma
+|-immune|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|355/398|[from] item: Leftovers
+|upkeep
+|turn|39
+|
+|switch|p2a: Rotom|Rotom-Wash|98/100
+|-damage|p2a: Rotom|86/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|92/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|379/398|[from] item: Leftovers
+|upkeep
+|turn|40
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|328/398|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|352/398|[from] item: Leftovers
+|upkeep
+|turn|41
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|268/398
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|85/100|[from] Volt Switch
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|292/398|[from] item: Leftovers
+|upkeep
+|turn|42
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Earthquake|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|202/398
+|
+|-heal|p1a: Necrozma|226/398|[from] item: Leftovers
+|upkeep
+|turn|43
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Recover|p2a: Clodsire
+|-heal|p2a: Clodsire|100/100
+|
+|-heal|p1a: Necrozma|250/398|[from] item: Leftovers
+|upkeep
+|turn|44
+|
+|switch|p2a: Rotom|Rotom-Wash|100/100
+|-damage|p2a: Rotom|88/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|94/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|274/398|[from] item: Leftovers
+|upkeep
+|turn|45
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|279/398|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|93/100|[from] move: Pain Split
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|99/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|303/398|[from] item: Leftovers
+|upkeep
+|turn|46
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Necrozma
+|-damage|p1a: Necrozma|186/398
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|100/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|210/398|[from] item: Leftovers
+|upkeep
+|turn|47
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-status|p1a: Necrozma|par
+|cant|p1a: Necrozma|par
+|
+|-heal|p1a: Necrozma|234/398 par|[from] item: Leftovers
+|upkeep
+|turn|48
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|100/100
+|cant|p1a: Necrozma|par
+|
+|-heal|p1a: Necrozma|258/398 par|[from] item: Leftovers
+|upkeep
+|turn|49
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Earthquake|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|167/398 par
+|
+|-heal|p1a: Necrozma|191/398 par|[from] item: Leftovers
+|upkeep
+|turn|50
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Poison Jab|p1a: Necrozma
+|-immune|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|215/398 par|[from] item: Leftovers
+|upkeep
+|turn|51
+|
+|switch|p2a: Rotom|Rotom-Wash|100/100
+|-damage|p2a: Rotom|88/100|[from] Stealth Rock
+|cant|p1a: Necrozma|par
+|
+|-heal|p2a: Rotom|94/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|239/398 par|[from] item: Leftovers
+|upkeep
+|turn|52
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|160/398 par
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|100/100|[from] Volt Switch
+|cant|p1a: Necrozma|par
+|
+|-heal|p1a: Necrozma|184/398 par|[from] item: Leftovers
+|upkeep
+|turn|53
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Recover||[still]
+|-fail|p2a: Clodsire|heal
+|
+|-heal|p1a: Necrozma|208/398 par|[from] item: Leftovers
+|upkeep
+|turn|54
+|
+|cant|p1a: Necrozma|par
+|move|p2a: Clodsire|Spikes||[still]
+|-fail|p2a: Clodsire
+|
+|-heal|p1a: Necrozma|232/398 par|[from] item: Leftovers
+|upkeep
+|turn|55
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Earthquake|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|145/398 par
+|
+|-heal|p1a: Necrozma|169/398 par|[from] item: Leftovers
+|upkeep
+|turn|56
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Recover||[still]
+|-fail|p2a: Clodsire|heal
+|
+|-heal|p1a: Necrozma|193/398 par|[from] item: Leftovers
+|upkeep
+|turn|57
+|
+|switch|p2a: Rotom|Rotom-Wash|94/100
+|-damage|p2a: Rotom|82/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|88/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|217/398 par|[from] item: Leftovers
+|upkeep
+|turn|58
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|241/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|80/100|[from] move: Pain Split
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|86/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|265/398 par|[from] item: Leftovers
+|upkeep
+|turn|59
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|186/398 par
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|100/100|[from] Volt Switch
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|210/398 par|[from] item: Leftovers
+|upkeep
+|turn|60
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Recover||[still]
+|-fail|p2a: Clodsire|heal
+|
+|-heal|p1a: Necrozma|234/398 par|[from] item: Leftovers
+|upkeep
+|turn|61
+|
+|switch|p2a: Rotom|Rotom-Wash|86/100
+|-damage|p2a: Rotom|74/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|80/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|258/398 par|[from] item: Leftovers
+|upkeep
+|turn|62
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|249/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|83/100|[from] move: Pain Split
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|89/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|273/398 par|[from] item: Leftovers
+|upkeep
+|turn|63
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|194/398 par
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|100/100|[from] Volt Switch
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|218/398 par|[from] item: Leftovers
+|upkeep
+|turn|64
+|
+|switch|p2a: Rotom|Rotom-Wash|89/100
+|-damage|p2a: Rotom|76/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|82/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|242/398 par|[from] item: Leftovers
+|upkeep
+|turn|65
+|
+|switch|p2a: Clodsire|Clodsire, F, tera:Fairy|100/100
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p1a: Necrozma|266/398 par|[from] item: Leftovers
+|upkeep
+|turn|66
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Earthquake|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|185/398 par
+|
+|-heal|p1a: Necrozma|209/398 par|[from] item: Leftovers
+|upkeep
+|turn|67
+|
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|move|p2a: Clodsire|Spikes||[still]
+|-fail|p2a: Clodsire
+|
+|-heal|p1a: Necrozma|233/398 par|[from] item: Leftovers
+|upkeep
+|turn|68
+|
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Clodsire
+|-supereffective|p2a: Clodsire
+|-damage|p2a: Clodsire|0 fnt
+|faint|p2a: Clodsire
+|
+|-heal|p1a: Necrozma|257/398 par|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Wash|82/100
+|-damage|p2a: Rotom|70/100|[from] Stealth Rock
+|turn|69
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|234/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|78/100|[from] move: Pain Split
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p2a: Rotom|84/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|258/398 par|[from] item: Leftovers
+|upkeep
+|turn|70
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Necrozma
+|-damage|p1a: Necrozma|137/398 par
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p2a: Rotom|90/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|161/398 par|[from] item: Leftovers
+|upkeep
+|turn|71
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-fail|p1a: Necrozma|par
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p2a: Rotom|96/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|185/398 par|[from] item: Leftovers
+|upkeep
+|turn|72
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-fail|p1a: Necrozma|par
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p2a: Rotom|100/100|[from] item: Leftovers
+|-heal|p1a: Necrozma|209/398 par|[from] item: Leftovers
+|upkeep
+|turn|73
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Necrozma
+|-damage|p1a: Necrozma|89/398 par
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p1a: Necrozma|113/398 par|[from] item: Leftovers
+|upkeep
+|turn|74
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Necrozma
+|-damage|p1a: Necrozma|0 fnt
+|faint|p1a: Necrozma
+|
+|upkeep
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|-damage|p1a: Great Tusk|326/434|[from] Spikes
+|turn|75
+|
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|switch|p1a: Kingambit|Kingambit, F|341/341
+|-damage|p1a: Kingambit|256/341|[from] Spikes
+|-activate|p1a: Kingambit|ability: Supreme Overlord
+|-start|p1a: Kingambit|fallen2|[silent]
+|move|p2a: Rotom|Hydro Pump|p1a: Kingambit
+|-damage|p1a: Kingambit|105/341
+|
+|upkeep
+|turn|76
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Kingambit|[miss]
+|-miss|p2a: Rotom|p1a: Kingambit
+|move|p1a: Kingambit|Kowtow Cleave|p2a: Rotom
+|-damage|p2a: Rotom|21/100
+|
+|-heal|p2a: Rotom|27/100|[from] item: Leftovers
+|upkeep
+|turn|77
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Kingambit
+|-status|p1a: Kingambit|par
+|cant|p1a: Kingambit|par
+|
+|-heal|p2a: Rotom|33/100|[from] item: Leftovers
+|upkeep
+|turn|78
+|
+|move|p2a: Rotom|Pain Split|p1a: Kingambit
+|-sethp|p1a: Kingambit|101/341 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|34/100|[from] move: Pain Split
+|move|p1a: Kingambit|Kowtow Cleave|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

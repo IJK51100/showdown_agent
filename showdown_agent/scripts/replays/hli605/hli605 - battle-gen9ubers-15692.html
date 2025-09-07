@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-15692</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-15692<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-uu</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-15692|init|battle
+|title|hli605 vs. random-uu
+|j|☆hli605
+|j|☆random-uu
+|gametype|singles
+|player|p1|hli605|169|
+|player|p2|random-uu|1|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Kyogre|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Great Tusk|
+|poke|p1|Kingambit, F|
+|poke|p2|Tornadus-Therian, M|
+|poke|p2|Clodsire, F|
+|poke|p2|Metagross|
+|poke|p2|Rotom-Wash|
+|poke|p2|Cobalion|
+|poke|p2|Zarude-Dada|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|switch|p2a: Cobalion|Cobalion|100/100
+|turn|1
+|
+|-terastallize|p2a: Cobalion|Water
+|move|p2a: Cobalion|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|398/444
+|
+|switch|p2a: Rotom|Rotom-Wash|100/100|[from] Volt Switch
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444
+|
+|upkeep
+|turn|2
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|move|p1a: Arceus|Judgment|p2a: Tornadus
+|-damage|p2a: Tornadus|52/100
+|
+|upkeep
+|turn|3
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|395/444
+|move|p1a: Arceus|Judgment|p2a: Tornadus
+|-damage|p2a: Tornadus|3/100
+|
+|upkeep
+|turn|4
+|
+|switch|p2a: Clodsire|Clodsire, F|100/100
+|move|p1a: Arceus|Judgment|p2a: Clodsire
+|-resisted|p2a: Clodsire
+|-damage|p2a: Clodsire|88/100
+|
+|upkeep
+|turn|5
+|
+|switch|p2a: Metagross|Metagross|100/100
+|move|p1a: Arceus|Judgment|p2a: Metagross
+|-resisted|p2a: Metagross
+|-damage|p2a: Metagross|71/100
+|
+|upkeep
+|turn|6
+|
+|switch|p2a: Cobalion|Cobalion, tera:Water|100/100
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444
+|
+|upkeep
+|turn|7
+|
+|switch|p2a: Clodsire|Clodsire, F|88/100
+|move|p1a: Arceus|Judgment|p2a: Clodsire
+|-resisted|p2a: Clodsire
+|-damage|p2a: Clodsire|75/100
+|
+|upkeep
+|turn|8
+|
+|move|p1a: Arceus|Judgment|p2a: Clodsire
+|-resisted|p2a: Clodsire
+|-damage|p2a: Clodsire|60/100
+|move|p2a: Clodsire|Recover|p2a: Clodsire
+|-heal|p2a: Clodsire|100/100
+|
+|upkeep
+|turn|9
+|
+|switch|p2a: Metagross|Metagross|71/100
+|move|p1a: Arceus|Judgment|p2a: Metagross
+|-resisted|p2a: Metagross
+|-damage|p2a: Metagross|41/100
+|
+|upkeep
+|turn|10
+|
+|switch|p2a: Cobalion|Cobalion, tera:Water|100/100
+|move|p1a: Arceus|Recover||[still]
+|-fail|p1a: Arceus|heal
+|
+|upkeep
+|turn|11
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|36/100
+|move|p1a: Arceus|Judgment|p2a: Tornadus
+|-damage|p2a: Tornadus|0 fnt
+|faint|p2a: Tornadus
+|
+|upkeep
+|
+|switch|p2a: Zarude|Zarude-Dada|100/100
+|turn|12
+|
+|switch|p2a: Clodsire|Clodsire, F|100/100
+|move|p1a: Arceus|Judgment|p2a: Clodsire
+|-resisted|p2a: Clodsire
+|-damage|p2a: Clodsire|86/100
+|
+|upkeep
+|turn|13
+|
+|switch|p2a: Cobalion|Cobalion, tera:Water|100/100
+|move|p1a: Arceus|Judgment|p2a: Cobalion
+|-damage|p2a: Cobalion|42/100
+|
+|upkeep
+|turn|14
+|
+|switch|p2a: Clodsire|Clodsire, F|86/100
+|move|p1a: Arceus|Judgment|p2a: Clodsire
+|-resisted|p2a: Clodsire
+|-damage|p2a: Clodsire|72/100
+|
+|upkeep
+|turn|15
+|
+|switch|p2a: Metagross|Metagross|41/100
+|move|p1a: Arceus|Judgment|p2a: Metagross
+|-resisted|p2a: Metagross
+|-damage|p2a: Metagross|12/100
+|
+|upkeep
+|turn|16
+|
+|switch|p2a: Clodsire|Clodsire, F|72/100
+|move|p1a: Arceus|Recover||[still]
+|-fail|p1a: Arceus|heal
+|
+|upkeep
+|turn|17
+|
+|switch|p2a: Metagross|Metagross|12/100
+|move|p1a: Arceus|Judgment|p2a: Metagross
+|-resisted|p2a: Metagross
+|-damage|p2a: Metagross|0 fnt
+|faint|p2a: Metagross
+|
+|upkeep
+|
+|switch|p2a: Zarude|Zarude-Dada|100/100
+|turn|18
+|
+|move|p2a: Zarude|Power Whip|p1a: Arceus
+|-damage|p1a: Arceus|309/444
+|move|p1a: Arceus|Judgment|p2a: Zarude
+|-supereffective|p2a: Zarude
+|-damage|p2a: Zarude|0 fnt
+|faint|p2a: Zarude
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Wash|100/100
+|turn|19
+|
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-damage|p2a: Rotom|55/100
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-status|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|61/100|[from] item: Leftovers
+|upkeep
+|turn|20
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-damage|p2a: Rotom|20/100
+|
+|-heal|p2a: Rotom|26/100|[from] item: Leftovers
+|upkeep
+|turn|21
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus
+|-damage|p1a: Arceus|195/444 par
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|417/444 par
+|
+|-heal|p2a: Rotom|32/100|[from] item: Leftovers
+|upkeep
+|turn|22
+|
+|switch|p2a: Clodsire|Clodsire, F|72/100
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444 par
+|
+|upkeep
+|turn|23
+|
+|switch|p2a: Cobalion|Cobalion, tera:Water|42/100
+|move|p1a: Arceus|Recover||[still]
+|-fail|p1a: Arceus|heal
+|
+|upkeep
+|turn|24
+|
+|switch|p2a: Clodsire|Clodsire, F|72/100
+|move|p1a: Arceus|Recover||[still]
+|-fail|p1a: Arceus|heal
+|
+|upkeep
+|turn|25
+|
+|move|p1a: Arceus|Will-O-Wisp|p2a: Clodsire
+|-status|p2a: Clodsire|brn
+|move|p2a: Clodsire|Spikes|p1a: Arceus
+|-sidestart|p1: hli605|Spikes
+|
+|-damage|p2a: Clodsire|66/100 brn|[from] brn
+|upkeep
+|turn|26
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Clodsire|Earthquake|p1a: Arceus
+|-damage|p1a: Arceus|414/444 par
+|
+|-damage|p2a: Clodsire|59/100 brn|[from] brn
+|upkeep
+|turn|27
+|
+|switch|p2a: Cobalion|Cobalion, tera:Water|42/100
+|cant|p1a: Arceus|par
+|
+|upkeep
+|turn|28
+|
+|switch|p2a: Rotom|Rotom-Wash|32/100
+|move|p1a: Arceus|Will-O-Wisp|p2a: Rotom
+|-status|p2a: Rotom|brn
+|
+|-heal|p2a: Rotom|38/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|32/100 brn|[from] brn
+|upkeep
+|turn|29
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus
+|-damage|p1a: Arceus|339/444 par
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|38/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|32/100 brn|[from] brn
+|upkeep
+|turn|30
+|
+|switch|p2a: Clodsire|Clodsire, F|59/100 brn
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|
+|-damage|p2a: Clodsire|53/100 brn|[from] brn
+|upkeep
+|turn|31
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Clodsire|Spikes|p1a: Arceus
+|-sidestart|p1: hli605|Spikes
+|
+|-damage|p2a: Clodsire|47/100 brn|[from] brn
+|upkeep
+|turn|32
+|
+|switch|p2a: Cobalion|Cobalion, tera:Water|42/100
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|
+|upkeep
+|turn|33
+|
+|move|p2a: Cobalion|Thunder Wave|p1a: Arceus|[miss]
+|-miss|p2a: Cobalion|p1a: Arceus
+|move|p1a: Arceus|Will-O-Wisp|p2a: Cobalion
+|-status|p2a: Cobalion|brn
+|
+|-damage|p2a: Cobalion|36/100 brn|[from] brn
+|upkeep
+|turn|34
+|
+|switch|p2a: Rotom|Rotom-Wash|32/100 brn
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|
+|-heal|p2a: Rotom|38/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|32/100 brn|[from] brn
+|upkeep
+|turn|35
+|
+|switch|p2a: Clodsire|Clodsire, F|47/100 brn
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|
+|-damage|p2a: Clodsire|41/100 brn|[from] brn
+|upkeep
+|turn|36
+|
+|switch|p2a: Cobalion|Cobalion, tera:Water|36/100 brn
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-damage|p2a: Cobalion|29/100 brn|[from] brn
+|upkeep
+|turn|37
+|
+|move|p2a: Cobalion|Stealth Rock|p1a: Arceus
+|-sidestart|p1: hli605|move: Stealth Rock
+|cant|p1a: Arceus|par
+|
+|-damage|p2a: Cobalion|23/100 brn|[from] brn
+|upkeep
+|turn|38
+|
+|move|p2a: Cobalion|Body Press|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|317/444 par
+|cant|p1a: Arceus|par
+|
+|-damage|p2a: Cobalion|17/100 brn|[from] brn
+|upkeep
+|turn|39
+|
+|move|p2a: Cobalion|Body Press|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|295/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-damage|p2a: Cobalion|11/100 brn|[from] brn
+|upkeep
+|turn|40
+|
+|switch|p2a: Clodsire|Clodsire, F|41/100 brn
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-damage|p2a: Clodsire|35/100 brn|[from] brn
+|upkeep
+|turn|41
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Clodsire|Recover|p2a: Clodsire
+|-heal|p2a: Clodsire|85/100 brn
+|
+|-damage|p2a: Clodsire|79/100 brn|[from] brn
+|upkeep
+|turn|42
+|
+|switch|p2a: Rotom|Rotom-Wash|32/100 brn
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|38/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|32/100 brn|[from] brn
+|upkeep
+|turn|43
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|195/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|65/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|71/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|65/100 brn|[from] brn
+|upkeep
+|turn|44
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus
+|-damage|p1a: Arceus|168/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|71/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|65/100 brn|[from] brn
+|upkeep
+|turn|45
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|71/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|65/100 brn|[from] brn
+|upkeep
+|turn|46
+|
+|switch|p2a: Clodsire|Clodsire, F|79/100 brn
+|cant|p1a: Arceus|par
+|
+|-damage|p2a: Clodsire|73/100 brn|[from] brn
+|upkeep
+|turn|47
+|
+|switch|p2a: Cobalion|Cobalion, tera:Water|11/100 brn
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-damage|p2a: Cobalion|4/100 brn|[from] brn
+|upkeep
+|turn|48
+|
+|move|p2a: Cobalion|Stealth Rock||[still]
+|-fail|p2a: Cobalion
+|cant|p1a: Arceus|par
+|
+|-damage|p2a: Cobalion|0 fnt|[from] brn
+|faint|p2a: Cobalion
+|upkeep
+|
+|switch|p2a: Clodsire|Clodsire, F|73/100 brn
+|turn|49
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Clodsire|Spikes|p1a: Arceus
+|-sidestart|p1: hli605|Spikes
+|
+|-damage|p2a: Clodsire|67/100 brn|[from] brn
+|upkeep
+|turn|50
+|
+|switch|p2a: Rotom|Rotom-Wash|65/100 brn
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|71/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|65/100 brn|[from] brn
+|upkeep
+|turn|51
+|
+|switch|p2a: Clodsire|Clodsire, F|67/100 brn
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-damage|p2a: Clodsire|61/100 brn|[from] brn
+|upkeep
+|turn|52
+|
+|switch|p2a: Rotom|Rotom-Wash|65/100 brn
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|71/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|65/100 brn|[from] brn
+|upkeep
+|turn|53
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|71/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|65/100 brn|[from] brn
+|upkeep
+|turn|54
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|149/444 par
+|
+|switch|p2a: Clodsire|Clodsire, F|61/100 brn|[from] Volt Switch
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-damage|p2a: Clodsire|55/100 brn|[from] brn
+|upkeep
+|turn|55
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Clodsire|Spikes||[still]
+|-fail|p2a: Clodsire
+|
+|-damage|p2a: Clodsire|49/100 brn|[from] brn
+|upkeep
+|turn|56
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Clodsire|Poison Jab|p1a: Arceus
+|-supereffective|p1a: Arceus
+|-damage|p1a: Arceus|103/444 par
+|
+|-damage|p2a: Clodsire|43/100 brn|[from] brn
+|upkeep
+|turn|57
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Clodsire|Poison Jab|p1a: Arceus
+|-supereffective|p1a: Arceus
+|-crit|p1a: Arceus
+|-damage|p1a: Arceus|22/444 par
+|
+|-damage|p2a: Clodsire|37/100 brn|[from] brn
+|upkeep
+|turn|58
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|move|p2a: Clodsire|Earthquake|p1a: Arceus
+|-damage|p1a: Arceus|0 fnt
+|faint|p1a: Arceus
+|
+|-damage|p2a: Clodsire|31/100 brn|[from] brn
+|upkeep
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|-damage|p1a: Great Tusk|326/434|[from] Spikes
+|-damage|p1a: Great Tusk|313/434|[from] Stealth Rock
+|turn|59
+|
+|move|p1a: Great Tusk|Headlong Rush|p2a: Clodsire
+|-supereffective|p2a: Clodsire
+|-damage|p2a: Clodsire|0 fnt
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|faint|p2a: Clodsire
+|
+|-heal|p1a: Great Tusk|340/434|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Wash|65/100 brn
+|turn|60
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Great Tusk
+|-immune|p1a: Great Tusk
+|move|p1a: Great Tusk|Headlong Rush|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p2a: Rotom|71/100 brn|[from] item: Leftovers
+|-heal|p1a: Great Tusk|367/434|[from] item: Leftovers
+|-damage|p2a: Rotom|65/100 brn|[from] brn
+|upkeep
+|turn|61
+|
+|move|p2a: Rotom|Volt Switch|p1a: Great Tusk
+|-immune|p1a: Great Tusk
+|move|p1a: Great Tusk|Headlong Rush|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p2a: Rotom|71/100 brn|[from] item: Leftovers
+|-heal|p1a: Great Tusk|394/434|[from] item: Leftovers
+|-damage|p2a: Rotom|65/100 brn|[from] brn
+|upkeep
+|turn|62
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Great Tusk
+|-supereffective|p1a: Great Tusk
+|-damage|p1a: Great Tusk|0 fnt
+|faint|p1a: Great Tusk
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|
+|-heal|p2a: Rotom|71/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|65/100 brn|[from] brn
+|upkeep
+|
+|switch|p1a: Eternatus|Eternatus|484/484
+|-damage|p1a: Eternatus|363/484|[from] Spikes
+|-damage|p1a: Eternatus|303/484|[from] Stealth Rock
+|-ability|p1a: Eternatus|Pressure
+|turn|63
+|
+|move|p1a: Eternatus|Recover|p1a: Eternatus
+|-heal|p1a: Eternatus|484/484
+|move|p2a: Rotom|Pain Split|p1a: Eternatus
+|-sethp|p1a: Eternatus|339/484|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100 brn|[from] move: Pain Split
+|
+|-heal|p1a: Eternatus|369/484|[from] item: Black Sludge
+|-damage|p2a: Rotom|95/100 brn|[from] brn
+|upkeep
+|turn|64
+|
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Rotom
+|-damage|p2a: Rotom|50/100 brn
+|move|p2a: Rotom|Pain Split|p1a: Eternatus
+|-sethp|p1a: Eternatus|259/484|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|86/100 brn|[from] move: Pain Split
+|
+|-heal|p1a: Eternatus|289/484|[from] item: Black Sludge
+|-heal|p2a: Rotom|92/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|86/100 brn|[from] brn
+|upkeep
+|turn|65
+|
+|move|p1a: Eternatus|Recover|p1a: Eternatus
+|-heal|p1a: Eternatus|484/484
+|move|p2a: Rotom|Thunder Wave|p1a: Eternatus
+|-status|p1a: Eternatus|par
+|
+|-heal|p2a: Rotom|92/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|86/100 brn|[from] brn
+|upkeep
+|turn|66
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|433/484 par
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Rotom
+|-damage|p2a: Rotom|43/100 brn
+|
+|-heal|p2a: Rotom|49/100 brn|[from] item: Leftovers
+|-heal|p1a: Eternatus|463/484 par|[from] item: Black Sludge
+|-damage|p2a: Rotom|43/100 brn|[from] brn
+|upkeep
+|turn|67
+|
+|move|p2a: Rotom|Pain Split|p1a: Eternatus
+|-sethp|p1a: Eternatus|296/484 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|98/100 brn|[from] move: Pain Split
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Rotom
+|-damage|p2a: Rotom|54/100 brn
+|
+|-heal|p2a: Rotom|60/100 brn|[from] item: Leftovers
+|-heal|p1a: Eternatus|326/484 par|[from] item: Black Sludge
+|-damage|p2a: Rotom|54/100 brn|[from] brn
+|upkeep
+|turn|68
+|
+|move|p2a: Rotom|Volt Switch|p1a: Eternatus
+|-resisted|p1a: Eternatus
+|-damage|p1a: Eternatus|296/484 par
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Rotom
+|-damage|p2a: Rotom|14/100 brn
+|
+|-heal|p2a: Rotom|20/100 brn|[from] item: Leftovers
+|-heal|p1a: Eternatus|326/484 par|[from] item: Black Sludge
+|-damage|p2a: Rotom|14/100 brn|[from] brn
+|upkeep
+|turn|69
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Eternatus|[miss]
+|-miss|p2a: Rotom|p1a: Eternatus
+|move|p1a: Eternatus|Dynamax Cannon|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>

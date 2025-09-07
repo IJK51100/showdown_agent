@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<!-- version 1 -->
+<title>battle-gen9ubers-16773</title>
+<style>
+    html,
+    body {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        padding: 12px 0;
+    }
+
+    .battle-log {
+        font-family: Verdana, sans-serif;
+        font-size: 10pt;
+    }
+
+    .battle-log-inline {
+        border: 1px solid #AAAAAA;
+        background: #EEF2F5;
+        color: black;
+        max-width: 640px;
+        margin: 0 auto 80px;
+        padding-bottom: 5px;
+    }
+
+    .battle-log .inner {
+        padding: 4px 8px 0px 8px;
+    }
+
+    .battle-log .inner-preempt {
+        padding: 0 8px 4px 8px;
+    }
+
+    .battle-log .inner-after {
+        margin-top: 0.5em;
+    }
+
+    .battle-log h2 {
+        margin: 0.5em -8px;
+        padding: 4px 8px;
+        border: 1px solid #AAAAAA;
+        background: #E0E7EA;
+        border-left: 0;
+        border-right: 0;
+        font-family: Verdana, sans-serif;
+        font-size: 13pt;
+    }
+
+    .backprop {
+        top: 0;
+    }
+
+    .battle-log .chat {
+        vertical-align: middle;
+        padding: 3px 0 3px 0;
+        font-size: 8pt;
+    }
+
+    .battle-log .chat strong {
+        color: #40576A;
+    }
+
+    .battle-log .chat em {
+        padding: 1px 4px 1px 3px;
+        color: #000000;
+        font-style: normal;
+    }
+
+    .chat.mine {
+        background: rgba(0, 0, 0, 0.05);
+        margin-left: -8px;
+        margin-right: -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .spoiler {
+        color: #BBBBBB;
+        background: #BBBBBB;
+        padding: 0px 3px;
+    }
+
+    .spoiler:hover,
+    .spoiler:active,
+    .spoiler-shown {
+        color: #000000;
+        background: #E2E2E2;
+        padding: 0px 3px;
+    }
+
+    .spoiler a {
+        color: #BBBBBB;
+    }
+
+    .spoiler:hover a,
+    .spoiler:active a,
+    .spoiler-shown a {
+        color: #2288CC;
+    }
+
+    .chat code,
+    .chat .spoiler:hover code,
+    .chat .spoiler:active code,
+    .chat .spoiler-shown code {
+        border: 1px solid #C0C0C0;
+        background: #EEEEEE;
+        color: black;
+        padding: 0 2px;
+    }
+
+    .chat .spoiler code {
+        border: 1px solid #CCCCCC;
+        background: #CCCCCC;
+        color: #CCCCCC;
+    }
+
+    .battle-log .rated {
+        padding: 3px 4px;
+    }
+
+    .battle-log .rated strong {
+        color: white;
+        background: #89A;
+        padding: 1px 4px;
+        border-radius: 4px;
+    }
+
+    .spacer {
+        margin-top: 0.5em;
+    }
+
+    .message-announce {
+        background: #6688AA;
+        color: white;
+        padding: 1px 4px 2px;
+    }
+
+    .message-announce a,
+    .broadcast-green a,
+    .broadcast-blue a,
+    .broadcast-red a {
+        color: #DDEEFF;
+    }
+
+    .broadcast-green {
+        background-color: #559955;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .broadcast-blue {
+        background-color: #6688AA;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .infobox {
+        border: 1px solid #6688AA;
+        padding: 2px 4px;
+    }
+
+    .infobox-limited {
+        max-height: 200px;
+        overflow: auto;
+        overflow-x: hidden;
+    }
+
+    .broadcast-red {
+        background-color: #AA5544;
+        color: white;
+        padding: 2px 4px;
+    }
+
+    .message-learn-canlearn {
+        font-weight: bold;
+        color: #228822;
+        text-decoration: underline;
+    }
+
+    .message-learn-cannotlearn {
+        font-weight: bold;
+        color: #CC2222;
+        text-decoration: underline;
+    }
+
+    .message-effect-weak {
+        font-weight: bold;
+        color: #CC2222;
+    }
+
+    .message-effect-resist {
+        font-weight: bold;
+        color: #6688AA;
+    }
+
+    .message-effect-immune {
+        font-weight: bold;
+        color: #666666;
+    }
+
+    .message-learn-list {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .message-throttle-notice,
+    .message-error {
+        color: #992222;
+    }
+
+    .message-overflow,
+    .chat small.message-overflow {
+        font-size: 0pt;
+    }
+
+    .message-overflow::before {
+        font-size: 9pt;
+        content: '...';
+    }
+
+    .subtle {
+        color: #3A4A66;
+    }
+</style>
+<div class="wrapper replay-wrapper" style="max-width:1180px;margin:0 auto">
+    <input type="hidden" name="replayid" value="unregisteredserver-gen8randombattle-320064" />
+    <div class="battle"></div>
+    <div class="battle-log"></div>
+    <div class="replay-controls"></div>
+    <div class="replay-controls-2"></div>
+    <h1 style="font-weight:normal;text-align:center"><strong>poke-env battle replay</strong><br />battle-gen9ubers-16773<br /><a
+            href="http://pokemonshowdown.com/users/randomplayer1" class="subtle" target="_blank">hli605</a>
+        vs. <a href="http://pokemonshowdown.com/users/randomplayer2" class="subtle"
+            target="_blank">random-uu</a></h1>
+    <script type="text/plain" class="battle-log-data">
+    >battle-gen9ubers-16773|init|battle
+|title|hli605 vs. random-uu
+|j|☆hli605
+|j|☆random-uu
+|gametype|singles
+|player|p1|hli605|169|
+|player|p2|random-uu|1|
+|gen|9
+|tier|[Gen 9] Ubers
+|rule|HP Percentage Mod: HP is shown in percentages
+|rule|Endless Battle Clause: Forcing endless battles is banned
+|rule|Sleep Clause Mod: Limit one foe put to sleep
+|rule|Species Clause: Limit one of each Pokémon
+|rule|OHKO Clause: OHKO moves are banned
+|rule|Evasion Items Clause: Evasion items are banned
+|rule|Evasion Moves Clause: Evasion moves are banned
+|clearpoke
+|poke|p1|Necrozma-Dusk-Mane|
+|poke|p1|Kyogre|
+|poke|p1|Arceus-Fairy|
+|poke|p1|Eternatus|
+|poke|p1|Great Tusk|
+|poke|p1|Kingambit, F|
+|poke|p2|Tornadus-Therian, M|
+|poke|p2|Clodsire, F|
+|poke|p2|Metagross|
+|poke|p2|Rotom-Wash|
+|poke|p2|Cobalion|
+|poke|p2|Zarude-Dada|
+|teampreview
+|
+|teamsize|p1|6
+|teamsize|p2|6
+|start
+|switch|p1a: Kingambit|Kingambit, F|341/341
+|switch|p2a: Rotom|Rotom-Wash|100/100
+|turn|1
+|
+|-terastallize|p2a: Rotom|Steel
+|move|p2a: Rotom|Volt Switch|p1a: Kingambit
+|-damage|p1a: Kingambit|235/341
+|
+|switch|p2a: Cobalion|Cobalion|100/100|[from] Volt Switch
+|move|p1a: Kingambit|Kowtow Cleave|p2a: Cobalion
+|-resisted|p2a: Cobalion
+|-damage|p2a: Cobalion|79/100
+|-damage|p1a: Kingambit|179/341|[from] item: Rocky Helmet|[of] p2a: Cobalion
+|-ability|p2a: Cobalion|Justified|boost
+|-boost|p2a: Cobalion|atk|1
+|
+|upkeep
+|turn|2
+|
+|move|p2a: Cobalion|Stealth Rock|p1a: Kingambit
+|-sidestart|p1: hli605|move: Stealth Rock
+|move|p1a: Kingambit|Swords Dance|p1a: Kingambit
+|-boost|p1a: Kingambit|atk|2
+|
+|upkeep
+|turn|3
+|
+|move|p2a: Cobalion|Body Press|p1a: Kingambit
+|-supereffective|p1a: Kingambit
+|-damage|p1a: Kingambit|0 fnt
+|faint|p1a: Kingambit
+|-end|p1a: Kingambit|fallenundefined|[silent]
+|
+|upkeep
+|
+|switch|p1a: Great Tusk|Great Tusk|434/434
+|-damage|p1a: Great Tusk|421/434|[from] Stealth Rock
+|turn|4
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|move|p1a: Great Tusk|Headlong Rush|p2a: Tornadus
+|-immune|p2a: Tornadus
+|
+|-heal|p1a: Great Tusk|434/434|[from] item: Leftovers
+|upkeep
+|turn|5
+|
+|move|p2a: Tornadus|U-turn|p1a: Great Tusk
+|-resisted|p1a: Great Tusk
+|-damage|p1a: Great Tusk|420/434
+|
+|switch|p2a: Cobalion|Cobalion|79/100|[from] U-turn
+|move|p1a: Great Tusk|Knock Off|p2a: Cobalion
+|-resisted|p2a: Cobalion
+|-damage|p2a: Cobalion|68/100
+|-damage|p1a: Great Tusk|348/434|[from] item: Rocky Helmet|[of] p2a: Cobalion
+|-ability|p2a: Cobalion|Justified|boost
+|-boost|p2a: Cobalion|atk|1
+|-enditem|p2a: Cobalion|Rocky Helmet|[from] move: Knock Off|[of] p1a: Great Tusk
+|
+|-heal|p1a: Great Tusk|375/434|[from] item: Leftovers
+|upkeep
+|turn|6
+|
+|move|p2a: Cobalion|Volt Switch|p1a: Great Tusk
+|-immune|p1a: Great Tusk
+|move|p1a: Great Tusk|Headlong Rush|p2a: Cobalion
+|-supereffective|p2a: Cobalion
+|-damage|p2a: Cobalion|0 fnt
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|faint|p2a: Cobalion
+|
+|-heal|p1a: Great Tusk|402/434|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Metagross|Metagross|100/100
+|turn|7
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|move|p1a: Great Tusk|Headlong Rush|p2a: Tornadus
+|-immune|p2a: Tornadus
+|
+|-heal|p1a: Great Tusk|429/434|[from] item: Leftovers
+|upkeep
+|turn|8
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Great Tusk
+|-damage|p1a: Great Tusk|159/434
+|move|p1a: Great Tusk|Knock Off|p2a: Tornadus
+|-damage|p2a: Tornadus|64/100
+|-enditem|p2a: Tornadus|Heavy-Duty Boots|[from] move: Knock Off|[of] p1a: Great Tusk
+|
+|-heal|p1a: Great Tusk|186/434|[from] item: Leftovers
+|upkeep
+|turn|9
+|
+|switch|p2a: Metagross|Metagross|100/100
+|move|p1a: Great Tusk|Knock Off|p2a: Metagross
+|-supereffective|p2a: Metagross
+|-damage|p2a: Metagross|51/100
+|-enditem|p2a: Metagross|Choice Band|[from] move: Knock Off|[of] p1a: Great Tusk
+|
+|-heal|p1a: Great Tusk|213/434|[from] item: Leftovers
+|upkeep
+|turn|10
+|
+|switch|p2a: Zarude|Zarude-Dada|100/100
+|move|p1a: Great Tusk|Headlong Rush|p2a: Zarude
+|-resisted|p2a: Zarude
+|-damage|p2a: Zarude|76/100
+|-unboost|p1a: Great Tusk|def|1
+|-unboost|p1a: Great Tusk|spd|1
+|
+|-heal|p1a: Great Tusk|240/434|[from] item: Leftovers
+|upkeep
+|turn|11
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|97/100
+|move|p1a: Great Tusk|Body Press|p2a: Tornadus
+|-resisted|p2a: Tornadus
+|-damage|p2a: Tornadus|81/100
+|
+|-heal|p1a: Great Tusk|267/434|[from] item: Leftovers
+|upkeep
+|turn|12
+|
+|move|p2a: Tornadus|Hurricane|p1a: Great Tusk
+|-supereffective|p1a: Great Tusk
+|-crit|p1a: Great Tusk
+|-damage|p1a: Great Tusk|0 fnt
+|faint|p1a: Great Tusk
+|-end|p1a: Great Tusk|Protosynthesis|[silent]
+|
+|upkeep
+|
+|switch|p1a: Necrozma|Necrozma-Dusk-Mane|398/398
+|-damage|p1a: Necrozma|374/398|[from] Stealth Rock
+|turn|13
+|
+|switch|p2a: Zarude|Zarude-Dada|76/100
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Zarude
+|-damage|p2a: Zarude|30/100
+|
+|-heal|p1a: Necrozma|398/398|[from] item: Leftovers
+|upkeep
+|turn|14
+|
+|switch|p2a: Metagross|Metagross|51/100
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Metagross
+|-resisted|p2a: Metagross
+|-damage|p2a: Metagross|30/100
+|
+|upkeep
+|turn|15
+|
+|move|p2a: Metagross|Bullet Punch|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|373/398
+|move|p1a: Necrozma|Earthquake|p2a: Metagross
+|-supereffective|p2a: Metagross
+|-damage|p2a: Metagross|0 fnt
+|faint|p2a: Metagross
+|
+|-heal|p1a: Necrozma|397/398|[from] item: Leftovers
+|upkeep
+|
+|switch|p2a: Zarude|Zarude-Dada|30/100
+|turn|16
+|
+|move|p2a: Zarude|Jungle Healing|p2a: Zarude
+|-heal|p2a: Zarude|55/100
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Zarude
+|-damage|p2a: Zarude|5/100
+|
+|-heal|p1a: Necrozma|398/398|[from] item: Leftovers
+|upkeep
+|turn|17
+|
+|move|p2a: Zarude|Knock Off|p1a: Necrozma
+|-supereffective|p1a: Necrozma
+|-damage|p1a: Necrozma|248/398
+|-enditem|p1a: Necrozma|Leftovers|[from] move: Knock Off|[of] p2a: Zarude
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Zarude
+|-damage|p2a: Zarude|0 fnt
+|faint|p2a: Zarude
+|
+|upkeep
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|turn|18
+|
+|move|p2a: Tornadus|Nasty Plot|p2a: Tornadus
+|-boost|p2a: Tornadus|spa|2
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398
+|
+|upkeep
+|turn|19
+|
+|move|p2a: Tornadus|Nasty Plot|p2a: Tornadus
+|-boost|p2a: Tornadus|spa|2
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Tornadus
+|-crit|p2a: Tornadus
+|-damage|p2a: Tornadus|13/100
+|
+|upkeep
+|turn|20
+|
+|switch|p2a: Clodsire|Clodsire, F|100/100
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Clodsire
+|-damage|p2a: Clodsire|50/100
+|
+|upkeep
+|turn|21
+|
+|move|p1a: Necrozma|Earthquake|p2a: Clodsire
+|-supereffective|p2a: Clodsire
+|-damage|p2a: Clodsire|0 fnt
+|faint|p2a: Clodsire
+|
+|upkeep
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|46/100
+|turn|22
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|100/100
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|73/100
+|
+|-heal|p2a: Rotom|79/100|[from] item: Leftovers
+|upkeep
+|turn|23
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Necrozma|[miss]
+|-miss|p2a: Rotom|p1a: Necrozma
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p2a: Rotom|85/100|[from] item: Leftovers
+|upkeep
+|turn|24
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-status|p1a: Necrozma|par
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p2a: Rotom|91/100|[from] item: Leftovers
+|upkeep
+|turn|25
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-fail|p1a: Necrozma|par
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|-heal|p2a: Rotom|97/100|[from] item: Leftovers
+|upkeep
+|turn|26
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|80/100
+|move|p1a: Necrozma|Earthquake|p2a: Tornadus
+|-immune|p2a: Tornadus
+|
+|upkeep
+|turn|27
+|
+|move|p2a: Tornadus|U-turn|p1a: Necrozma
+|-damage|p1a: Necrozma|366/398 par
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|97/100|[from] U-turn
+|move|p1a: Necrozma|Sunsteel Strike|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|71/100
+|
+|-heal|p2a: Rotom|77/100|[from] item: Leftovers
+|upkeep
+|turn|28
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|move|p1a: Necrozma|Earthquake|p2a: Tornadus
+|-immune|p2a: Tornadus
+|
+|upkeep
+|turn|29
+|
+|move|p2a: Tornadus|Hurricane|p1a: Necrozma
+|-resisted|p1a: Necrozma
+|-damage|p1a: Necrozma|299/398 par
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398 par
+|
+|upkeep
+|turn|30
+|
+|move|p2a: Tornadus|Hurricane|p1a: Necrozma|[miss]
+|-miss|p2a: Tornadus|p1a: Necrozma
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-fail|p1a: Necrozma|heal
+|
+|upkeep
+|turn|31
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Necrozma
+|-damage|p1a: Necrozma|301/398 par
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|32
+|
+|move|p2a: Tornadus|U-turn|p1a: Necrozma
+|-damage|p1a: Necrozma|269/398 par
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|77/100|[from] U-turn
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398 par
+|
+|-heal|p2a: Rotom|83/100|[from] item: Leftovers
+|upkeep
+|turn|33
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|323/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|upkeep
+|turn|34
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Necrozma
+|-damage|p1a: Necrozma|202/398 par
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|upkeep
+|turn|35
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398 par
+|
+|upkeep
+|turn|36
+|
+|move|p2a: Tornadus|Hurricane|p1a: Necrozma|[miss]
+|-miss|p2a: Tornadus|p1a: Necrozma
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-fail|p1a: Necrozma|heal
+|
+|upkeep
+|turn|37
+|
+|move|p2a: Tornadus|Nasty Plot|p2a: Tornadus
+|-boost|p2a: Tornadus|spa|2
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-fail|p1a: Necrozma|heal
+|
+|upkeep
+|turn|38
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|100/100
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|39
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-fail|p1a: Necrozma|par
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|upkeep
+|turn|40
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-fail|p1a: Necrozma|par
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|41
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|350/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|42
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-fail|p1a: Necrozma|par
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|upkeep
+|turn|43
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-fail|p1a: Necrozma|par
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|44
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|326/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|upkeep
+|turn|45
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|314/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|46
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|308/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|upkeep
+|turn|47
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-fail|p1a: Necrozma|par
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|48
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|305/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|upkeep
+|turn|49
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|move|p1a: Necrozma|Earthquake|p2a: Tornadus
+|-immune|p2a: Tornadus
+|
+|upkeep
+|turn|50
+|
+|move|p2a: Tornadus|U-turn|p1a: Necrozma
+|-damage|p1a: Necrozma|273/398 par
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|100/100|[from] U-turn
+|move|p1a: Necrozma|Morning Sun|p1a: Necrozma
+|-heal|p1a: Necrozma|398/398 par
+|
+|upkeep
+|turn|51
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|350/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|move|p1a: Necrozma|Earthquake|p2a: Rotom
+|-immune|p2a: Rotom|[from] ability: Levitate
+|
+|upkeep
+|turn|52
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|move|p1a: Necrozma|Stealth Rock|p2a: Tornadus
+|-sidestart|p2: random-uu|move: Stealth Rock
+|
+|upkeep
+|turn|53
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|100/100
+|-damage|p2a: Rotom|95/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|100/100|[from] item: Leftovers
+|upkeep
+|turn|54
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|269/398 par
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100|[from] Volt Switch
+|-damage|p2a: Tornadus|76/100|[from] Stealth Rock
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|55
+|
+|move|p2a: Tornadus|U-turn|p1a: Necrozma
+|-damage|p1a: Necrozma|237/398 par
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|100/100|[from] U-turn
+|-damage|p2a: Rotom|95/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|100/100|[from] item: Leftovers
+|upkeep
+|turn|56
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|270/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|90/100|[from] move: Pain Split
+|cant|p1a: Necrozma|par
+|
+|-heal|p2a: Rotom|96/100|[from] item: Leftovers
+|upkeep
+|turn|57
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Necrozma
+|-damage|p1a: Necrozma|146/398 par
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|100/100|[from] item: Leftovers
+|upkeep
+|turn|58
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Necrozma
+|-fail|p1a: Necrozma|par
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|upkeep
+|turn|59
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|-damage|p2a: Tornadus|76/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|upkeep
+|turn|60
+|
+|move|p2a: Tornadus|Nasty Plot|p2a: Tornadus
+|-boost|p2a: Tornadus|spa|2
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|61
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|100/100
+|-damage|p2a: Rotom|95/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|100/100|[from] item: Leftovers
+|upkeep
+|turn|62
+|
+|move|p2a: Rotom|Pain Split|p1a: Necrozma
+|-sethp|p1a: Necrozma|224/398 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|74/100|[from] move: Pain Split
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|80/100|[from] item: Leftovers
+|upkeep
+|turn|63
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|145/398 par
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100|[from] Volt Switch
+|-damage|p2a: Tornadus|76/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|upkeep
+|turn|64
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Necrozma|[miss]
+|-miss|p2a: Tornadus|p1a: Necrozma
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|upkeep
+|turn|65
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Necrozma
+|-damage|p1a: Necrozma|46/398 par
+|cant|p1a: Necrozma|par
+|
+|upkeep
+|turn|66
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|80/100
+|-damage|p2a: Rotom|74/100|[from] Stealth Rock
+|move|p1a: Necrozma|Stealth Rock||[still]
+|-fail|p1a: Necrozma
+|
+|-heal|p2a: Rotom|80/100|[from] item: Leftovers
+|upkeep
+|turn|67
+|
+|move|p2a: Rotom|Volt Switch|p1a: Necrozma
+|-damage|p1a: Necrozma|0 fnt
+|faint|p1a: Necrozma
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100|[from] Volt Switch
+|-damage|p2a: Tornadus|76/100|[from] Stealth Rock
+|
+|upkeep
+|
+|switch|p1a: Arceus|Arceus-Fairy|444/444
+|-damage|p1a: Arceus|389/444|[from] Stealth Rock
+|turn|68
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|80/100
+|-damage|p2a: Rotom|74/100|[from] Stealth Rock
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|55/100
+|
+|-heal|p2a: Rotom|61/100|[from] item: Leftovers
+|upkeep
+|turn|69
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus
+|-damage|p1a: Arceus|335/444
+|
+|-heal|p2a: Rotom|67/100|[from] item: Leftovers
+|upkeep
+|turn|70
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|322/444|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|
+|upkeep
+|turn|71
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|373/444|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|
+|upkeep
+|turn|72
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|100/100
+|-damage|p2a: Tornadus|76/100|[from] Stealth Rock
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444
+|
+|upkeep
+|turn|73
+|
+|move|p2a: Tornadus|Focus Blast|p1a: Arceus|[miss]
+|-miss|p2a: Tornadus|p1a: Arceus
+|move|p1a: Arceus|Judgment|p2a: Tornadus
+|-damage|p2a: Tornadus|28/100
+|
+|upkeep
+|turn|74
+|
+|move|p2a: Tornadus|U-turn|p1a: Arceus
+|-resisted|p1a: Arceus
+|-damage|p1a: Arceus|428/444
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|100/100|[from] U-turn
+|-damage|p2a: Rotom|95/100|[from] Stealth Rock
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|74/100
+|
+|-heal|p2a: Rotom|80/100|[from] item: Leftovers
+|upkeep
+|turn|75
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|343/444|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100|[from] move: Pain Split
+|
+|upkeep
+|turn|76
+|
+|switch|p2a: Tornadus|Tornadus-Therian, M|62/100
+|-damage|p2a: Tornadus|37/100|[from] Stealth Rock
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444
+|
+|upkeep
+|turn|77
+|
+|move|p2a: Tornadus|Nasty Plot|p2a: Tornadus
+|-boost|p2a: Tornadus|spa|2
+|move|p1a: Arceus|Judgment|p2a: Tornadus
+|-damage|p2a: Tornadus|0 fnt
+|faint|p2a: Tornadus
+|
+|upkeep
+|
+|switch|p2a: Rotom|Rotom-Wash, tera:Steel|100/100
+|-damage|p2a: Rotom|95/100|[from] Stealth Rock
+|turn|78
+|
+|move|p1a: Arceus|Recover||[still]
+|-fail|p1a: Arceus|heal
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|366/444
+|
+|-heal|p2a: Rotom|100/100|[from] item: Leftovers
+|upkeep
+|turn|79
+|
+|move|p1a: Arceus|Recover|p1a: Arceus
+|-heal|p1a: Arceus|444/444
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus
+|-damage|p1a: Arceus|321/444
+|
+|upkeep
+|turn|80
+|
+|move|p1a: Arceus|Will-O-Wisp|p2a: Rotom
+|-status|p2a: Rotom|brn
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|312/444|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|100/100 brn|[from] move: Pain Split
+|
+|-damage|p2a: Rotom|95/100 brn|[from] brn
+|upkeep
+|turn|81
+|
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-status|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|100/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|95/100 brn|[from] brn
+|upkeep
+|turn|82
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|
+|-heal|p2a: Rotom|100/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|95/100 brn|[from] brn
+|upkeep
+|turn|83
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus
+|-damage|p1a: Arceus|258/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|
+|-heal|p2a: Rotom|100/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|95/100 brn|[from] brn
+|upkeep
+|turn|84
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|271/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|90/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|
+|-heal|p2a: Rotom|96/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|90/100 brn|[from] brn
+|upkeep
+|turn|85
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus
+|-damage|p1a: Arceus|234/444 par
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|96/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|90/100 brn|[from] brn
+|upkeep
+|turn|86
+|
+|move|p2a: Rotom|Hydro Pump|p1a: Arceus
+|-damage|p1a: Arceus|197/444 par
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|96/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|90/100 brn|[from] brn
+|upkeep
+|turn|87
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|173/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|
+|-heal|p2a: Rotom|96/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|90/100 brn|[from] brn
+|upkeep
+|turn|88
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|222/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|74/100 brn|[from] move: Pain Split
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|80/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|74/100 brn|[from] brn
+|upkeep
+|turn|89
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|200/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|1
+|-boost|p1a: Arceus|spd|1
+|
+|-heal|p2a: Rotom|80/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|74/100 brn|[from] brn
+|upkeep
+|turn|90
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|179/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|80/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|74/100 brn|[from] brn
+|upkeep
+|turn|91
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|158/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|80/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|74/100 brn|[from] brn
+|upkeep
+|turn|92
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|190/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|63/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|69/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|63/100 brn|[from] brn
+|upkeep
+|turn|93
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|190/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|63/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|69/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|63/100 brn|[from] brn
+|upkeep
+|turn|94
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|190/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|63/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|69/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|63/100 brn|[from] brn
+|upkeep
+|turn|95
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|172/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|69/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|63/100 brn|[from] brn
+|upkeep
+|turn|96
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|69/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|63/100 brn|[from] brn
+|upkeep
+|turn|97
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|151/444 par
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|69/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|63/100 brn|[from] brn
+|upkeep
+|turn|98
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|170/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|57/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|63/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|57/100 brn|[from] brn
+|upkeep
+|turn|99
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|170/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|57/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|63/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|57/100 brn|[from] brn
+|upkeep
+|turn|100
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|151/444 par
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|63/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|57/100 brn|[from] brn
+|upkeep
+|turn|101
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|132/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|63/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|57/100 brn|[from] brn
+|upkeep
+|turn|102
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|63/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|57/100 brn|[from] brn
+|upkeep
+|turn|103
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|111/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|63/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|57/100 brn|[from] brn
+|upkeep
+|turn|104
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|140/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|47/100 brn|[from] move: Pain Split
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|53/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|47/100 brn|[from] brn
+|upkeep
+|turn|105
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|53/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|47/100 brn|[from] brn
+|upkeep
+|turn|106
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|122/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|53/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|47/100 brn|[from] brn
+|upkeep
+|turn|107
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|101/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|53/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|47/100 brn|[from] brn
+|upkeep
+|turn|108
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|120/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|40/100 brn|[from] move: Pain Split
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|46/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|40/100 brn|[from] brn
+|upkeep
+|turn|109
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|46/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|40/100 brn|[from] brn
+|upkeep
+|turn|110
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|46/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|40/100 brn|[from] brn
+|upkeep
+|turn|111
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|46/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|40/100 brn|[from] brn
+|upkeep
+|turn|112
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus|[miss]
+|-miss|p2a: Rotom|p1a: Arceus
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|46/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|40/100 brn|[from] brn
+|upkeep
+|turn|113
+|
+|move|p2a: Rotom|Thunder Wave|p1a: Arceus
+|-fail|p1a: Arceus|par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|46/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|40/100 brn|[from] brn
+|upkeep
+|turn|114
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|101/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|46/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|40/100 brn|[from] brn
+|upkeep
+|turn|115
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|110/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|37/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|43/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|37/100 brn|[from] brn
+|upkeep
+|turn|116
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|110/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|37/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|43/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|37/100 brn|[from] brn
+|upkeep
+|turn|117
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|110/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|37/100 brn|[from] move: Pain Split
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|43/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|37/100 brn|[from] brn
+|upkeep
+|turn|118
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|110/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|37/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|43/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|37/100 brn|[from] brn
+|upkeep
+|turn|119
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|92/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|43/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|37/100 brn|[from] brn
+|upkeep
+|turn|120
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|101/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|34/100 brn|[from] move: Pain Split
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|40/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|34/100 brn|[from] brn
+|upkeep
+|turn|121
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|101/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|34/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|40/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|34/100 brn|[from] brn
+|upkeep
+|turn|122
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|82/444 par
+|cant|p1a: Arceus|par
+|
+|-heal|p2a: Rotom|40/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|34/100 brn|[from] brn
+|upkeep
+|turn|123
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|91/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|31/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|36/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|31/100 brn|[from] brn
+|upkeep
+|turn|124
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|70/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|36/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|31/100 brn|[from] brn
+|upkeep
+|turn|125
+|
+|move|p2a: Rotom|Volt Switch|p1a: Arceus
+|-damage|p1a: Arceus|51/444 par
+|move|p1a: Arceus|Calm Mind|p1a: Arceus
+|-boost|p1a: Arceus|spa|0
+|-boost|p1a: Arceus|spd|0
+|
+|-heal|p2a: Rotom|36/100 brn|[from] item: Leftovers
+|-damage|p2a: Rotom|31/100 brn|[from] brn
+|upkeep
+|turn|126
+|
+|move|p2a: Rotom|Pain Split|p1a: Arceus
+|-sethp|p1a: Arceus|71/444 par|[from] move: Pain Split|[silent]
+|-sethp|p2a: Rotom|24/100 brn|[from] move: Pain Split
+|move|p1a: Arceus|Judgment|p2a: Rotom
+|-resisted|p2a: Rotom
+|-damage|p2a: Rotom|0 fnt
+|faint|p2a: Rotom
+|
+    </script>
+</div>
+
+<div class="battle-log battle-log-inline" style="display:none"></div>
+
+<script>
+    let daily = Math.floor(Date.now() / 1000 / 60 / 60 / 24); document.write('<script src="https://play.pokemonshowdown.com/js/replay-embed.js?version' + daily + '"></' + 'script>');
+</script>
+
+<p style="text-align:center"> Replay created by <a href="https://github.com/hsahovic/poke-env">poke-env</a>, with code from <a
+        href="https://github.com/smogon/pokemon-showdown"> pokemon-showdown</a>. If something goes wrong, don't hesitate
+    to open an <a href="https://github.com/hsahovic/poke-env/issues">issue!</a></p>
